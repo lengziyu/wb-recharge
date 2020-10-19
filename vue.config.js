@@ -1,6 +1,5 @@
 const path = require('path');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
-const IS_NOT_DEV = process.env.VUE_APP_URL != "dev";
 const CompressionPlugin = require("compression-webpack-plugin");
 const UglifyJsWebpackPlugin = require("uglifyjs-webpack-plugin");
 
@@ -43,9 +42,9 @@ module.exports = {
 	// 解决ie11兼容ES6
 	config.entry("main").add("babel-polyfill");
 	// 打包文件分析
-	config
-		.plugin('webpack-bundle-analyzer')
-		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	// config
+	// 	.plugin('webpack-bundle-analyzer')
+	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 	// 移除prefetch插件
 	config.plugins.delete('prefetch')
   },
