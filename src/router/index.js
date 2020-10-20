@@ -4,6 +4,8 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
+import loginRouter from './modules/login.js'
+
 const routes = [
   {
     path: "/",
@@ -14,8 +16,9 @@ const routes = [
     path: "/about",
     name: "About",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+      import("../views/About.vue")
+  },
+  ...loginRouter,
 ];
 
 const router = new VueRouter({
