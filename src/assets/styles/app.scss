@@ -5,7 +5,11 @@
   -moz-osx-font-smoothing: grayscale;
   font-size: 15px;
 }
-
+body{
+	max-width: 75em;
+	margin: 0 auto !important;
+	background-color: #f2f2f2;
+}
 @import './input.scss';
 
 img.max{
@@ -13,4 +17,10 @@ img.max{
 }
 .tcenter{
 	text-align: center;
+}
+
+.user-panel{
+	border-radius: 8px;
+	margin: 12px;
+	overflow: hidden;
 }

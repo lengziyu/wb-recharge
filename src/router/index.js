@@ -5,6 +5,10 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
 import loginRouter from './modules/login.js'
+import userRouter from './modules/user.js'
+import newsRouter from './modules/news.js'
+import shopRouter from './modules/shop.js'
+import chongzhiRouter from './modules/chongzhi.js'
 
 const routes = [
   {
@@ -19,6 +23,10 @@ const routes = [
       import("../views/About.vue")
   },
   ...loginRouter,
+  ...userRouter,
+  ...newsRouter,
+  ...shopRouter,
+  ...chongzhiRouter,
 ];
 
 const router = new VueRouter({
