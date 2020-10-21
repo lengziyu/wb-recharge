@@ -15,4 +15,16 @@ export default [
 		name: 'UserAddressAdd',
 		component: () => import('@/views/user/address/add.vue')
 	},
+	// 优惠券
+	{
+		path: '/user/coupon',
+		name: 'UserCoupon',
+		component: () => import('@/views/user/coupon/index.vue')
+	},
+	// 订单
+	{
+		path: '/user/order',
+		name: 'UserOrder',
+		component: () => import('@/views/user/order/index.vue')
+	},
 ]

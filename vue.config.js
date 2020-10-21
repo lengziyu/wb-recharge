@@ -22,11 +22,11 @@ module.exports = {
           }),
         ]
      },
-	sass: {
-		prependData: `
-		@import "@/assets/styles/common/__variable.scss";
-		`
-		}
+	// sass: {
+	// 	prependData: `
+	// 	@import "@/assets/styles/common/__variable.scss";
+	// 	`
+	// 	}
     }
   },
   chainWebpack: (config) =>{

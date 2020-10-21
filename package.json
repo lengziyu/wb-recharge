@@ -44,7 +44,6 @@
     "eslint-plugin-vue": "^7.1.0",
     "prettier": "^2.1.2",
     "sass": "^1.27.0",
-    "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.12"
   },
   "description": "10月-12月的外包项目",

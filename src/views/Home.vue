@@ -1,7 +1,9 @@
 <template>
 	<div>
-		<van-button type="primary" @click.native="changeLang">主要按钮</van-button>
+		<van-button type="primary" @click.native="changeLang">切换语言</van-button>
 		<div>{{$t('aa')}}</div>
+		
+		<router-link :to="{ path: '/user'}">会员中心</router-link>
 	</div>
 </template>
 

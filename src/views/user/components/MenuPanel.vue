@@ -29,7 +29,8 @@ export default {
 			},{
 				name: '优惠券',
 				code: '',
-				icon: 'coupon-o'
+				icon: 'coupon-o',
+				url: '/user/coupon'
 			},{
 				name: 'VIP会员',
 				code: '',

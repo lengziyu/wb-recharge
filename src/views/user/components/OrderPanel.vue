@@ -1,7 +1,7 @@
 <template>
 	<div class="user-panel">
 		<van-panel title="我的订单">
-		  <div class="order-item" v-for="i in list">
+		  <div class="order-item" v-for="i in list" @click="clickItem(i)">
 			  <div class="order-icon">
 				  <van-icon :name="i.icon" />
 			  </div>
@@ -22,7 +22,7 @@ export default {
 				code: '',
 				icon: 'credit-pay',
 			},{
-				name: '代付款',
+				name: '待付款',
 				code: '',
 				icon: 'pending-payment'
 			},{
@@ -36,7 +36,9 @@ export default {
 		
 	},
 	methods: {
-		
+		clickItem() {
+			this.$router.push('/user/order')
+		}
 	}
 }
 </script>

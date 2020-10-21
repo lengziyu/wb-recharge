@@ -9,12 +9,12 @@
 		<van-address-edit
 		  :area-list="areaList"
 		  show-postal
-		  show-delete
+		  :show-delete="id?true:false"
 		  show-set-default
-		  show-search-result
-		  :search-result="searchResult"
 		  :area-columns-placeholder="['请选择', '请选择', '请选择']"
 		  @save="onSave"
+		  @change-area="changeArea"
+		  :address-info="info"
 		  @delete="onDelete"
 		  @change-detail="onChangeDetail"
 		/>
@@ -28,8 +28,18 @@ export default {
   data() {
     return {
       areaList: areaList,
-      searchResult: [],
 	  id: this.$route.query.id,
+	  info: {
+		  id: this.$route.query.id,
+		  tel: '',
+		  province: '',
+		  city: '',
+		  county: '',
+		  addressDetail: '',
+		  areaCode: '',
+		  postalCode: '',
+		  isDefault: ''
+	  }
     };
   },
    methods: {
@@ -39,18 +49,9 @@ export default {
      onDelete() {
        Toast('delete');
      },
-     onChangeDetail(val) {
-       if (val) {
-         this.searchResult = [
-           {
-             name: '黄龙万科中心',
-             address: '杭州市西湖区',
-           },
-         ];
-       } else {
-         this.searchResult = [];
-       }
-     },
+	 changeArea(e) {
+		 console.log(e)
+	 }
    },
  };
 </script>

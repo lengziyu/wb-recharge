@@ -22,10 +22,14 @@
 		
 		<div class="user-panel">
 			<van-cell-group>
-			  <van-cell title="我的个人推荐链接" is-link />
-			  <van-cell title="积分获取方式" is-link />
-			  <van-cell title="留言板" is-link />
+				<van-cell title="我的个人推荐链接" is-link />
+				<van-cell title="积分获取方式" is-link />
+				<van-cell title="留言板" is-link />
 			</van-cell-group>
+		</div>
+		
+		<div class="user-panel">
+			<van-button @click.native="clickLoginOut" color="linear-gradient(to right, #ff6034, #ee0a24)" block>退出登录</van-button>
 		</div>
 		
 		<Tabbar />
@@ -52,7 +56,9 @@ export default {
 		
 	},
 	methods: {
-		
+		clickLoginOut() {
+			this.$router.push('/login')
+		}
 	}
 }
 </script>
