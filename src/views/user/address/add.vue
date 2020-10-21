@@ -23,11 +23,11 @@
 
 <script>
 import { Toast } from 'vant';
-
+import areaList from '@/assets/json/area.js'
 export default {
   data() {
     return {
-      areaList: [],
+      areaList: areaList,
       searchResult: [],
 	  id: this.$route.query.id,
     };

@@ -37,8 +37,8 @@ const i18n = new VueI18n({
 })
 import { Locale } from 'vant';
 // 引入英文语言包
-import enUS from 'vant/es/locale/lang/en-US';
-Locale.use('en-US', enUS);
+// import enUS from 'vant/es/locale/lang/en-US';
+// Locale.use('en-US', enUS);
 
 // rem 适配
 import 'amfe-flexible';
