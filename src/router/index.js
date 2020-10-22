@@ -8,7 +8,7 @@ import loginRouter from './modules/login.js'
 import userRouter from './modules/user.js'
 import newsRouter from './modules/news.js'
 import shopRouter from './modules/shop.js'
-import chongzhiRouter from './modules/chongzhi.js'
+import productRouter from './modules/product.js'
 
 const routes = [
   {
@@ -26,7 +26,7 @@ const routes = [
   ...userRouter,
   ...newsRouter,
   ...shopRouter,
-  ...chongzhiRouter,
+  ...productRouter,
 ];
 
 const router = new VueRouter({

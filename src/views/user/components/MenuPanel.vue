@@ -38,11 +38,13 @@ export default {
 			},{
 				name: '我的钱包',
 				code: '',
-				icon: 'paid'
+				icon: 'paid',
+				
 			},{
 				name: '个人信息认证',
 				code: '',
-				icon: 'passed'
+				icon: 'passed',
+				url: '/user/passed'
 			}]
 		}
 	},

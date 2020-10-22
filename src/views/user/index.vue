@@ -11,7 +11,12 @@
 					<span class="signIn-num">积分：9999</span>
 				</div>
 				<div class="signIn-btn">
-					<van-icon name="sign" /> 点击签到
+					<span v-if="!signShow" @click="clickSign">
+						<van-icon name="sign" /> 点击签到
+					</span>
+					<span v-else>
+						<van-icon name="edit" /> 已签到
+					</span>
 				</div>
 			</div>
 		</div>
@@ -22,9 +27,11 @@
 		
 		<div class="user-panel">
 			<van-cell-group>
-				<van-cell title="我的个人推荐链接" is-link />
-				<van-cell title="积分获取方式" is-link />
-				<van-cell title="留言板" is-link />
+				<van-cell title="我的个人推荐链接" is-link url="/user/recommend" />
+				<van-cell title="积分抵扣规则" is-link url="/user/texts?type=dikou" />
+				<van-cell title="积分获取方式" is-link url="/user/texts?type=integral" />
+				<van-cell title="留言板" is-link url="/user/message" />
+				<van-cell title="我的积分记录" is-link url="/user/jifen" />
 			</van-cell-group>
 		</div>
 		
@@ -49,7 +56,7 @@ export default {
 	},
 	data() {
 		return {
-			
+			signShow: false,
 		}
 	},
 	mounted() {
@@ -58,6 +65,9 @@ export default {
 	methods: {
 		clickLoginOut() {
 			this.$router.push('/login')
+		},
+		clickSign() {
+			this.signShow = !this.signShow
 		}
 	}
 }

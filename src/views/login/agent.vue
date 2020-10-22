@@ -7,49 +7,51 @@
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
 		/>
-		
-		<van-form @submit="onSubmit">
-			<van-field
-			  v-model="name"
-			  name="姓名"
-			  placeholder="姓名"
-			/>
-			<van-field
-			  v-model="phone"
-			  name="手机号码"
-			  placeholder="手机号码"
-			/>
-			<van-field
-			  v-model="wechat"
-			  name="微信号"
-			  placeholder="微信号"
-			/>
-			<van-field
-			  v-model="addr"
-			  type="textarea"
-			   rows="2"
-			   autosize
-			  name="联系地址"
-			  show-word-limit
-			  maxlength="50"
-			  placeholder="联系地址"
-			/>
-			<van-field
-			  v-model="work"
-			  name="目前工作"
-			  placeholder="目前工作"
-			/>
-			<van-field
-			  v-model="reason"
-			  name="申请缘由"
-			  placeholder="申请缘由"
-			/>
-			<div style="margin: 16px; margin-top: 40px;">
-				<van-button round block type="info" native-type="submit">
-				立即申请
-				</van-button>
-			</div>
-		</van-form>
+		<div class="user-panel">
+			<van-form @submit="onSubmit">
+				<van-field
+				  v-model="name"
+				  name="姓名"
+				  placeholder="姓名"
+				/>
+				<van-field
+				  v-model="phone"
+				  name="手机号码"
+				  placeholder="手机号码"
+				/>
+				<van-field
+				  v-model="wechat"
+				  name="微信号"
+				  placeholder="微信号"
+				/>
+				<van-field
+				  v-model="addr"
+				  type="textarea"
+				   rows="2"
+				   autosize
+				  name="联系地址"
+				  show-word-limit
+				  maxlength="50"
+				  placeholder="联系地址"
+				/>
+				<van-field
+				  v-model="work"
+				  name="目前工作"
+				  placeholder="目前工作"
+				/>
+				<van-field
+				  v-model="reason"
+				  name="申请缘由"
+				  placeholder="申请缘由"
+				/>
+			</van-form>
+		</div>
+		<div style="margin: 16px; margin-top: 40px;">
+			<van-button round block type="info" native-type="submit">
+			立即申请
+			</van-button>
+		</div>
+
 	</div>
 </template>
 
