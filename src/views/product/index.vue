@@ -8,7 +8,7 @@
 				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
 			</div>
 		</div>
-		<div class="product-item">
+		<div class="product-item" @click="$router.push('/product/ticket')">
 			<div class="product-title">
 				特惠门票
 			</div>

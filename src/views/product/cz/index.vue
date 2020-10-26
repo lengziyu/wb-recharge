@@ -13,7 +13,7 @@
 			<div class="sidebar-content-title">
 				快速充值通道
 			</div>
-			<div class="cz-item" v-for="i in 3">
+			<div class="cz-item" v-for="i in 3" @click="clickItem">
 				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
 			</div>
 		</div>
@@ -50,6 +50,9 @@ export default {
 	methods: {
 		onChange() {
 			
+		},
+		clickItem() {
+			this.$router.push('/product/cz/detail')
 		}
 	}
 }

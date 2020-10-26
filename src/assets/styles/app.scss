@@ -3,7 +3,8 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 15px;
+  font-size: 14px;
+  color: #333;
 }
 body{
 	max-width: 75em;
@@ -26,6 +27,13 @@ img.max{
 	margin: 12px;
 	overflow: hidden;
 }
+.user-panel-bg{
+	border-radius: 8px;
+	margin: 12px;
+	overflow: hidden;
+	padding: 20px;
+	background-color: #fff;
+}
 .van-doc-demo-block__title {
     margin: 0;
     padding: 32px 0 16px;
@@ -33,4 +41,52 @@ img.max{
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
+}
+.red{
+	color: orangered;
+}
+.fab-btn{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #1989fa;
+	line-height: 45px;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
+}
+.fab-btn-wx{
+	bottom: 44px;
+	background-color: #07C160;
+}
+.fab-copyright{
+	background-color: #fff;
+	bottom: 88px;
+	color: #1989fa;
+	padding: 10px 0;
+	font-size: 12px;
+	line-height: 20px;
+	p{
+		padding: 0;
+		margin: 0;
+	}
+}
+.re-title{
+	font-weight: 400;
+	color: #333;
+	font-size: 13px;
+	margin-bottom: 12px;
+}
+.fab-tips{
+	position: fixed;
+	bottom: 200px;
+	right: 12px;
+	background-color: #1989fa;
+	line-height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
 }
