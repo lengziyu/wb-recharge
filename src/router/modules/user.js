@@ -66,10 +66,20 @@ export default [
 		name: 'UserTexts',
 		component: () => import('@/views/user/texts.vue')
 	},
-	// 说明
+	// 
 	{
 		path: '/user/recommend',
 		name: 'UserRecommend',
 		component: () => import('@/views/user/recommend.vue')
+	},
+	{
+		path: '/user/problem',
+		name: 'UserProblem',
+		component: () => import('@/views/user/problem/index.vue')
+	},
+	{
+		path: '/user/wallet',
+		name: 'UserWallet',
+		component: () => import('@/views/user/wallet/index.vue')
 	},
 ]

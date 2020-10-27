@@ -39,6 +39,7 @@ export default {
 				name: '我的钱包',
 				code: '',
 				icon: 'paid',
+				url: '/user/wallet'
 				
 			},{
 				name: '个人信息认证',
