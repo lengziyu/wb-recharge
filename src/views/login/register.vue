@@ -78,6 +78,7 @@
 
 <script>
 	import SignInTitle from './components/SignInTitle.vue'
+	import { registerPhone } from '@/api/login.js'
 	export default {
 		name: "Login",
 		components: {
@@ -95,9 +96,20 @@
 	  methods:{
 		onSubmit(values) {
 			console.log('submit', values);
+			this.registerPhone();
 		},
 		onClickRight() {
 			this.isPhoneRegister = !this.isPhoneRegister;
+		},
+		registerPhone() {
+			registerPhone({
+				phone: this.phone,
+				password: this.password,
+				code: this.sms,
+				lang: 'en'
+			}).then(res=>{
+				
+			})
 		}
 	  }
 	};
