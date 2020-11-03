@@ -95,8 +95,9 @@
 		},
 	  methods:{
 		onSubmit(values) {
+			this.$router.push('/user')
 			console.log('submit', values);
-			this.registerPhone();
+			// this.registerPhone();
 		},
 		onClickRight() {
 			this.isPhoneRegister = !this.isPhoneRegister;

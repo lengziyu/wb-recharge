@@ -1,5 +1,12 @@
 <template>
 	<div class="product">
+		<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" height="200">
+		  <van-swipe-item>
+			  <img src="@/assets/images/img.jpg" alt="">
+		  </van-swipe-item>
+		  <van-swipe-item>2</van-swipe-item>
+		  <van-swipe-item>3</van-swipe-item>
+		</van-swipe>
 		<div class="product-item" @click="$router.push('/product/cz')">
 			<div class="product-title">
 				预付卡直充
@@ -51,6 +58,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .my-swipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 200px;
+    text-align: center;
+    background-color: #39a9ed;
+	img{
+		width: 100%;
+		height: 100%;
+	}
+  }
 .product{
 	.product-item{
 		padding: 5px 20px;

@@ -9,7 +9,7 @@ function resolve(dir){
 
 module.exports = {
   lintOnSave: false,
-  // publicPath: '/',
+  publicPath: '/recharge/',
   productionSourceMap: false,
   css: {
     loaderOptions: {

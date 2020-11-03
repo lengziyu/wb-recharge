@@ -79,6 +79,7 @@
 		},
 	  methods:{
 		onSubmit(values) {
+			this.$router.push('/user')
 			console.log('submit', values);
 		},
 		onClickRight() {
