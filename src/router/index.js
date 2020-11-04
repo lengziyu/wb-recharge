@@ -10,7 +10,7 @@ import newsRouter from './modules/news.js'
 import shopRouter from './modules/shop.js'
 import productRouter from './modules/product.js'
 
-const routes = [
+export const constantRoutes = [
   {
     path: "/",
     name: "Home",
@@ -19,8 +19,7 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    component: () =>
-      import("../views/About.vue")
+    component: () => import("../views/About.vue")
   },
   ...loginRouter,
   ...userRouter,
@@ -29,11 +28,20 @@ const routes = [
   ...productRouter,
 ];
 
-const router = new VueRouter({
+const createRouter = () => new VueRouter({
   mode: "history",
   base: '/recharge/',
   base: process.env.BASE_URL,
-  routes
-});
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRoutes
+})
+
+
+const router = createRouter()
+
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
+}
 
 export default router;

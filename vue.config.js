@@ -51,11 +51,15 @@ module.exports = {
 			args[0].terserOptions.compress.pure_funcs = ['console.log']
 			return args
        })
-	// config
-	// 	.plugin('webpack-bundle-analyzer')
-	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	config
+		.plugin('webpack-bundle-analyzer')
+		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 	// 移除prefetch插件
-	config.plugins.delete('prefetch')
+	config.plugins.delete('preload') 
+	config.plugins.delete('prefetch') 
+	config.optimization.splitChunks({
+	  chunks: 'all'
+	})
   },
     configureWebpack: {  //webpack的相关配置在这里
 			output: {

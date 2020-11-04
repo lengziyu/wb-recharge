@@ -7,10 +7,10 @@
 		  @click-left="$utils.routeBack"
 		/>
 		<div class="user-panel">
-			<van-cell title="手机绑定" is-link url="/user/passed/binding?type=phone&text=手机" />
-			<van-cell title="微信绑定" is-link url="/user/passed/binding?type=wechat&text=微信" />
-			<van-cell title="邮箱认证" is-link url="/user/passed/binding?type=email&text=邮箱" />
-			<van-cell title="实名认证" is-link url="/user/passed/real" />
+			<van-cell title="手机绑定" is-link url="/recharge/user/passed/binding?type=phone&text=手机" />
+			<van-cell title="微信绑定" is-link url="/recharge/user/passed/binding?type=wechat&text=微信" />
+			<van-cell title="邮箱认证" is-link url="/recharge/user/passed/binding?type=email&text=邮箱" />
+			<van-cell title="实名认证" is-link url="/recharge/user/passed/real" />
 		</div>
 	</div>
 </template>

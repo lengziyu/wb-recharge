@@ -7,7 +7,7 @@
 		  @click-left="$utils.routeBack"
 		/>
 		<div class="banner">
-			<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+			<img class="max" src="@/assets/images/b1.png" alt="">
 		</div>
 		
 		<div class="user-panel">

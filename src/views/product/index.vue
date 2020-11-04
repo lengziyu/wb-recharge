@@ -1,10 +1,16 @@
 <template>
 	<div class="product">
+		
+		<van-dropdown-menu>
+		  <van-dropdown-item v-model="value1" :options="option1" />
+		</van-dropdown-menu>
 		<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" height="200">
 		  <van-swipe-item>
-			  <img src="@/assets/images/img.jpg" alt="">
+			  <img src="@/assets/images/b2.png" alt="">
 		  </van-swipe-item>
-		  <van-swipe-item>2</van-swipe-item>
+		  <van-swipe-item>
+			  <img src="@/assets/images/b1.png" alt="">
+		  </van-swipe-item>
 		  <van-swipe-item>3</van-swipe-item>
 		</van-swipe>
 		<div class="product-item" @click="$router.push('/product/cz')">
@@ -12,7 +18,7 @@
 				预付卡直充
 			</div>
 			<div class="product-pic">
-				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+				<img class="max" src="@/assets/images/m2.png" alt="">
 			</div>
 		</div>
 		<div class="product-item" @click="$router.push('/product/ticket')">
@@ -20,7 +26,7 @@
 				特惠门票
 			</div>
 			<div class="product-pic">
-				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+				<img class="max" src="@/assets/images/m1.png" alt="">
 			</div>
 		</div>
 		<div class="product-item">
@@ -44,6 +50,12 @@ export default {
 	data() {
 		return {
 			activeKey: 0,
+		  value1: 0,
+		  value2: 'a',
+		  option1: [
+			{ text: '中文', value: 0 },
+			{ text: 'English', value: 1 },
+		  ],
 		}
 	},
 	mounted() {

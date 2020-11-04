@@ -27,11 +27,11 @@
 		
 		<div class="user-panel">
 			<van-cell-group>
-				<van-cell title="我的个人推荐链接" is-link url="/user/recommend" />
-				<van-cell title="积分抵扣规则" is-link url="/user/texts?type=dikou" />
-				<van-cell title="积分获取方式" is-link url="/user/texts?type=integral" />
-				<van-cell title="留言板" is-link url="/user/message" />
-				<van-cell title="我的积分记录" is-link url="/user/jifen" />
+				<van-cell title="我的个人推荐链接" is-link url="/recharge/user/recommend" />
+				<van-cell title="积分抵扣规则" is-link url="/recharge/user/texts?type=dikou" />
+				<van-cell title="积分获取方式" is-link url="/recharge/user/texts?type=integral" />
+				<van-cell title="留言板" is-link url="/recharge/user/message" />
+				<van-cell title="我的积分记录" is-link url="/recharge/user/jifen" />
 				<!-- <van-cell title="常见问题汇总" is-link url="/user/problem" /> -->
 				
 			</van-cell-group>

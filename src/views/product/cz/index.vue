@@ -68,7 +68,7 @@ export default {
 }
 .sidebar-content{
 	position: absolute;
-	right: 0;
+	left: 110px;
 	top: 50px;
 	width: 260px;
 	.sidebar-content-title{
