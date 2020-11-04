@@ -42,6 +42,15 @@ module.exports = {
 	// 解决ie11兼容ES6
 	config.entry("main").add("babel-polyfill");
 	// 打包文件分析
+		config.optimization.minimizer('terser').tap((args) => {
+			// 注释console.*
+			args[0].terserOptions.compress.drop_console = true
+			// remove debugger
+			args[0].terserOptions.compress.drop_debugger = true
+			// 移除 console.log
+			args[0].terserOptions.compress.pure_funcs = ['console.log']
+			return args
+       })
 	// config
 	// 	.plugin('webpack-bundle-analyzer')
 	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
@@ -49,11 +58,11 @@ module.exports = {
 	config.plugins.delete('prefetch')
   },
     configureWebpack: {  //webpack的相关配置在这里
-	     output: {
-	        filename: `js/[name].[hash].js`,
-	        chunkFilename: `js/[name].[hash].js`
-	      },
-          plugins: [
+			output: {
+				filename: `js/[name].[hash].js`,
+				chunkFilename: `js/[name].[hash].js`
+			},
+			plugins: [
 			new FileManagerPlugin({
 				onEnd: {
 					delete: [

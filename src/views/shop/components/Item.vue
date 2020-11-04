@@ -41,8 +41,13 @@ export default {
 
 <style lang="scss" scoped>
 		.jf-pic{
-			height: 108px;
+			height: 110px;
 			overflow: hidden;
+			text-align: center;
+			// img{
+			// 	width: 100%;
+			// 	height: 100%;
+			// }
 		}
 		.jf-title{
 			font-size: 12px;
