@@ -4,10 +4,11 @@
 		  title="加盟代理商"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
 		/>
-		<div class="user-panel">
+		<div class="user-panel padding-head">
 			<van-form @submit="onSubmit">
 				<van-field
 				  v-model="name"

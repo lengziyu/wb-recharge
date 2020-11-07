@@ -4,9 +4,10 @@
 		  title="商品详情"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" height="200">
+		<van-swipe class="my-swipe padding-head" :autoplay="3000" indicator-color="white" height="200">
 		  <van-swipe-item>
 			  <img src="@/assets/images/img.jpg" alt="">
 		  </van-swipe-item>

@@ -4,10 +4,11 @@
 		  title="我的个人推荐链接"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
 		
-		<div class="user-panel tcenter recommend">
+		<div class="user-panel tcenter recommend padding-head">
 			<div class="recommend-ewm">
 				<img class="max" src="@/assets/images/ewm.png" alt="">
 			</div>

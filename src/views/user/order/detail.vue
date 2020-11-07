@@ -4,9 +4,10 @@
 		  title="订单详情"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel">
+		<div class="user-panel padding-head">
 			<van-panel title="标题" desc="描述信息" status="待支付">
 			  <div class="odetail-content">
 				  <p>下单时间：2020-10-23 34:33:33</p>

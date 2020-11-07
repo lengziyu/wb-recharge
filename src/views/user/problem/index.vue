@@ -4,9 +4,10 @@
 		  title="常见问题汇总"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel-bg">
+		<div class="user-panel-bg padding-head">
 			<van-collapse v-model="activeNames">
 			  <van-collapse-item title="常见问题1" name="1">内容</van-collapse-item>
 			  <van-collapse-item title="常见问题2" name="2">内容</van-collapse-item>

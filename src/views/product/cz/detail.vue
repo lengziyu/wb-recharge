@@ -1,12 +1,13 @@
 <template>
-	<div>
+	<div class="cz-detail">
 		<van-nav-bar
 		  title="在线充值"
 		  left-text=""
+		   
 		  left-arrow
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel-bg">
+		<div class="user-panel-bg padding-head">
 			<div class="re-title">
 				请输入手机号码
 			</div>
@@ -69,7 +70,7 @@
 			Tips
 		</div>
 		
-		<div class="fab-btn fab-copyright">
+		<div class="fab-copyright">
 			<p>
 				退款政策 | 粤IP43543号
 			</p>
@@ -78,12 +79,12 @@
 			</p>
 		</div>
 		
-		<div class="fab-btn fab-btn-wx" @click="clickPayWx">
+<!-- 		<div class="fab-btn fab-btn-wx" @click="clickPayWx">
 			微信支付￥88.88
 		</div>
 		<div class="fab-btn" @click="clickPay">
 			支付宝支付￥88.88
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -137,6 +138,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cz-detail{
+	position: relative;
+}
 .user-panel-bg{
 	margin-bottom: 160px;
 }

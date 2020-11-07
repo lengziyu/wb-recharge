@@ -5,33 +5,43 @@
 		  left-text=""
 		  :right-text="isPhoneReset?'手机号找回':'邮箱找回'"
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
 		/>
 		
-		<div class="login-banner">
+		<div class="login-banner padding-head">
 			<SignIn-title />
 		</div>
 		
 		<!-- 邮箱找回 -->
-		<van-form @submit="onSubmit" v-if="isPhoneReset">
+		<van-form v-if="isPhoneReset">
 		  <van-field
 		    v-model="email"
 		    name="邮箱"
 		    placeholder="邮箱"
 			left-icon="user-o"
 		  />
-		  <van-field
-		    v-model="emailSms"
-		    center
-		    clearable
-		  	left-icon="comment-o"
-		    placeholder="邮箱验证码"
-		  >
-		    <template #button>
-		  		<van-button size="small" type="primary">发送验证码</van-button>
-		    </template>
-		  </van-field> 
+		 <van-field
+		   v-model="emailSms"
+		   center
+		   clearable
+		 	left-icon="comment-o"
+		   placeholder="邮箱验证码"
+		 >
+		   <template #button>
+		 		
+			<van-button @click="clickSendCode2" size="small" type="primary" :disabled="sendStatus2?true:false">
+				<span class="sendCode" v-if="sendStatus2">
+					<van-count-down @finish="finish2" :time="time2" format="ss" />s重新发送
+				</span>
+				<span class="sendText" v-else>
+					发送验证码
+				</span>
+				</van-button>
+		   </template>
+		 </van-field> 
+		  
 		  <van-field
 		    v-model="password"
 		    type="password"
@@ -40,7 +50,7 @@
 		    placeholder="新密码"
 		  />
 		  <div style="margin: 16px; margin-top: 40px;">
-		    <van-button round block type="info" native-type="submit">
+		    <van-button round block type="info" native-type="submit" @click="clickSubmit">
 		      确认
 		    </van-button>
 		  </div>
@@ -62,7 +72,15 @@
 		    placeholder="短信验证码"
 		  >
 		    <template #button>
-		  		<van-button size="small" type="primary">发送验证码</van-button>
+		  		
+				<van-button @click="clickSendCode" size="small" type="primary" :disabled="sendStatus?true:false">
+					<span class="sendCode" v-if="sendStatus">
+						<van-count-down @finish="finish" :time="time" format="ss" />s重新发送
+					</span>
+					<span class="sendText" v-else>
+						发送验证码
+					</span>
+					</van-button>
 		    </template>
 		  </van-field> 
 		  <van-field
@@ -73,7 +91,7 @@
 		    placeholder="新密码"
 		  />
 		  <div style="margin: 16px; margin-top: 40px;">
-		    <van-button round block type="info" native-type="submit">
+		    <van-button round block type="info" native-type="submit" @click="clickSubmit">
 		      确认
 		    </van-button>
 		  </div>
@@ -83,6 +101,15 @@
 
 <script>
 	import SignInTitle from './components/SignInTitle.vue'
+	import {
+		findByEmail, 
+		findByPhone, 
+		emailRegister,
+	} from '@/api/my/passed.js'
+	import {
+		loginPhoneGetCode 
+	} from '@/api/login.js'
+	import { Toast } from 'vant';
 	export default {
 		name: "Login",
 		components: {
@@ -95,15 +122,97 @@
 			password: '',
 			isPhoneReset: true,
 			sms: '',
-			emailSms: ''
+			emailSms: '',
+			time: 0,
+			sendStatus: false,
+			time2: 0,
+			sendStatus2: false,
 		  };
 		},
 	  methods:{
-		onSubmit(values) {
-			console.log('submit', values);
+		  // 邮箱发送验证码
+		  clickSendCode2() {
+		  	if(!this.email){
+		  		Toast('请输入邮箱')
+		  	}else{
+		  		emailRegister({
+		  			type: 1,
+		  			email: this.email,
+		  			lang: 'cn'
+		  		}).then(res=>{
+		  			this.time2 = this.$variables.sendCodeTime;
+		  			this.sendStatus2 = true;
+		  		})
+		  	}
+		  },
+		  finish2() {
+		  	this.time2 = 0;
+		  	this.sendStatus2 = false;
+		  },
+		// 手机号发送验证码
+		clickSendCode() {
+			if(!this.phone){
+				Toast('请输入手机号码')
+			}else{
+				loginPhoneGetCode({
+					type: 1,
+					phone: this.phone,
+					lang: 'cn'
+				}).then(res=>{
+					this.time = this.$variables.sendCodeTime;
+					this.sendStatus = true;
+				})
+			}
+		},
+		finish() {
+			this.time = 0;
+			this.sendStatus = false;
+		},
+		
+		// 提交
+		clickSubmit() {
+			if(this.isPhoneReset){
+				this.forGetEmail();
+			}else{
+				this.forGetPhone();
+			}
 		},
 		onClickRight() {
 			this.isPhoneReset = !this.isPhoneReset;
+		},
+		forGetEmail() {
+			if(!this.email){
+				Toast('请输入邮箱')
+			}else if(!this.emailSms) {
+				Toast('请输入邮箱验证码')
+			}else if(!this.password) {
+				Toast('请输入新密码')
+			}else {
+				findByEmail({
+					email: this.email,
+					code: this.emailSms,
+					password: this.password
+				}).then(res=>{
+					
+				})
+			}
+		},
+		findByPhone() {
+			if(!this.phone){
+				Toast('请输入手机号码')
+			}else if(!this.sms) {
+				Toast('请输入短信验证码')
+			}else if(!this.password) {
+				Toast('请输入新密码')
+			}else {
+				findByPhone({
+					phone: this.phone,
+					code: this.sms,
+					password: this.password
+				}).then(res=>{
+					
+				})
+			}
 		}
 	  }
 	};
@@ -123,5 +232,9 @@
 			color: #1989fa;
 		}
 	}
+}
+.van-count-down{
+	display: inline-block;
+	color: #fff;
 }
 </style>

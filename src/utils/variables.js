@@ -13,4 +13,5 @@ Vue.prototype.$variables = {
 	refreshingText: '正在刷新',
 	refreshedText: '刷新完成',
 	routeBase: '/admin',
+	sendCodeTime: 10000,
 }

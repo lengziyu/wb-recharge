@@ -4,9 +4,10 @@
 		  title="我的钱包"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel-bg">
+		<div class="user-panel-bg padding-head">
 			1
 		</div>
 	</div>

@@ -4,11 +4,12 @@
 		  title="实名认证"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
 		
-		
-			<van-form @submit="onSubmit">
+			
+			<van-form @submit="onSubmit" class="padding-head"> 
 				<div class="user-panel">
 				  <van-field
 					v-model="username"

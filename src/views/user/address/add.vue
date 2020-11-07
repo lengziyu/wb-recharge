@@ -4,8 +4,12 @@
 		  :title="id?'编辑收货地址':'新增收货地址'"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
+		<div class="padding-head">
+			
+		</div>
 		<van-address-edit
 		  :area-list="areaList"
 		  show-postal
@@ -24,6 +28,7 @@
 <script>
 import { Toast } from 'vant';
 import areaList from '@/assets/json/area.js'
+import { addressDel, addressAdd, addressInfo, addressEdit } from '@/api/my/address.js'
 export default {
   data() {
     return {
@@ -38,16 +43,58 @@ export default {
 		  addressDetail: '',
 		  areaCode: '',
 		  postalCode: '',
+		  name: '',
 		  isDefault: ''
 	  }
     };
   },
+  mounted() {
+  	// this.addressInfo();
+  },
    methods: {
+	 addressInfo() {
+		addressInfo({
+			id: this.id,
+		}).then(res=>{
+			let addrInfo = res.data;
+			this.info.name = addrInfo.receipt;
+			this.info.tel = addrInfo.phone;
+			this.info.addressDetail = addrInfo.addr;
+			this.info.postalCode = addrInfo.postcode;
+		}) 
+	 },  
      onSave() {
-       Toast('save');
+		if(this.id){
+			addressEdit({
+				id: this.id,
+				receipt: this.info.name,
+				phone: this.info.tel,
+				addr: this.info.province+' '+this.info.city+' '+ this.info.county +' '+this.info.addressDetail,
+				postcode: this.info.postalCode,
+			}).then(res=>{
+					   
+			})
+		}else{
+			addressAdd({
+				receipt: this.info.name,
+				phone: this.info.tel,
+				addr: this.info.province+' '+this.info.city+' '+ this.info.county +' '+this.info.addressDetail,
+				postcode: this.info.postalCode,
+			}).then(res=>{
+					   
+			})
+		}
+
      },
      onDelete() {
-       Toast('delete');
+		 addressDel({
+		   	id: this.id,
+		   }).then(res=>{
+		 	Toast('删除成功');
+		 	setTimeout(()=>{
+		 		this.$router.push('/user/address')
+		 	}, 1500)
+		  })
      },
 	 changeArea(e) {
 		 console.log(e)

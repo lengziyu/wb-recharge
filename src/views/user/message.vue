@@ -4,9 +4,10 @@
 		  title="留言板"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel">
+		<div class="user-panel padding-head">
 			<van-field
 			  v-model="message"
 			  rows="2"

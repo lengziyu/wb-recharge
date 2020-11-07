@@ -4,9 +4,10 @@
 		  title="我的积分记录"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="jf-list">
+		<div class="jf-list padding-head">
 			<van-list
 			  v-model="loading"
 			  :finished="finished"

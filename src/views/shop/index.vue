@@ -1,5 +1,16 @@
 <template>
 	<div>
+		<div class="tabbar-height"></div>
+		<van-search
+		  v-model="searchVal"
+		  show-action
+		  placeholder="类别/名称/积分区间/价格区间"
+		  @search="onSearch"
+		>
+		  <template #action>
+		    <div @click="onSearch">搜索</div>
+		  </template>
+		</van-search>
 		<div class="user-panel">
 			<div class="re-title">
 				2000神券适用
@@ -24,7 +35,7 @@
 			</div>
 			
 			<div class="re-title">
-				5000神券适用
+				500神券适用
 			</div>
 			<div class="jf-list">
 				<ul>
@@ -48,14 +59,16 @@ export default {
 	},
 	data() {
 		return {
-			
+			searchVal: ''
 		}
 	},
 	mounted() {
 		
 	},
 	methods: {
-		
+		onSearch() {
+			
+		}
 	}
 }
 </script>
@@ -75,5 +88,8 @@ export default {
 		padding: 1%;
 		margin: 1%;
 	}
+}
+.tabbar-height{
+	height: 48px;
 }
 </style>

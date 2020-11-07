@@ -4,9 +4,10 @@
 		  title="特惠门票"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="banner">
+		<div class="banner padding-head">
 			<img class="max" src="@/assets/images/b1.png" alt="">
 		</div>
 		

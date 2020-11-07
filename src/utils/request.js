@@ -3,6 +3,7 @@ import $variables from './variables'
 import qs from 'qs'
 import Vue from 'vue'
 import router from '@/router';
+import { Toast } from 'vant';
 
 let vm = new Vue();
 
@@ -13,14 +14,15 @@ const service = axios.create({
 })
 
 // 设置请求头
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
 
 // 拦截请求头
 service.interceptors.request.use(
   config => {
     console.log(config)
-	config.headers['token'] = vm.$utils.getStorage('Token');
+	// config.headers['token'] = vm.$utils.getStorage('Token');
+	// config.headers['lang'] = 'cn';
     if(config.method == 'POST'){
 		    config.data = qs.stringify(config.data)
     }
@@ -35,15 +37,16 @@ service.interceptors.response.use(
   response => {
 	console.log(response.data)
 	
-	if(response.data.code === '500'){
-
-	}else if(response.data.code === '1004') {
-		vm.$utils.removeStorage('CAI-Admin-Token');
-		vm.$utils.routeTo('/login?redirect='+router.history.current.fullPath);
-	}else if(response.data.code !== '200'){
-		
+	if(response.data.errno == 9999){
+		Toast(response.data.msg);
+		return
 	}
-	
+	// else if(response.data.code === '1004') {
+	// 	// vm.$utils.removeStorage('CAI-Admin-Token');
+	// 	// vm.$utils.routeTo('/login?redirect='+router.history.current.fullPath);
+	// }else if(response.data.code !== '200'){
+		
+	// }
 	return response.data;
 
   },

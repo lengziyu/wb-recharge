@@ -1,6 +1,6 @@
 <template>
 	<div>
-		
+		<div class="tabbar-height"></div>
 		<div class="re-title">
 			网站公告
 		</div>

@@ -3,10 +3,13 @@
 		<van-nav-bar
 		  title="收货地址管理"
 		  left-text=""
+		   
 		  left-arrow
 		  @click-left="$utils.routeBack"
 		/>
-		
+		<div class="padding-head">
+			
+		</div>
 		<van-address-list
 		  v-model="chosenAddressId"
 		  :list="list"
@@ -20,7 +23,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { addressList } from '@/api/my/address.js'
 export default {
   data() {
     return {
@@ -40,15 +43,27 @@ export default {
           address: '浙江省杭州市拱墅区莫干山路 50 号',
         },
 	      ],
+		  listQuery: {
+			  limit: 10,
+			  page: 1
+		  }
 	    };
+	  },
+	  mounted() {
+		this.addressList();  
 	  },
 	  methods: {
 	    onAdd() {
-	      this.$router.push('/user/address/add');
+			this.$router.push('/user/address/add');
 	    },
 	    onEdit(item, index) {
-	      this.$router.push('/user/address/add?id='+item.id);
+			this.$router.push('/user/address/add?id='+item.id);
 	    },
+		addressList() {
+			addressList(this.listQuery).then(res=>{
+				
+			})
+		}
 	  },
 	};
 </script>

@@ -4,9 +4,10 @@
 		  :title="title"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel">
+		<div class="user-panel padding-head">
 			<div class="content" v-if="type == 'dikou'" v-html="content">
 				
 			</div>

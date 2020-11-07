@@ -1,6 +1,6 @@
 <template>
 	<div class="product">
-		
+		<div class="tabbar-height"></div>
 		<van-dropdown-menu>
 		  <van-dropdown-item v-model="value1" :options="option1" />
 		</van-dropdown-menu>

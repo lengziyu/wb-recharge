@@ -21,6 +21,9 @@ export default {
 
 <style lang="scss">
 .tabbar{
-	margin-top: 70px;
+	// z-index: 99999;
+}
+.van-tabbar--fixed{
+	z-index: 99999;
 }
 </style>

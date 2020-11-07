@@ -4,10 +4,11 @@
 		  title="门票详情"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
 		
-		<div class="user-panel ticket-detail">
+		<div class="user-panel ticket-detail padding-head">
 			<div class="ticket-num">
 				请输入门票数量：<van-stepper v-model="ticketNum" />
 			</div>

@@ -1,5 +1,6 @@
 <template>
 	<div class="user">
+		<div class="tabbar-height"></div>
 		<div class="user-head">
 			<div class="user-head-bg"></div>
 			<div class="user-head-main">
@@ -49,7 +50,7 @@
 import Tabbar from '@/components/Tabbar.vue'
 import OrderPanel from './components/OrderPanel.vue'
 import MenuPanel from './components/MenuPanel.vue'
-
+import { loginOut } from '@/api/login.js'
 export default {
 	components: {
 		Tabbar,
@@ -66,7 +67,9 @@ export default {
 	},
 	methods: {
 		clickLoginOut() {
-			this.$router.push('/login')
+			loginOut({}).then(res=>{
+				this.$router.push('/login')
+			})
 		},
 		clickSign() {
 			this.signShow = !this.signShow

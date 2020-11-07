@@ -4,8 +4,10 @@
 		  title="预付卡充值"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
+
 		<van-sidebar v-model="activeKey" @change="onChange">
 		  <van-sidebar-item :title="i.name" v-for="i in list" />
 		</van-sidebar>
@@ -65,6 +67,7 @@ export default {
 .chongzhi .van-sidebar{
 	width: 94px !important;
 	text-align: center;
+	margin-top: 0px;
 }
 .sidebar-content{
 	position: absolute;

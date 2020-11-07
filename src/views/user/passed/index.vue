@@ -4,9 +4,10 @@
 		  title="个人信息认证"
 		  left-text=""
 		  left-arrow
+		   
 		  @click-left="$utils.routeBack"
 		/>
-		<div class="user-panel">
+		<div class="user-panel padding-head">
 			<van-cell title="手机绑定" is-link url="/recharge/user/passed/binding?type=phone&text=手机" />
 			<van-cell title="微信绑定" is-link url="/recharge/user/passed/binding?type=wechat&text=微信" />
 			<van-cell title="邮箱认证" is-link url="/recharge/user/passed/binding?type=email&text=邮箱" />

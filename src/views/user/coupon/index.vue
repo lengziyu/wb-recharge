@@ -3,9 +3,13 @@
 		<van-nav-bar
 		  title="我的优惠券"
 		  left-text=""
+		   
 		  left-arrow
 		  @click-left="$utils.routeBack"
 		/>
+		<div class="padding-head">
+			
+		</div>
 		<van-coupon-list
 			:coupons="coupons"
 			:chosen-coupon="chosenCoupon"

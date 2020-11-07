@@ -3,18 +3,19 @@
 		<van-nav-bar
 		  title="注册"
 		  left-text=""
+		   
 		  :right-text="isPhoneRegister?'手机号注册':'邮箱注册'"
 		  left-arrow
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
 		/>
 		
-		<div class="login-banner">
+		<div class="login-banner padding-head">
 			<SignIn-title />
 		</div>
 		
 		<!-- 邮箱注册 -->
-		<van-form @submit="onSubmit" v-if="isPhoneRegister">
+		<van-form v-if="!isPhoneRegister">
 		  <van-field
 		    v-model="email"
 		    name="邮箱"
@@ -29,7 +30,7 @@
 		    placeholder="密码"
 		  />
 		  <div style="margin: 16px; margin-top: 40px;">
-		    <van-button round block type="info" native-type="submit">
+		    <van-button round block type="info" @click="clickSubmit" native-type="submit">
 		      立即注册
 		    </van-button>
 		  </div>
@@ -42,6 +43,8 @@
 		    name="手机号码"
 		    placeholder="手机号码"
 			left-icon="user-o"
+			type="number"
+			maxlength="11"
 		  />
 		  <van-field
 		    v-model="password"
@@ -58,11 +61,19 @@
 		    placeholder="短信验证码"
 		  >
 		    <template #button>
-		  		<van-button size="small" type="primary">发送验证码</van-button>
+		  		
+				<van-button @click="clickSendCode" size="small" type="primary" :disabled="sendStatus?true:false">
+					<span class="sendCode" v-if="sendStatus">
+						<van-count-down @finish="finish" :time="time" format="ss" />s重新发送
+					</span>
+					<span class="sendText" v-else>
+						发送验证码
+					</span>
+					</van-button>
 		    </template>
 		  </van-field> 
 		  <div style="margin: 16px; margin-top: 40px;">
-		    <van-button round block type="info" native-type="submit">
+		    <van-button round block type="info" @click="clickSubmit" native-type="submit">
 		      立即注册
 		    </van-button>
 		  </div>
@@ -78,7 +89,12 @@
 
 <script>
 	import SignInTitle from './components/SignInTitle.vue'
-	import { registerPhone } from '@/api/login.js'
+	import { 
+		registerPhone, 
+		registerEmail, 
+		loginPhoneGetCode 
+	} from '@/api/login.js'
+	import { Toast } from 'vant';
 	export default {
 		name: "Login",
 		components: {
@@ -86,31 +102,81 @@
 		},
 		data() {
 		  return {
-			email: '',
+			email: '1058566903@qq.com',
 			phone: '',
-			password: '',
-			isPhoneRegister: true,
+			password: 'a12345678',
+			isPhoneRegister: false,
 			sms: '',
+			time: 0,
+			sendStatus: false,
 		  };
 		},
 	  methods:{
-		onSubmit(values) {
-			this.$router.push('/user')
-			console.log('submit', values);
-			// this.registerPhone();
+		// 发送验证码
+		clickSendCode() {
+			if(!this.phone){
+				Toast('请输入手机号码')
+			}else{
+				loginPhoneGetCode({
+					type: 1,
+					phone: this.phone,
+					lang: 'cn'
+				}).then(res=>{
+					this.time = this.$variables.sendCodeTime;
+					this.sendStatus = true;
+				})
+			}
+		},
+		finish() {
+			this.time = 0;
+			this.sendStatus = false;
+		},
+		// 提交
+		clickSubmit() {
+			if(this.isPhoneRegister){
+				this.registerPhone();
+			}else{
+				this.registerEmail();
+			}
 		},
 		onClickRight() {
 			this.isPhoneRegister = !this.isPhoneRegister;
 		},
+		// 手机号码注册
 		registerPhone() {
-			registerPhone({
-				phone: this.phone,
-				password: this.password,
-				code: this.sms,
-				lang: 'en'
-			}).then(res=>{
-				
-			})
+			if(!this.phone){
+				Toast('请输入手机号码')
+			}else if(!this.password){
+				Toast('请输入密码')
+			}else if(!this.sms){
+				Toast('请输入验证码')
+			}else{
+				registerPhone({
+					phone: this.phone,
+					password: this.password,
+					code: this.sms,
+				}).then(res=>{
+					
+					// this.$router.push('/user')
+				})
+			}
+		},
+		// 邮箱注册
+		registerEmail() {
+			if(!this.email){
+				Toast('请输入邮箱')
+			}else if(!this.password) {
+				Toast('请输入密码')
+			}else {
+				registerPhone({
+					email: this.email,
+					password: this.password,
+					lang: 'cn'
+				}).then(res=>{
+					
+					// this.$router.push('/user')
+				})
+			}
 		}
 	  }
 	};
@@ -130,5 +196,9 @@
 			color: #1989fa;
 		}
 	}
+}
+.van-count-down{
+	display: inline-block;
+	color: #fff;
 }
 </style>
