@@ -14,7 +14,7 @@ const service = axios.create({
 })
 
 // 设置请求头
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
 
 // 拦截请求头
@@ -24,7 +24,7 @@ service.interceptors.request.use(
 	// config.headers['token'] = vm.$utils.getStorage('Token');
 	// config.headers['lang'] = 'cn';
     if(config.method == 'POST'){
-		    config.data = qs.stringify(config.data)
+		config.data = qs.stringify(config.data)
     }
     return config
   },

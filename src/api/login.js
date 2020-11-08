@@ -5,7 +5,7 @@ export function registerPhone(query) {
 	return request({
 	    url: '/regbyphone',
 	    method: 'POST',
-		params: query
+		data: query
 	})
 }
 

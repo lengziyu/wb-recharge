@@ -4,7 +4,7 @@
 		  title="注册"
 		  left-text=""
 		   
-		  :right-text="isPhoneRegister?'手机号注册':'邮箱注册'"
+		  :right-text="isPhoneRegister?'邮箱注册':'手机号注册'"
 		  left-arrow
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
@@ -37,7 +37,7 @@
 		</van-form>
 		
 		<!-- 手机号注册 -->
-		<van-form @submit="onSubmit" v-else>
+		<van-form v-else>
 		  <van-field
 		    v-model="phone"
 		    name="手机号码"
@@ -168,7 +168,7 @@
 			}else if(!this.password) {
 				Toast('请输入密码')
 			}else {
-				registerPhone({
+				registerEmail({
 					email: this.email,
 					password: this.password,
 					lang: 'cn'

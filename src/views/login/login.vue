@@ -134,15 +134,14 @@
 		},
 		// 密码登录
 		login() {
-			if(!this.phone){
+			if(!this.username){
 				Toast('请输入用户名/邮箱/手机号码')
 			}else if(!this.password){
 				Toast('请输入密码')
 			}else{
 				loginPwd({
-					phone: this.phone,
+					username: this.username,
 					password: this.password,
-					code: this.sms,
 				}).then(res=>{
 					
 					// this.$router.push('/user')
