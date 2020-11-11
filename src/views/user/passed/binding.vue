@@ -35,7 +35,9 @@
 		    center
 		    clearable
 		    :placeholder="$route.query.type == 'phone'?'短信验证码':'邮箱验证码'"
-			v-if="$route.query.type == 'phone'"
+			v-if="$route.query.type != 'wechat'"
+			maxlength="6"
+			type="number"
 		  >
 		    <template #button>
 		  		
@@ -64,7 +66,8 @@
 <script>
 import { Toast } from 'vant';
 	import { 
-		loginPhoneGetCode 
+		loginPhoneGetCode,
+		emailRegister,
 	} from '@/api/login.js'
 	import {
 		bindPhone,
@@ -93,17 +96,36 @@ export default {
 	methods:{
 		// 发送验证码
 		clickSendCode() {
-			if(!this.phone){
-				Toast('请输入手机号码')
+			if(this.$route.query.type == 'phone'){
+				if(!this.phone){
+					Toast('请输入手机号码')
+				}else{
+					loginPhoneGetCode({
+						type: 2,
+						phone: this.phone,
+					}).then(res=>{
+						if(res.errno == 1){
+							Toast('验证码已发送，请注意查收');
+							this.time = this.$variables.sendCodeTime;
+							this.sendStatus = true;
+						}
+					})
+				}
 			}else{
-				loginPhoneGetCode({
-					type: 1,
-					phone: this.phone,
-					lang: 'cn'
-				}).then(res=>{
-					this.time = this.$variables.sendCodeTime;
-					this.sendStatus = true;
-				})
+				if(!this.email){
+					Toast('请输入邮箱')
+				}else{
+					emailRegister({
+						type: 2,
+						email: this.email,
+					}).then(res=>{
+						if(res.errno == 1){
+							Toast('验证码已发送，请注意查收');
+							this.time = this.$variables.sendCodeTime;
+							this.sendStatus = true;
+						}
+					})
+				}
 			}
 		},
 		finish() {
@@ -129,7 +151,10 @@ export default {
 					phone: this.phone,
 					code: this.sms,
 				}).then(res=>{
-					
+					if(res.errno == 1){
+						Toast('绑定成功');
+						this.$router.push('/user/passed')
+					}
 				})
 			}
 		},
@@ -143,7 +168,10 @@ export default {
 					email: this.email,
 					code: this.sms,
 				}).then(res=>{
-					
+					if(res.errno == 1){
+						Toast('绑定成功');
+						this.$router.push('/user/passed')
+					}
 				})
 			}
 		},

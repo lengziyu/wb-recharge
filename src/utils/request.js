@@ -21,8 +21,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 service.interceptors.request.use(
   config => {
     console.log(config)
-	// config.headers['token'] = vm.$utils.getStorage('Token');
-	// config.headers['lang'] = 'cn';
+	if(vm.$utils.getStorage('token')){
+		config.headers['token'] = vm.$utils.getStorage('token');
+	}
+	config.headers['lang'] = 'cn';
     if(config.method == 'POST'){
 		config.data = qs.stringify(config.data)
     }
@@ -39,7 +41,8 @@ service.interceptors.response.use(
 	
 	if(response.data.errno == 9999){
 		Toast(response.data.msg);
-		return
+	}else if(response.data.errno != 1){
+		Toast(response.data.msg);
 	}
 	// else if(response.data.code === '1004') {
 	// 	// vm.$utils.removeStorage('CAI-Admin-Token');

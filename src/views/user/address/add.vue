@@ -21,6 +21,7 @@
 		  :address-info="info"
 		  @delete="onDelete"
 		  @change-detail="onChangeDetail"
+		  @change-default="onChangeDefault"
 		/>
 	</div>
 </template>
@@ -44,12 +45,15 @@ export default {
 		  areaCode: '',
 		  postalCode: '',
 		  name: '',
-		  isDefault: ''
-	  }
+		  isDefault: false, 
+	  },
+	  currentAddr: ''
     };
   },
   mounted() {
-  	// this.addressInfo();
+	  if(this.id){
+		this.addressInfo();  
+	  }
   },
    methods: {
 	 addressInfo() {
@@ -61,27 +65,50 @@ export default {
 			this.info.tel = addrInfo.phone;
 			this.info.addressDetail = addrInfo.addr;
 			this.info.postalCode = addrInfo.postcode;
+			this.info.isDefault = addrInfo.isDefault == 1?true:false;
+			this.info.province = addrInfo.province;
+			this.info.city = addrInfo.city;
+			this.info.county = addrInfo.county;
+			this.info.areaCode = addrInfo.areaCode;
 		}) 
 	 },  
-     onSave() {
+     onSave(e) {
 		if(this.id){
 			addressEdit({
 				id: this.id,
-				receipt: this.info.name,
-				phone: this.info.tel,
-				addr: this.info.province+' '+this.info.city+' '+ this.info.county +' '+this.info.addressDetail,
-				postcode: this.info.postalCode,
+				receipt: e.name,
+				phone: e.tel,
+				province: e.province,
+				city: e.city,
+				county: e.county,
+				isDefault: e.isDefault?1:0,
+				addr: e.addressDetail,
+				areaCode: e.areaCode,
+				postcode: e.postalCode,
 			}).then(res=>{
-					   
+				Toast('修改成功');
+				setTimeout(()=>{
+					this.$router.push('/user/address')
+				}, 1500)	   
 			})
 		}else{
 			addressAdd({
-				receipt: this.info.name,
-				phone: this.info.tel,
-				addr: this.info.province+' '+this.info.city+' '+ this.info.county +' '+this.info.addressDetail,
-				postcode: this.info.postalCode,
+				receipt: e.name,
+				phone: e.tel,
+				province: e.province,
+				city: e.city,
+				county: e.county,
+				isDefault: e.isDefault?1:0,
+				addr: e.addressDetail,
+				areaCode: e.areaCode,
+				postcode: e.postalCode,
 			}).then(res=>{
-					   
+				if(res.errno == 1){
+					Toast('新增成功');
+					setTimeout(()=>{
+						this.$router.push('/user/address')
+					}, 1500)
+				}
 			})
 		}
 
@@ -90,14 +117,20 @@ export default {
 		 addressDel({
 		   	id: this.id,
 		   }).then(res=>{
-		 	Toast('删除成功');
-		 	setTimeout(()=>{
-		 		this.$router.push('/user/address')
-		 	}, 1500)
+			if(res.errno == 1){
+				Toast('删除成功');
+				setTimeout(()=>{
+					this.$router.push('/user/address')
+				}, 1500)
+			}
 		  })
      },
 	 changeArea(e) {
 		 console.log(e)
+		 this.currentAddr = e;
+	 },
+	 onChangeDefault(e) {
+		 // this.info.isDefault = e;
 	 }
    },
  };

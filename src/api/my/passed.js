@@ -5,7 +5,7 @@ export function bindPhone(query) {
 	return request({
 	    url: '/bindphone',
 	    method: 'POST',
-		params: query
+		data: query
 	})
 }
 

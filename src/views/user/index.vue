@@ -8,8 +8,8 @@
 					<img class="max" src="http://www.lengziyu.cn/blog/img/avatar.jpg">
 				</div>
 				<div class="user-infos">
-					<span class="user-name">冷子欲</span>
-					<span class="signIn-num">积分：9999</span>
+					<span class="user-name">{{ userInfo.username }}</span>
+					<span class="signIn-num">积分：{{ userInfo.integral }}</span>
 				</div>
 				<div class="signIn-btn">
 					<span v-if="!signShow" @click="clickSign">
@@ -51,6 +51,9 @@ import Tabbar from '@/components/Tabbar.vue'
 import OrderPanel from './components/OrderPanel.vue'
 import MenuPanel from './components/MenuPanel.vue'
 import { loginOut } from '@/api/login.js'
+import Cookies from 'js-cookie'
+import { Toast } from 'vant';
+import { isCheckSignin, interSignin } from '@/api/my/index.js'
 export default {
 	components: {
 		Tabbar,
@@ -60,19 +63,48 @@ export default {
 	data() {
 		return {
 			signShow: false,
+			userInfo: '',
 		}
 	},
 	mounted() {
-		
+		this.userInfo = this.$utils.getStorage('userInfo');
+		if(this.userInfo){
+			this.isCheckSignin();
+		}
 	},
 	methods: {
+		// 是否已签到
+		isCheckSignin() {
+			isCheckSignin().then(res=>{
+				if(res.errno == 1){
+					if(res.data.is_signin == 0){
+						this.signShow = false;
+					}else{
+						this.signShow = true;
+					}
+				}
+			})
+		},
+		// 退出登录
 		clickLoginOut() {
 			loginOut({}).then(res=>{
-				this.$router.push('/login')
+				if(res.errno == 1){
+					this.$utils.removeStorage('userInfo');
+					Cookies.remove('token');
+					setTimeout(()=>{
+						this.$router.push('/login')
+					}, 50)
+				}
+				
 			})
 		},
 		clickSign() {
-			this.signShow = !this.signShow
+			interSignin().then(res=>{
+				if(res.errno == 1){
+					this.signShow = true;
+					Toast('签到成功');
+				}
+			})
 		}
 	}
 }

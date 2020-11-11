@@ -47,6 +47,8 @@
 			   name="验证码"
 				left-icon="comment-o"
 			   placeholder="短信验证码"
+			   type="number"
+			   maxlength="6"
 			 >
 		    <template #button>
 		  		
@@ -89,6 +91,8 @@
 		loginPhoneGetCode
 	} from '@/api/login.js'
 	import { Toast } from 'vant';
+	import Cookies from 'js-cookie';
+	import { getUserInfo } from '@/api/my/index.js'
 	export default {
 		name: "Login",
 		components: {
@@ -112,12 +116,14 @@
 				Toast('请输入手机号码')
 			}else{
 				loginPhoneGetCode({
-					type: 1,
+					type: 3,
 					phone: this.phone,
-					lang: 'cn'
 				}).then(res=>{
-					this.time = this.$variables.sendCodeTime;
-					this.sendStatus = true;
+					if(res.errno == 1){
+						Toast('验证码已发送，请注意查收')
+						this.time = this.$variables.sendCodeTime;
+						this.sendStatus = true;
+					}
 				})
 			}
 		},
@@ -143,8 +149,11 @@
 					username: this.username,
 					password: this.password,
 				}).then(res=>{
-					
-					// this.$router.push('/user')
+					if(res.errno == 1){
+						this.$utils.setStorage('token', res.data.token);
+						Toast('登录成功');
+						this.getUserInfo();
+					}
 				})
 			}
 		},
@@ -152,17 +161,30 @@
 		loginPhone() {
 			if(!this.phone){
 				Toast('请输入手机号码')
-			}else if(!this.password){
+			}else if(!this.sms){
 				Toast('请输入验证码')
 			}else{
 				loginPhone({
 					phone: this.phone,
 					code: this.sms,
 				}).then(res=>{
-					
-					// this.$router.push('/user')
+					if(res.errno == 1){
+						this.$utils.setStorage('token', res.data.token)
+						Toast('登录成功');
+						this.getUserInfo();
+					}
 				})
 			}
+		},
+		getUserInfo() {
+			getUserInfo().then(userRes=>{
+				if(userRes.errno == 1){
+					this.$utils.setStorage('userInfo', userRes.data);
+					setTimeout(()=>{
+						this.$router.push('/user');
+					}, 1500)
+				}
+			})
 		},
 		onClickRight() {
 			this.isPWLogin = !this.isPWLogin;

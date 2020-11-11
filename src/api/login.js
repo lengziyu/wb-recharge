@@ -58,7 +58,7 @@ export function loginPhoneGetCode(query) {
 export function emailRegister(query) {
 	return request({
 	    url: '/codebyemail',
-	    method: 'GET',
+	    method: 'POST',
 		params: query
 	})
 }

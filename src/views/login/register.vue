@@ -59,6 +59,8 @@
 		    clearable
 		  	left-icon="comment-o"
 		    placeholder="短信验证码"
+			type="number"
+			maxlength="6"
 		  >
 		    <template #button>
 		  		
@@ -102,9 +104,9 @@
 		},
 		data() {
 		  return {
-			email: '1058566903@qq.com',
+			email: '',
 			phone: '',
-			password: 'a12345678',
+			password: '',
 			isPhoneRegister: false,
 			sms: '',
 			time: 0,
@@ -120,10 +122,11 @@
 				loginPhoneGetCode({
 					type: 1,
 					phone: this.phone,
-					lang: 'cn'
 				}).then(res=>{
-					this.time = this.$variables.sendCodeTime;
-					this.sendStatus = true;
+					if(res.errno == 1){
+						this.time = this.$variables.sendCodeTime;
+						this.sendStatus = true;
+					}
 				})
 			}
 		},
@@ -156,8 +159,12 @@
 					password: this.password,
 					code: this.sms,
 				}).then(res=>{
-					
-					// this.$router.push('/user')
+					if(res.errno == 1){
+						Toast('注册成功');
+						setTimeout(()=>{
+							this.$router.push('/login')
+						}, 1500)
+					}
 				})
 			}
 		},
@@ -171,10 +178,13 @@
 				registerEmail({
 					email: this.email,
 					password: this.password,
-					lang: 'cn'
 				}).then(res=>{
-					
-					// this.$router.push('/user')
+					if(res.errno == 1){
+						Toast('注册成功');
+						setTimeout(()=>{
+							this.$router.push('/login')
+						}, 1500)
+					}
 				})
 			}
 		}

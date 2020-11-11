@@ -23,7 +23,7 @@ export function addressAdd(query) {
 	return request({
 	    url: '/addr/create',
 	    method: 'POST',
-		params: query
+		data: query
 	})
 }
 
@@ -31,7 +31,7 @@ export function addressAdd(query) {
 export function addressInfo(query) {
 	return request({
 	    url: '/addr/show',
-	    method: 'POST',
+	    method: 'GET',
 		params: query
 	})
 }
