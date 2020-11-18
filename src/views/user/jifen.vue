@@ -17,14 +17,14 @@
 				  <div v-for="item in list" :key="item" :title="item" class="jf-item">
 					<div class="item-left">
 						<div class="item-title">
-							用户签到
+							{{ item.type }}
 						</div>
 						<div class="item-date">
-							2020-10-22 33:34:45
+							{{ item.created_at }}
 						</div>
 					</div>
 					<div class="item-right">
-						+1000
+						{{ item.algorithm }}{{ item.integral }}
 					</div>
 				  </div>
 				</van-list>

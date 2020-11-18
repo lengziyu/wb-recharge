@@ -26,14 +26,14 @@
 			  	<van-row>
 			  		<van-col span="8">
 			  			<p class="van-doc-demo-block__title">身份证正面</p>
-			  			<van-uploader v-model="fileList" max-count="1" multiple />
+			  			<van-uploader v-model="fileList" :after-read="afterRead" max-count="1" multiple />
 			  		</van-col>
 			  		
 			  		<van-col span="8">
 			  			<p class="van-doc-demo-block__title">
 			  				身份证反面
 			  			</p>
-			  			<van-uploader v-model="fileList2" max-count="1" multiple />
+			  			<van-uploader v-model="fileList2" :after-read="afterRead2" max-count="1" multiple />
 			  		</van-col>
 			  	</van-row>
 			  </div>
@@ -49,7 +49,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { upload } from '@/api/other.js'
 export default {
 	name: "",
 	components: {
@@ -60,10 +60,10 @@ export default {
 			username: '',
 			usernumber: '',
 			  fileList: [
-				{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' },
+				
 			  ],
 			  fileList2: [
-				  { url: 'https://img.yzcdn.cn/vant/leaf.jpg' },
+				 
 			  ]
 		}
 	},
@@ -73,6 +73,13 @@ export default {
 	methods:{
 		onSubmit() {
 			
+		},
+		afterRead(file){
+			upload({
+				file: file
+			}).then(res=>{
+				console.log(file)
+			})
 		}
 	}
 };
