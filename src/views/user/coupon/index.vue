@@ -23,7 +23,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { couponGethasList } from '@/api/my/coupon.js'
 const coupon = {
   available: 1,
   condition: '无使用门槛\n最多优惠12元',
@@ -49,9 +49,14 @@ export default {
 		}
 	},
 	mounted() {
-
+		this.couponGethasList();
 	},
 	methods:{
+		couponGethasList() {
+			couponGethasList().then(res=>{
+				console.log(res)
+			})
+		},
 		onChange(index) {
 			this.showList = false;
 			this.chosenCoupon = index;

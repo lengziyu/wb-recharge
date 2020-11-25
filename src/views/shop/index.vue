@@ -2,7 +2,7 @@
 	<div>
 		<div class="tabbar-height"></div>
 		<van-search
-		  v-model="searchVal"
+		  v-model="listQuery.search"
 		  show-action
 		  placeholder="类别/名称/积分区间/价格区间"
 		  @search="onSearch"
@@ -52,6 +52,7 @@
 <script>
 import Tabbar from '@/components/Tabbar.vue'
 import Item from './components/Item.vue'
+import { jifenList } from '@/api/jifen.js'
 export default {
 	components: {
 		Tabbar,
@@ -59,15 +60,24 @@ export default {
 	},
 	data() {
 		return {
-			searchVal: ''
+			listQuery: {
+				limit: 10,
+				page: 1,
+				search: ''
+			}
 		}
 	},
 	mounted() {
-		
+		this.jifenList();
 	},
 	methods: {
 		onSearch() {
 			
+		},
+		jifenList() {
+			jifenList(this.listQuery).then(res=>{
+				console.log(res)
+			})
 		}
 	}
 }

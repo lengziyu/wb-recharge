@@ -29,6 +29,7 @@
 
 <script>
 import Tabbar from '@/components/Tabbar.vue'
+import { couponList } from '@/api/my/coupon.js'
 export default {
 	components: {
 		Tabbar
@@ -39,10 +40,14 @@ export default {
 		}
 	},
 	mounted() {
-		
+		this.couponList();
 	},
 	methods: {
-		
+		couponList() {
+			couponList().then(res=>{
+				console.log(res)
+			})
+		}
 	}
 }
 </script>
