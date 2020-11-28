@@ -16,8 +16,7 @@
 				>
 				  <div v-for="item in list" :key="item" :title="item" class="jf-item">
 					<div class="item-left">
-						<div class="item-title">
-							{{ item.type }}
+						<div class="item-title" v-html="typeFn(item.type)">
 						</div>
 						<div class="item-date">
 							{{ item.created_at }}
@@ -60,6 +59,19 @@ export default {
 
 	},
 	methods:{
+		typeFn(type) {
+			if(type == 1){
+				return '登录签到积分'
+			}else if(type == 2){
+				return '购物得积分'
+			}else if(type == 3){
+				return '邀请好友注册积分'
+			}else if(type == 4){
+				return '购物使用积分代扣'
+			}else if(type == 5){
+				return '邀请好友购物积分'
+			}
+		},
 		async getList() {
 		    let { data: res } = await interList({ 
 			  page: this.listQuery.page,

@@ -12,7 +12,7 @@ export function couponList(query) {
 // 已领取的优惠券列表
 export function couponGethasList(query) {
 	return request({
-	    url: '/coupon',
+	    url: '/coupon/gethas',
 	    method: 'GET',
 		params: query
 	})

@@ -24,17 +24,6 @@
 <script>
 import { Toast } from 'vant';
 import { couponGethasList } from '@/api/my/coupon.js'
-const coupon = {
-  available: 1,
-  condition: '无使用门槛\n最多优惠12元',
-  reason: '',
-  value: 150,
-  name: '优惠券名称',
-  startAt: 1489104000,
-  endAt: 1514592000,
-  valueDesc: '1.5',
-  unitDesc: '元',
-};
 
 export default {
 	name: "",
@@ -44,8 +33,8 @@ export default {
 	data() {
 		return {
 			chosenCoupon: -1,
-			coupons: [coupon],
-			disabledCoupons: [coupon],
+			coupons: [],
+			disabledCoupons: [],
 		}
 	},
 	mounted() {
@@ -53,8 +42,48 @@ export default {
 	},
 	methods:{
 		couponGethasList() {
-			couponGethasList().then(res=>{
-				console.log(res)
+			couponGethasList().then(re=>{
+				this.coupons = [];
+				this.disabledCoupons = [];
+				let res = re.data;
+				for (var i = 0; i < res.length; i++) {
+					var name = '使用场景：';
+					if(res[i].used == 0){
+						name += '所有场景'
+					}else if(res[i].used == 1) {
+						name += '积分商城'
+					}else if(res[i].used == 2) {
+						name += '门票'
+					}else if(res[i].used == 3) {
+						name += '话费'
+					}
+					if(res[i].is_overdue == 0){
+						this.coupons.push({
+							startAt: res[i].valid_start_time,
+							endAt: res[i].valid_end_time,
+							description: res[i].content,
+							name: name,
+							condition: '满'+res[i].with_amount+'元可减',
+							valueDesc: res[i].used_amount,
+							value: res[i].used_amount,
+							available: res[i].is_overdue,
+							id: res[i].id,
+						})
+					}else{
+						this.disabledCoupons.push({
+							startAt: res[i].valid_start_time,
+							endAt: res[i].valid_end_time,
+							description: res[i].content,
+							name: name,
+							condition: '满'+res[i].with_amount+'元可减',
+							valueDesc: res[i].used_amount,
+							value: res[i].used_amount,
+							available: res[i].is_overdue,
+							id: res[i].id,
+						})
+					}
+					
+				}
 			})
 		},
 		onChange(index) {
