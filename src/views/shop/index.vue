@@ -12,15 +12,17 @@
 		  </template>
 		</van-search>
 		<div class="user-panel">
-			<div class="re-title">
-				2000神券适用
-			</div>
-			<div class="jf-list">
-				<ul>
-					<li v-for="i in 3">
-						<Item />
-					</li>
-				</ul>
+			<div v-if="list2000.length > 0">
+				<div class="re-title">
+					2000神券适用
+				</div>
+				<div class="jf-list">
+					<ul>
+						<li v-for="i in list2000" @click="clickItem(i)">
+							<Item />
+						</li>
+					</ul>
+				</div>
 			</div>
 			
 			<div class="re-title">
@@ -28,21 +30,23 @@
 			</div>
 			<div class="jf-list">
 				<ul>
-					<li v-for="i in 6">
-						<Item />
+					<li v-for="i in list1000" @click="clickItem(i)">
+						<Item :item="i" />
 					</li>
 				</ul>
 			</div>
 			
-			<div class="re-title">
-				500神券适用
-			</div>
-			<div class="jf-list">
-				<ul>
-					<li v-for="i in 2">
-						<Item />
-					</li>
-				</ul>
+			<div  v-if="list500.length > 0">
+				<div class="re-title">
+					500神券适用
+				</div>
+				<div class="jf-list">
+					<ul>
+						<li v-for="i in list500" @click="clickItem(i)">
+							<Item />
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<Tabbar />
@@ -64,7 +68,10 @@ export default {
 				limit: 10,
 				page: 1,
 				search: ''
-			}
+			},
+			list2000: [],
+			list1000: [],
+			list500: []
 		}
 	},
 	mounted() {
@@ -76,8 +83,11 @@ export default {
 		},
 		jifenList() {
 			jifenList(this.listQuery).then(res=>{
-				console.log(res)
+				this.list1000 = res.data.data;
 			})
+		},
+		clickItem(item) {
+			this.$router.push('/shop/detail?id='+item.id);
 		}
 	}
 }

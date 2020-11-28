@@ -9,21 +9,19 @@
 		/>
 		<van-swipe class="my-swipe padding-head" :autoplay="3000" indicator-color="white" height="200">
 		  <van-swipe-item>
-			  <img src="@/assets/images/img.jpg" alt="">
+			  <img :src="detail.product_img" alt="">
 		  </van-swipe-item>
-		  <van-swipe-item>2</van-swipe-item>
-		  <van-swipe-item>3</van-swipe-item>
 		</van-swipe>
 		<div class="details">
 			<div class="price">
-				1000 <span>积分</span> /  <span>￥</span>100<span>元</span>
+				{{ detail.integral }} <span>积分</span> /  <span>￥</span>{{ detail.money }}<span>元</span>
 			</div>
 			<div class="title">
-				途涯客(TOYAXER)男士休闲背包usb充电双肩包防水商务休闲电脑包RJSP
+				{{ detail.title }}
 			</div>
 			<div class="info">
 				<div class="baoyou">
-					满10元包邮
+					满20元包邮
 				</div>
 				<div class="sale">
 					月销<span>100</span>笔
@@ -32,14 +30,13 @@
 		</div>
 		
 		<van-cell title="七天无理由退款" icon="tosend" is-link />
-		<van-cell title="满10块包邮" icon="free-postage" is-link />
+		<van-cell title="满20块包邮" icon="free-postage" is-link />
 		<div class="detail-panel">
 			<div class="re-title">
 				商品信息
 			</div>
-			<div>
-				<img class="max" src="https://img.alicdn.com/imgextra/i2/3044627242/O1CN018ErkLB23MsvCA5DgF_!!3044627242.jpg" alt="">
-				<img class="max" src="https://img.alicdn.com/imgextra/i1/3044627242/O1CN01cA7LYU23MsvAPzmoG_!!3044627242.jpg" alt="">
+			<div v-html="detail.content">
+				
 			</div>
 		</div>
 		<van-goods-action>
@@ -57,7 +54,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { jifenDetail } from '@/api/jifen.js'
 export default {
 	name: "",
 	components: {
@@ -65,13 +62,22 @@ export default {
 	},
 	data() {
 		return {
-
+			detail: ''
 		}
 	},
 	mounted() {
-
+		this.jifenDetail();
 	},
 	methods:{
+		jifenDetail() {
+			console.log(this.$route.query.id)
+			jifenDetail({
+				id: this.$route.query.id,
+			}).then(res=>{
+				console.log(res.data)
+				this.detail = res.data;
+			})
+		},
 	    onClickIcon() {
 	      Toast('点击图标');
 	    },

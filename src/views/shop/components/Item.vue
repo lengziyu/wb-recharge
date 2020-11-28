@@ -1,13 +1,13 @@
 <template>
 	<div @click="clickItem">
 		<div class="jf-pic">
-			<img src="//gw.alicdn.com/bao/upload/O1CN01hASekb1XE7efoSOnk_!!6000000002891-2-yinhe.png_170x10000.jpg_.webp" class="max" alt="">
+			<img :src="item.product_img" class="max" alt="">
 		</div>
 		<div class="jf-title">
-			商品可用积分兑换，iphone12新机未开拆的。
+			{{ item.title }}
 		</div>
 		<div class="jf-num">
-			1000 <span>积分</span>
+			{{ item.integral }} <span>积分</span>
 		</div>
 		<div class="jf-btn">
 			立即兑换
@@ -19,6 +19,7 @@
 import { Toast } from 'vant';
 
 export default {
+	props: ['item'],
 	name: "",
 	components: {
 	
@@ -41,13 +42,13 @@ export default {
 
 <style lang="scss" scoped>
 		.jf-pic{
-			height: 110px;
+			height: 80px;
 			overflow: hidden;
 			text-align: center;
-			// img{
-			// 	width: 100%;
-			// 	height: 100%;
-			// }
+			img{
+				width: 100%;
+				height: 100%;
+			}
 		}
 		.jf-title{
 			font-size: 12px;
