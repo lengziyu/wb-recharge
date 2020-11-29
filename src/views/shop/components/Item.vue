@@ -1,5 +1,5 @@
 <template>
-	<div @click="clickItem">
+	<div>
 		<div class="jf-pic">
 			<img :src="item.product_img" class="max" alt="">
 		</div>
@@ -33,9 +33,7 @@ export default {
 
 	},
 	methods:{
-		clickItem() {
-			this.$router.push('/shop/detail')
-		}
+
 	}
 };
 </script>

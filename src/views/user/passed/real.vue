@@ -74,11 +74,11 @@ export default {
 		onSubmit() {
 			
 		},
-		afterRead(file){
+		afterRead(data){
 			upload({
-				file: file
+				file: data.file
 			}).then(res=>{
-				console.log(file)
+				console.log(res)
 			})
 		}
 	}

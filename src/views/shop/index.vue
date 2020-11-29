@@ -19,7 +19,7 @@
 				<div class="jf-list">
 					<ul>
 						<li v-for="i in list2000" @click="clickItem(i)">
-							<Item />
+							<Item :item="i" />
 						</li>
 					</ul>
 				</div>
@@ -43,7 +43,7 @@
 				<div class="jf-list">
 					<ul>
 						<li v-for="i in list500" @click="clickItem(i)">
-							<Item />
+							<Item :item="i" />
 						</li>
 					</ul>
 				</div>
@@ -65,7 +65,7 @@ export default {
 	data() {
 		return {
 			listQuery: {
-				limit: 10,
+				limit: 20,
 				page: 1,
 				search: ''
 			},
@@ -82,8 +82,16 @@ export default {
 			
 		},
 		jifenList() {
-			jifenList(this.listQuery).then(res=>{
+			jifenList({...this.listQuery, search: 500}).then(res=>{
+				this.list500 = res.data.data;
+			})
+			
+			jifenList({...this.listQuery, search: 1000}).then(res=>{
 				this.list1000 = res.data.data;
+			})
+			
+			jifenList({...this.listQuery, search: 2000}).then(res=>{
+				this.list2000 = res.data.data;
 			})
 		},
 		clickItem(item) {
