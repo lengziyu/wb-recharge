@@ -5,7 +5,10 @@ export function jifenList(query) {
 	return request({
 	    url: '/itgproduct',
 	    method: 'GET',
-		params: query
+		params: query,
+		headers: {
+			'Content-Type': 'application/json'
+		}
 	})
 }
 

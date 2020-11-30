@@ -2,10 +2,11 @@
 	<div>
 		<div class="tabbar-height"></div>
 		<van-search
-		  v-model="listQuery.search"
+		  v-model="title"
 		  show-action
 		  placeholder="类别/名称/积分区间/价格区间"
 		  @search="onSearch"
+		  @clear="onClear"
 		>
 		  <template #action>
 		    <div @click="onSearch">搜索</div>
@@ -67,11 +68,11 @@ export default {
 			listQuery: {
 				limit: 20,
 				page: 1,
-				search: ''
 			},
 			list2000: [],
 			list1000: [],
-			list500: []
+			list500: [],
+			title: ''
 		}
 	},
 	mounted() {
@@ -79,18 +80,31 @@ export default {
 	},
 	methods: {
 		onSearch() {
-			
+			this.jifenList();
+		},
+		onClear() {
+			this.jifenList();
 		},
 		jifenList() {
-			jifenList({...this.listQuery, search: 500}).then(res=>{
+			jifenList({
+				...this.listQuery, 
+				'search[title]': this.title,
+				'search[integral]': 500
+			}).then(res=>{
 				this.list500 = res.data.data;
 			})
 			
-			jifenList({...this.listQuery, search: 1000}).then(res=>{
+			jifenList({...this.listQuery, 
+			'search[title]': this.title,
+			'search[integral]': 1000
+			}).then(res=>{
 				this.list1000 = res.data.data;
 			})
 			
-			jifenList({...this.listQuery, search: 2000}).then(res=>{
+			jifenList({...this.listQuery, 
+			'search[title]': this.title,
+			'search[integral]': 2000
+			}).then(res=>{
 				this.list2000 = res.data.data;
 			})
 		},

@@ -23,7 +23,7 @@
 					满20元包邮
 				</div>
 				<div class="sale">
-					月销<span>100</span>笔
+					月销<span>{{ detail.sell_num }}</span>笔
 				</div>
 			</div>
 		</div>

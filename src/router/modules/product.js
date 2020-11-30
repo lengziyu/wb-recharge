@@ -29,4 +29,9 @@ export default [
 		name: 'ProductTicketPay',
 		component: () => import('@/views/product/ticket/pay.vue')
 	},
+	{
+		path: '/product/wx',
+		name: 'ProductWx',
+		component: () => import('@/views/product/wx/index.vue')
+	},
 ]

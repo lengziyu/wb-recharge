@@ -54,6 +54,7 @@ import { loginOut } from '@/api/login.js'
 import Cookies from 'js-cookie'
 import { Toast } from 'vant';
 import { isCheckSignin, interSignin } from '@/api/my/index.js'
+import { getUserInfo } from '@/api/my/index.js'
 export default {
 	components: {
 		Tabbar,
@@ -69,10 +70,11 @@ export default {
 	mounted() {
 		this.userInfo = this.$utils.getStorage('userInfo');
 		if(this.userInfo){
-			this.isCheckSignin();
+			this.getUserInfo();
 		}
 	},
 	methods: {
+		
 		// 是否已签到
 		isCheckSignin() {
 			isCheckSignin().then(res=>{
@@ -82,6 +84,14 @@ export default {
 					}else{
 						this.signShow = true;
 					}
+				}
+			})
+		},
+		getUserInfo() {
+			getUserInfo().then(userRes=>{
+				if(userRes.errno == 1){
+					this.$utils.setStorage('userInfo', userRes.data);
+					this.isCheckSignin();
 				}
 			})
 		},

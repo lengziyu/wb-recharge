@@ -82,4 +82,9 @@ export default [
 		name: 'UserWallet',
 		component: () => import('@/views/user/wallet/index.vue')
 	},
+	{
+		path: '/user/vip',
+		name: 'UserVIP',
+		component: () => import('@/views/user/vip/index.vue')
+	},
 ]

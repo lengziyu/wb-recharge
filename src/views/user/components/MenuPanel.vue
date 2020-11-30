@@ -34,7 +34,8 @@ export default {
 			},{
 				name: 'VIP会员',
 				code: '',
-				icon: 'gem-o'
+				icon: 'gem-o',
+				url: '/user/vip'
 			},{
 				name: '我的钱包',
 				code: '',
