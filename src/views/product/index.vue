@@ -2,7 +2,7 @@
 	<div class="product">
 		<div class="tabbar-height"></div>
 		<van-dropdown-menu>
-		  <van-dropdown-item v-model="value1" :options="option1" />
+		  <van-dropdown-item v-model="value1" @change="onChange" :options="option1" />
 		</van-dropdown-menu>
 		<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" height="200">
 		  <van-swipe-item>
@@ -43,6 +43,9 @@
 
 <script>
 import Tabbar from '@/components/Tabbar.vue'
+import store from '@/store'
+import { mapMutations } from 'vuex'
+	
 export default {
 	components: {
 		Tabbar
@@ -50,20 +53,20 @@ export default {
 	data() {
 		return {
 			activeKey: 0,
-		  value1: 0,
-		  value2: 'a',
+		  value1: this.$store.state.lang,
 		  option1: [
-			{ text: '中文', value: 0 },
-			{ text: 'English', value: 1 },
+			{ text: '中文', value: 'cn' },
+			{ text: 'English', value: 'en' },
 		  ],
 		}
 	},
 	mounted() {
-		
+	
 	},
 	methods: {
-		onChange() {
-			
+		...mapMutations(['setLang']),
+		onChange(e) {
+			this.setLang(e)
 		}
 	}
 }

@@ -6,13 +6,14 @@ import router from '@/router';
 import { Toast } from 'vant';
 
 let vm = new Vue();
+import store from '@/store'
 
 // create an axios instance
 const service = axios.create({
   baseURL: vm.$variables.requestUrl, // api 的 base_url
   timeout: 10000,
 })
-
+console.log(store)
 // 设置请求头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
@@ -24,7 +25,7 @@ service.interceptors.request.use(
 	if(vm.$utils.getStorage('token')){
 		config.headers['token'] = vm.$utils.getStorage('token');
 	}
-	config.headers['lang'] = 'cn';
+	config.headers['lang'] = store.state.lang;
     if(config.method == 'POST'){
 		config.data = qs.stringify(config.data)
     }

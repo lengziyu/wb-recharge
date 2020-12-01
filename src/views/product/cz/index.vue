@@ -9,13 +9,13 @@
 		/>
 
 		<van-sidebar v-model="activeKey" @change="onChange">
-		  <van-sidebar-item :title="i.name" v-for="i in list" />
+		  <van-sidebar-item :title="i.title" v-for="i in list" />
 		</van-sidebar>
 		<div class="sidebar-content">
 			<div class="sidebar-content-title">
 				快速充值通道
 			</div>
-			<div class="cz-item" v-for="i in 3" @click="clickItem">
+			<div class="cz-item" v-for="i in oList" @click="clickItem">
 				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
 			</div>
 		</div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-
+import { cardOperatorList, cardCountryList } from '@/api/product/cz.js'
 export default {
 	components: {
 
@@ -31,23 +31,25 @@ export default {
 	data() {
 		return {
 			activeKey: 0,
-			list: [{
-				name: '新加坡Singapore'
-			},{
-				name: '马来西亚Malaysia'
-			},{
-				name: '泰国Thailand'
-			},{
-				name: '印度尼西亚Indonesia'
-			},{
-				name: '菲律宾Philippines'
-			},{
-				name: '缅甸Myanmar'
-			}]
+			list: [],
+			oList: [],
+			// {
+			// 	name: '新加坡Singapore'
+			// },{
+			// 	name: '马来西亚Malaysia'
+			// },{
+			// 	name: '泰国Thailand'
+			// },{
+			// 	name: '印度尼西亚Indonesia'
+			// },{
+			// 	name: '菲律宾Philippines'
+			// },{
+			// 	name: '缅甸Myanmar'
+			// }
 		}
 	},
 	mounted() {
-		
+		this.cardCountryList();
 	},
 	methods: {
 		onChange() {
@@ -55,6 +57,24 @@ export default {
 		},
 		clickItem() {
 			this.$router.push('/product/cz/detail')
+		},
+		cardCountryList() {
+			cardCountryList().then(res=>{
+				if(res.errno == 1){
+					console.log(res.data)
+					this.list = res.data;
+					this.cardOperatorList();
+				}
+			})
+		},
+		cardOperatorList() {
+			cardOperatorList({
+				'search[country_id]': this.list[this.activeKey].id,
+			}).then(res=>{
+				if(res.errno == 1){
+					this.oList = res.data;
+				}
+			})
 		}
 	}
 }

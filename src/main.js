@@ -29,7 +29,7 @@ import { cn } from './langs/cn'		// 中文包
 import { en } from './langs/en'		// 英文包
 
 const i18n = new VueI18n({
-    locale: 'cn',    // 语言标识
+    locale: store.state.lang,    // 语言标识
     messages: {
       'cn': { ...cn },   // 中文语言包
       'en': { ...en }    // 英文语言包
@@ -37,8 +37,10 @@ const i18n = new VueI18n({
 })
 import { Locale } from 'vant';
 // 引入英文语言包
-// import enUS from 'vant/es/locale/lang/en-US';
-// Locale.use('en-US', enUS);
+if(store.state.lang == 'en'){
+	var enUS = require('vant/es/locale/lang/en-US')
+	Locale.use('en-US', enUS);
+}
 
 // rem 适配
 import 'amfe-flexible';
