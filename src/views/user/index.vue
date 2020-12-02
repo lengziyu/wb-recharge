@@ -91,6 +91,7 @@ export default {
 			getUserInfo().then(userRes=>{
 				if(userRes.errno == 1){
 					this.$utils.setStorage('userInfo', userRes.data);
+					this.userInfo = userRes.data;
 					this.isCheckSignin();
 				}
 			})
@@ -113,6 +114,9 @@ export default {
 				if(res.errno == 1){
 					this.signShow = true;
 					Toast('签到成功');
+					setTimeout(()=>{
+						this.getUserInfo();
+					}, 50)
 				}
 			})
 		}

@@ -9,14 +9,14 @@
 		/>
 
 		<van-sidebar v-model="activeKey" @change="onChange">
-		  <van-sidebar-item :title="i.title" v-for="i in list" />
+		  <van-sidebar-item :title="i.title_cn+i.title_en" v-for="i in list" />
 		</van-sidebar>
 		<div class="sidebar-content">
 			<div class="sidebar-content-title">
 				快速充值通道
 			</div>
-			<div class="cz-item" v-for="i in oList" @click="clickItem">
-				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+			<div class="cz-item" v-for="i in oList" @click="clickItem(i)">
+				<img class="max" :src="i.cover_url">
 			</div>
 		</div>
 	</div>
@@ -52,11 +52,16 @@ export default {
 		this.cardCountryList();
 	},
 	methods: {
-		onChange() {
-			
+		onChange(e) {
+			console.log(e)
+			this.activeKey = e;
+			this.cardOperatorList();
 		},
-		clickItem() {
-			this.$router.push('/product/cz/detail')
+		clickItem(i) {
+			this.$router.push('/product/cz/detail?country_id='
+			+this.list[this.activeKey].id
+			+'&operator_id='+i.id
+			+'&type='+i.type.join(','))
 		},
 		cardCountryList() {
 			cardCountryList().then(res=>{

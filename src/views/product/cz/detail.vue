@@ -12,7 +12,7 @@
 				请输入手机号码
 			</div>
 			<div class="cz-phone">
-				<span class="cz-qh">+65</span>
+				<span class="cz-qh">+{{ info.area_code }}</span>
 				<span class="cz-line">|</span>
 				<input type="text" placeholder="手机号码">
 			</div>
@@ -23,46 +23,33 @@
 				请选择产品
 			</div>
 			<div class="tabs">
-				<van-tabs v-model="active">
+				<van-tabs v-model="active" @change="onChange">
 				  <van-tab title="话费">
 					  <ul>
-					  	<li v-for="(i, idx1) in 5" :class="current1 == idx1?'current':''" @click="clickCurrent1(i, idx1)">
-							主账户￥10
+					  	<li v-for="(i, idx1) in huafei" :class="current1 == idx1?'current':''" @click="clickCurrent1(i, idx1)">
+							{{ i.title }}
 						</li>
 					  </ul>
 				  </van-tab>
 				  <van-tab title="套餐">
 					  <ul>
-					  	<li v-for="(i, idx2) in 11" :class="current2 == idx2?'current':''" @click="clickCurrent2(i, idx2)">
-							超值套餐
+					  	<li v-for="(i, idx2) in taocan" :class="current2 == idx2?'current':''" @click="clickCurrent2(i, idx2)">
+							{{ i.title }}
 						</li>
 					  </ul>
 				  </van-tab>
 				  <van-tab title="流量">
 					  <ul>
-					  	<li v-for="(i, idx3) in 8" :class="current3 == idx3?'current':''" @click="clickCurrent3(i, idx3)">
-							3天10G
+					  	<li v-for="(i, idx3) in liuliang" :class="current3 == idx3?'current':''" @click="clickCurrent3(i, idx3)">
+							{{ i.title }}
 						</li>
 					  </ul>
 				  </van-tab>
 				</van-tabs>
 			</div>
 			
-			<div class="cz-say">
-				<ul>
-					<li>
-						有效期：176天
-					</li>
-					<li>
-						主账户：￥30
-					</li>
-					<li>
-						红利账户：$4.5
-					</li>
-					<li>
-						本地流量：10MB
-					</li>
-				</ul>
+			<div class="cz-say" v-html="activeContent">
+
 			</div>
 		</div>
 		
@@ -90,7 +77,7 @@
 
 <script>
 import { Toast, Dialog  } from 'vant';
-
+import { cardRectype, cardProductList } from '@/api/product/cz.js'
 export default {
 	name: "",
 	components: {
@@ -102,12 +89,50 @@ export default {
 			current1: 0,
 			current2: 0,
 			current3: 0,
+			country_id: this.$route.query.country_id,
+			operator_id: this.$route.query.operator_id,
+			type: this.$route.query.type,
+			info: '',
+			huafei: [],
+			taocan: [],
+			liuliang: [],
+			activeContent: ''
 		}
 	},
 	mounted() {
-
+		this.cardRectype();
 	},
 	methods: {
+		onChange() {
+			this.cardRectype();
+		},
+		cardRectype() {
+			cardRectype({
+				country_id: this.country_id,
+				operator_id: this.operator_id,
+				type: this.active+1,
+			}).then(res=>{
+				this.info = res.data;
+				this.cardProductList(res.data.id);
+			})
+		},
+		cardProductList(id) {
+			cardProductList({
+				'search[rec_type_id]': id
+			}).then(res=>{
+				console.log(res)
+				if(this.active == 0){
+					this.huafei = res.data.data;
+					this.activeContent = this.huafei[this.current1].content;
+				}else if(this.active == 1) {
+					this.taocan = res.data.data;
+					this.activeContent = this.taocan[this.current2].content;
+				}else if(this.active == 2) {
+					this.liuliang = res.data.data;
+					this.activeContent = this.liuliang[this.current3].content;
+				}
+			})
+		},
 		clickCurrent1(i, idx) {
 			this.current1 = idx;
 		},
