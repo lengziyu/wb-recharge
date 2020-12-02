@@ -14,7 +14,7 @@
 			<div class="cz-phone">
 				<span class="cz-qh">+{{ info.area_code }}</span>
 				<span class="cz-line">|</span>
-				<input type="text" placeholder="手机号码">
+				<input type="text" v-model="phone" placeholder="手机号码">
 			</div>
 			
 			<van-divider />
@@ -24,21 +24,21 @@
 			</div>
 			<div class="tabs">
 				<van-tabs v-model="active" @change="onChange">
-				  <van-tab title="话费">
+				  <van-tab title="话费" v-if="isCurrentNum('1')">
 					  <ul>
 					  	<li v-for="(i, idx1) in huafei" :class="current1 == idx1?'current':''" @click="clickCurrent1(i, idx1)">
 							{{ i.title }}
 						</li>
 					  </ul>
 				  </van-tab>
-				  <van-tab title="套餐">
+				  <van-tab title="套餐" v-if="isCurrentNum('2')">
 					  <ul>
 					  	<li v-for="(i, idx2) in taocan" :class="current2 == idx2?'current':''" @click="clickCurrent2(i, idx2)">
 							{{ i.title }}
 						</li>
 					  </ul>
 				  </van-tab>
-				  <van-tab title="流量">
+				  <van-tab title="流量" v-if="isCurrentNum('3')">
 					  <ul>
 					  	<li v-for="(i, idx3) in liuliang" :class="current3 == idx3?'current':''" @click="clickCurrent3(i, idx3)">
 							{{ i.title }}
@@ -56,7 +56,7 @@
 		<div class="fab-tips" @click="clickTips">
 			Tips
 		</div>
-		
+		<Paytype />
 		<div class="fab-copyright">
 			<p>
 				退款政策 | 粤IP43543号
@@ -65,6 +65,8 @@
 				版权所有@深圳水电费是多少公司
 			</p>
 		</div>
+		
+		
 		
 <!-- 		<div class="fab-btn fab-btn-wx" @click="clickPayWx">
 			微信支付￥88.88
@@ -78,10 +80,12 @@
 <script>
 import { Toast, Dialog  } from 'vant';
 import { cardRectype, cardProductList } from '@/api/product/cz.js'
+import Paytype from '@/components/PayType.vue'
 export default {
 	name: "",
 	components: {
-		Dialog
+		Dialog,
+		Paytype
 	},
 	data() {
 		return {
@@ -96,13 +100,21 @@ export default {
 			huafei: [],
 			taocan: [],
 			liuliang: [],
-			activeContent: ''
+			activeContent: '',
+			phone: ''
 		}
 	},
 	mounted() {
 		this.cardRectype();
 	},
 	methods: {
+		isCurrentNum(num){
+			if(this.type.indexOf(num) != -1){
+				return true
+			}else{
+				return false
+			}
+		},
 		onChange() {
 			this.cardRectype();
 		},
@@ -110,24 +122,24 @@ export default {
 			cardRectype({
 				country_id: this.country_id,
 				operator_id: this.operator_id,
-				type: this.active+1,
+				type: this.type.split(',')[this.active],
 			}).then(res=>{
 				this.info = res.data;
-				this.cardProductList(res.data.id);
+				this.cardProductList(res.data.id, this.type.split(',')[this.active]);
 			})
 		},
-		cardProductList(id) {
+		cardProductList(id, type) {
 			cardProductList({
 				'search[rec_type_id]': id
 			}).then(res=>{
 				console.log(res)
-				if(this.active == 0){
+				if(type == '1'){
 					this.huafei = res.data.data;
 					this.activeContent = this.huafei[this.current1].content;
-				}else if(this.active == 1) {
+				}else if(type == '2') {
 					this.taocan = res.data.data;
 					this.activeContent = this.taocan[this.current2].content;
-				}else if(this.active == 2) {
+				}else if(type == '3') {
 					this.liuliang = res.data.data;
 					this.activeContent = this.liuliang[this.current3].content;
 				}
@@ -146,7 +158,9 @@ export default {
 			
 		},
 		clickPay() {
-			
+			if(!this.info.regx_string.test(this.phone)){
+				Toast('请输入正确的手机号')
+			}
 		},
 		clickTips() {
 			Dialog.alert({
@@ -167,7 +181,7 @@ export default {
 	position: relative;
 }
 .user-panel-bg{
-	margin-bottom: 160px;
+	margin-bottom: 70px;
 }
 .cz-phone{
 	.cz-qh{

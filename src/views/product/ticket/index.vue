@@ -39,7 +39,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { tickettype } from '@/api/product/ticket.js'
 export default {
 	name: "",
 	components: {
@@ -47,15 +47,29 @@ export default {
 	},
 	data() {
 		return {
-			
+			list: '',
+			listQuery: {
+				limit: 20,
+				page: 1,
+			},
 		}
 	},
 	mounted() {
-
+		this.tickettype();
 	},
 	methods:{
 		clickItem() {
 			this.$router.push('/product/ticket/detail')
+		},
+		tickettype() {
+			tickettype({
+				...this.listQuery,
+				'search[title]': ''
+			}).then(res=>{
+				if(res.errno == 1){
+					this.list = res.data;
+				}
+			})
 		}
 	}
 };
