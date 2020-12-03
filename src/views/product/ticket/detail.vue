@@ -17,30 +17,29 @@
 				请选择产品
 			</div>
 			<ul class="td-list">
-				<li v-for="(i, idx) in 8" @click="clickItem(idx)" :class="current == idx?'current':''">
-					Ansds Bdfee 主题乐园
+				<li v-for="(i, idx) in info" @click="clickItem(idx)" :class="current == idx?'current':''">
+					{{ i.title }}
 				</li>
 			</ul>
 			
-			<div class="price">
+			<div class="price" v-if="info.length>0">
 				<p>
-					原价：<span class="red" style="text-decoration: line-through;">￥454</span>
+					价格：<span class="red">￥{{ info[current].money }}</span>
 				</p>
 				<p>
-					现价：<span class="red">￥445</span>
+					vip折扣：<span class="red">{{ info[current].vip_dis }}%</span>
+				</p>
+				<p>
+					代理折扣：<span class="red">{{ info[current].agent_dis }}%</span>
 				</p>
 			</div>
-			<div>
-				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+			
+			<div v-if="info.length>0" v-html="info[current].content">
+				
 			</div>
 			
 			<div class="details">
-				<div class="details-title">
-					使用方式：
-				</div>
-				<div class="details-text">
-					使用电子票：付款成功后，在订单列表中查看。
-				</div>
+
 			</div>
 			
 			<div class="fab-btn" @click="clickPay">
@@ -52,7 +51,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { ticket } from '@/api/product/ticket.js'
 export default {
 	name: "",
 	components: {
@@ -61,15 +60,31 @@ export default {
 	data() {
 		return {
 			ticketNum: 1,
-			current: 1
+			current: 0,
+			title: '',
+			is_recommend: 1,
+			is_new: 1,
+			is_hot: 1,
+			info: []
 		}
 	},
 	mounted() {
-
+		this.ticket();
 	},
 	methods:{
 		clickItem(idx) {
 			this.current = idx
+		},
+		ticket() {
+			ticket({
+				'search[type_id]': this.$route.query.id,
+				'search[title]': this.title,
+				// 'search[is_recommend]': this.is_recommend,
+				// 'search[is_new]': this.is_new,
+				// 'search[is_hot]': this.is_hot,
+			}).then(res=>{
+				this.info = res.data;
+			})
 		},
 		clickPay() {
 			this.$router.push('/product/ticket/pay')

@@ -87,4 +87,9 @@ export default [
 		name: 'UserVIP',
 		component: () => import('@/views/user/vip/index.vue')
 	},
+	{
+		path: '/user/luckdraw',
+		name: 'UserLuckdraw',
+		component: () => import('@/views/user/luckdraw/index.vue')
+	},
 ]

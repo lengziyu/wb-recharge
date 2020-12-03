@@ -17,13 +17,13 @@
 					点击以下列表查看详情
 				</div>
 				<div class="da-list-wrap">
-					<div class="da-item" v-for="i in 6" @click="clickItem()">
+					<div class="da-item" v-for="i in list" @click="clickItem(i)">
 						<div class="da-item-pic">
-							<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+							<img class="max" :src="i.cover_url" alt="">
 						</div>
 						<div class="da-item-info">
 							<div class="da-item-info-title">
-								马来西亚撒大声地所所多撒大声地所多所啥事
+								{{ i.title }}
 							</div>
 							<div class="da-item-info-btn">
 								点击购买>>
@@ -52,22 +52,24 @@ export default {
 				limit: 20,
 				page: 1,
 			},
+			search: ''
+			
 		}
 	},
 	mounted() {
 		this.tickettype();
 	},
 	methods:{
-		clickItem() {
-			this.$router.push('/product/ticket/detail')
+		clickItem(i) {
+			this.$router.push('/product/ticket/detail?id='+i.id)
 		},
 		tickettype() {
 			tickettype({
 				...this.listQuery,
-				'search[title]': ''
+				'search[title]': this.search,
 			}).then(res=>{
 				if(res.errno == 1){
-					this.list = res.data;
+					this.list = res.data.data;
 				}
 			})
 		}

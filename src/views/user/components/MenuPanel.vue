@@ -35,7 +35,7 @@ export default {
 				name: 'VIP会员',
 				code: '',
 				icon: 'gem-o',
-				url: '/user/vip'
+				url: '/user/luckdraw'
 			},{
 				name: '我的钱包',
 				code: '',
