@@ -25,7 +25,7 @@
       <div class="main-bg"></div>
       <div class="bg-p"></div>
       <div class="content">
-        <div class="count">今日免费抽奖次数： {{ count}}</div>
+        <div class="count">您可参加抽奖次数： {{ count}}</div>
       </div>
       <div class="tip">
         <div class="tip-title">活动规则</div>
@@ -67,7 +67,7 @@ const config = {
 export default {
   data() {
     return {
-      count: 3, // 剩余抽奖次数
+      count: 0, // 剩余抽奖次数
       duration: 3000, // 转盘旋转时间
       prizeList: [], // 奖品列表
       rotateAngle: 0, // 旋转角度
