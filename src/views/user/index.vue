@@ -24,7 +24,7 @@
 		
 		<Order-panel />
 		
-		<Menu-panel />
+		<Menu-panel :userInfo="userInfo" />
 		
 		<div class="user-panel">
 			<van-cell-group>

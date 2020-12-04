@@ -35,3 +35,12 @@ export function findByEmail(query) {
 		params: query
 	})
 }
+
+// 实名认证
+export function realnameAuth(query) {
+	return request({
+	    url: '/realnameauth',
+	    method: 'POST',
+		params: query
+	})
+}

@@ -1,5 +1,12 @@
 <template>
   <div class="container">
+	<van-nav-bar
+	  title="抽奖获VIP会员"
+	  left-text=""
+	  left-arrow
+	   
+	  @click-left="$utils.routeBack"
+	/>
     <div class="lucky-wheel">
       <div class="lucky-title"></div>
       <div class="wheel-main">
@@ -30,8 +37,8 @@
       <div class="tip">
         <div class="tip-title">活动规则</div>
         <div class="tip-content">
-          <p>1.每日可以抽取一次，即可获得一次幸运大转盘的机会，仅限当天有效，过期作废。 </p>
-          <p>2.中奖后，点击领取按钮即可领取相应奖品。</p>
+          <p>1.每{{ needIntegral }}积分可以抽取一次，幸运大转盘的机会。 </p>
+          <p>2.中奖后，自动变身尊贵的”VIP会员“，购物等有重大优惠哦。</p>
           <p>3.最终解析权归我司所有。</p>
         </div>
       </div>
@@ -41,9 +48,6 @@
         <img :src="toastIcon" class="toast-picture" />
         <div class="close" @click="closeToast()"></div>
         <div class="toast-title">{{toastTitle}}</div>
-        <div class="toast-btn">
-          <div class="toast-cancel" @click="closeToast">立即领取</div>
-        </div>
       </div>
     </div>
     <div class="toast-mask" v-show="prize"></div>
@@ -53,7 +57,7 @@
 import { prizeList } from './config'
 import { Toast } from 'vant';
 import { getUserInfo } from '@/api/my/index.js'
-import { LDGetConfig } from '@/api/my/luckdraw.js'
+import { LDGetConfig, LDGetTackout } from '@/api/my/luckdraw.js'
 const CIRCLE_ANGLE = 360
 
 const config = {
@@ -157,6 +161,11 @@ export default {
 
       return list
     },
+	rateNum(arr) {
+		var array = arr.split(",");           //转化为zhi数组dao
+		var value = array[Math.round(Math.random()*(array.length-1))];  //随机抽zhuan取一个值shu
+		return value
+	},
     beginRotate() {
       // 添加次数校验
       if(this.count === 0) return
@@ -166,13 +175,24 @@ export default {
       // 可以返回下标，也可以返回奖品 id，通过查询 奖品列表，最终得到下标
 
       // 随机获取下标
-      this.index = this.random(this.prizeList.length - 1);
-
-      // 减少剩余抽奖次数
-      this.count--
-
-      // 开始旋转
-      this.rotating()
+      // this.index = this.random(this.prizeList.length - 1);
+	  LDGetTackout().then(res=>{
+		  if(res.errno == 1){
+			  if(res.data.result == 1){
+				 this.index = Number(this.rateNum('1,3,5,7'));
+			  }else{
+				 this.index = Number(this.rateNum('0,2,4,6'));
+			  }
+			  // 减少剩余抽奖次数
+			  this.count--;
+			  // 开始旋转
+			  this.rotating()
+		  }
+	  })
+	  // this.index = Number(this.rateNum('1,3,5,7'));
+	  //   this.count--;
+	  //   // 开始旋转
+	  //   this.rotating()
     },
     random (max, min = 0) {
       return parseInt(Math.random() * (max - min + 1) + min)
@@ -268,6 +288,9 @@ export default {
 .wheel-bg div {
   text-align: center;
 }
+.prize-type{
+	margin-top: 5px;
+}
 .prize-list {
   width: 100%;
   height: 100%;
@@ -279,12 +302,13 @@ export default {
   height: 150px;
   top: 0;
   left: 50%;
+  font-size: 12px;
   margin-left: -47.5px;
   transform-origin: 50% 100%;
 }
 
 .prize-pic img {
-  width: 80px;
+  width: 40px;
   height: 40px;
   margin-top: 25px;
 }

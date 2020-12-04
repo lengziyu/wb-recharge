@@ -5,6 +5,9 @@ export function upload(query) {
 	return request({
 	    url: '/upload',
 	    method: 'POST',
-		data: query
+		data: query,
+		headers: {
+			// 'Content-Type': 'multiple/form-data'
+		}
 	})
 }

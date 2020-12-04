@@ -14,6 +14,7 @@
 
 <script>
 export default {
+	props: ['userInfo'],
 	data() {
 		return {
 			list:[{
@@ -32,7 +33,7 @@ export default {
 				icon: 'coupon-o',
 				url: '/user/coupon'
 			},{
-				name: 'VIP会员',
+				name: '抽奖获VIP会员',
 				code: '',
 				icon: 'gem-o',
 				url: '/user/luckdraw'
@@ -55,7 +56,11 @@ export default {
 	},
 	methods: {
 		clickItem(item) {
-			this.$router.push(item.url)
+			if(item.url == '/user/luckdraw' && this.userInfo.is_vip == 1){
+				Toast('您已是VIP会员');
+			}else{
+				this.$router.push(item.url)
+			}
 		}
 	}
 }
