@@ -5,11 +5,12 @@
 			<div class="user-head-bg"></div>
 			<div class="user-head-main">
 				<div class="user-avatar">
-					<img class="max" src="http://www.lengziyu.cn/blog/img/avatar.jpg">
+					<img v-if="userInfo" class="max" src="http://www.lengziyu.cn/blog/img/avatar.jpg">
+					<img v-else class="max notLogin" src="@/assets/images/user.png">
 				</div>
 				<div class="user-infos">
-					<span class="user-name">{{ userInfo.username }}</span>
-					<span class="signIn-num">积分：{{ userInfo.integral }}</span>
+					<span class="user-name">{{ userInfo?userInfo.username:'未登录' }}</span>
+					<span class="signIn-num">积分：{{ userInfo?userInfo.integral:'0' }}</span>
 				</div>
 				<div class="signIn-btn">
 					<span v-if="!signShow" @click="clickSign">
@@ -160,7 +161,13 @@ export default {
 			overflow: hidden;
 			margin: 0 auto;
 			margin-top: 40px;
+			background-color: #fff;
 			box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+			.notLogin{
+				width: 60px;
+				height: 60px;
+				margin-top: 15px;
+			}
 		}
 		.user-infos{
 			margin: 12px 0;

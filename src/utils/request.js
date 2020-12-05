@@ -42,6 +42,13 @@ service.interceptors.response.use(
 	
 	if(response.data.errno == 9999){
 		Toast(response.data.msg);
+	}else if(response.data.errno == 10000){
+		Toast(response.data.msg);
+		vm.$utils.removeStorage('token');
+		vm.$utils.removeStorage('userInfo');
+		setTimeout(()=>{
+			vm.$utils.routeTo('/login?redirect='+router.history.current.fullPath);
+		}, 1500)
 	}else if(response.data.errno != 1){
 		Toast(response.data.msg);
 	}
