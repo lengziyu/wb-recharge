@@ -30,8 +30,8 @@
 			
 			<van-cell 
 				title="实名认证" 
-				:is-link="userInfo.is_real_name == 1?false:true" 
-				:url="userInfo.is_real_name == 1?'':'/recharge/user/passed/real'" 
+				:is-link="userInfo.real_name_status != 100?false:true" 
+				:url="userInfo.real_name_status != 100?'':'/recharge/user/passed/real'" 
 				:value="userInfo.real_name"
 			/>
 		</div>

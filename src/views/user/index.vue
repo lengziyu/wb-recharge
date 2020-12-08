@@ -10,7 +10,7 @@
 				</div>
 				<div class="user-infos">
 					<span class="user-name">{{ userInfo?userInfo.username:'未登录' }}</span>
-					<span class="signIn-num">积分：{{ userInfo?userInfo.integral:'0' }}</span>
+					<span class="signIn-num">{{ $t('user.header.jifen') }}：{{ userInfo?userInfo.integral:'0' }}</span>
 				</div>
 				<div class="signIn-btn">
 					<span v-if="!signShow" @click="clickSign">
