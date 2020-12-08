@@ -17,8 +17,11 @@
 				请选择产品
 			</div>
 			<ul class="td-list">
+				
 				<li v-for="(i, idx) in info" @click="clickItem(idx)" :class="current == idx?'current':''">
-					{{ i.title }}
+					<van-badge :content="5">
+					  <div class="child">{{ i.title }}</div>
+					</van-badge>
 				</li>
 			</ul>
 			
@@ -50,12 +53,12 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+import { Toast,Badge } from 'vant';
 import { ticket } from '@/api/product/ticket.js'
 export default {
 	name: "",
 	components: {
-	
+		Badge,
 	},
 	data() {
 		return {

@@ -185,7 +185,7 @@ export default {
 }
 .cz-phone{
 	.cz-qh{
-		padding-right: 20px;
+		padding-right: 8px;
 	}
 	.cz-line{
 		padding-right: 16px;
