@@ -1,10 +1,10 @@
 <template>
 	<div class="tabbar">
 		<van-tabbar route>
-		  <van-tabbar-item icon="home-o" replace to="/product">产品中心</van-tabbar-item>
-		  <van-tabbar-item icon="point-gift-o" replace to="/shop">积分商城</van-tabbar-item>
-		  <van-tabbar-item icon="newspaper-o" replace to="/news">网站资讯</van-tabbar-item>
-		  <van-tabbar-item icon="user-o" replace to="/user">会员中心</van-tabbar-item>
+		  <van-tabbar-item icon="home-o" replace to="/product">{{$t('tabbar.cp')}}</van-tabbar-item>
+		  <van-tabbar-item icon="point-gift-o" replace to="/shop">{{$t('tabbar.jf')}}</van-tabbar-item>
+		  <van-tabbar-item icon="newspaper-o" replace to="/news">{{$t('tabbar.news')}}</van-tabbar-item>
+		  <van-tabbar-item icon="user-o" replace to="/user">{{$t('tabbar.my')}}</van-tabbar-item>
 		</van-tabbar>
 	</div>
 </template>

@@ -12,7 +12,7 @@
 					<span class="user-name">{{ userInfo?userInfo.username:'未登录' }}</span>
 					<span class="signIn-num">{{ $t('user.header.jifen') }}：{{ userInfo?userInfo.integral:'0' }}</span>
 				</div>
-				<div class="signIn-btn">
+				<div class="signIn-btn" v-if="signShow != 'load'">
 					<span v-if="!signShow" @click="clickSign">
 						<van-icon name="sign" /> 点击签到
 					</span>
@@ -64,7 +64,7 @@ export default {
 	},
 	data() {
 		return {
-			signShow: false,
+			signShow: 'load',
 			userInfo: '',
 		}
 	},

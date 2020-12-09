@@ -67,6 +67,7 @@ export default {
 		...mapMutations(['setLang']),
 		onChange(e) {
 			this.setLang(e)
+			this.$i18n.locale = e
 		}
 	}
 }
