@@ -13,38 +13,39 @@
 </template>
 
 <script>
+	
 export default {
 	props: ['userInfo'],
 	data() {
 		return {
 			list:[{
-				name: '收货地址',
+				name: this.$t('user.menus.addr'),
 				code: '',
 				icon: 'location-o',
 				url: '/user/address'
 			},{
-				name: '加盟代理商',
+				name: this.$t('user.menus.agent'),
 				code: '',
 				icon: 'cluster-o',
 				url: '/login/agent'
 			},{
-				name: '优惠券',
+				name: this.$t('user.menus.coupon'),
 				code: '',
 				icon: 'coupon-o',
 				url: '/user/coupon'
 			},{
-				name: '抽奖获VIP会员',
+				name: this.$t('user.menus.getVip'),
 				code: '',
 				icon: 'gem-o',
 				url: '/user/luckdraw'
 			},{
-				name: '我的钱包',
+				name: this.$t('user.menus.wallet'),
 				code: '',
 				icon: 'paid',
 				url: '/user/wallet'
 				
 			},{
-				name: '个人信息认证',
+				name: this.$t('user.menus.passed'),
 				code: '',
 				icon: 'passed',
 				url: '/user/passed'

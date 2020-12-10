@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="signIn_title">
-			<p class="Title_p2"> 安全 · 优价 · 便捷</p>
+			<p class="Title_p2"> {{ $t('login.signTitle') }}</p>
 		</div>
 	</div>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<div class="user-panel">
-		<van-panel title="我的订单">
+		<van-panel :title="$t('user.orders.title')">
 		  <div class="order-item" v-for="i in list" @click="clickItem(i)">
 			  <div class="order-icon">
 				  <van-icon :name="i.icon" />
@@ -14,19 +14,20 @@
 </template>
 
 <script>
+
 export default {
 	data() {
 		return {
 			list:[{
-				name: '全部',
+				name: this.$t('user.orders.all'),
 				code: '',
 				icon: 'credit-pay',
 			},{
-				name: '待付款',
+				name: this.$t('user.orders.waitPay'),
 				code: '',
 				icon: 'pending-payment'
 			},{
-				name: '申请退款',
+				name: this.$t('user.orders.refund'),
 				code: '',
 				icon: 'peer-pay'
 			}]

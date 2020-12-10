@@ -9,15 +9,15 @@
 					<img v-else class="max notLogin" src="@/assets/images/user.png">
 				</div>
 				<div class="user-infos">
-					<span class="user-name">{{ userInfo?userInfo.username:'未登录' }}</span>
+					<span class="user-name">{{ userInfo?userInfo.username:$t('user.header.loginStatus') }}</span>
 					<span class="signIn-num">{{ $t('user.header.jifen') }}：{{ userInfo?userInfo.integral:'0' }}</span>
 				</div>
 				<div class="signIn-btn" v-if="signShow != 'load'">
 					<span v-if="!signShow" @click="clickSign">
-						<van-icon name="sign" /> 点击签到
+						<van-icon name="sign" /> {{ $t('user.header.jfSign') }}
 					</span>
 					<span v-else>
-						<van-icon name="edit" /> 已签到
+						<van-icon name="edit" /> {{ $t('user.header.jfIsSign') }}
 					</span>
 				</div>
 			</div>
@@ -29,18 +29,18 @@
 		
 		<div class="user-panel">
 			<van-cell-group>
-				<van-cell title="我的个人推荐链接" is-link url="/recharge/user/recommend" />
-				<van-cell title="积分抵扣规则" is-link url="/recharge/user/texts?type=dikou" />
-				<van-cell title="积分获取方式" is-link url="/recharge/user/texts?type=integral" />
-				<van-cell title="留言板" is-link url="/recharge/user/message" />
-				<van-cell title="我的积分记录" is-link url="/recharge/user/jifen" />
+				<van-cell :title="$t('user.cells.recommend')" is-link url="/recharge/user/recommend" />
+				<van-cell :title="$t('user.cells.jfKou')" is-link url="/recharge/user/texts?type=dikou" />
+				<van-cell :title="$t('user.cells.jfGet')" is-link url="/recharge/user/texts?type=integral" />
+				<van-cell :title="$t('user.cells.message')" is-link url="/recharge/user/message" />
+				<van-cell :title="$t('user.cells.jfList')" is-link url="/recharge/user/jifen" />
 				<!-- <van-cell title="常见问题汇总" is-link url="/user/problem" /> -->
 				
 			</van-cell-group>
 		</div>
 		
 		<div class="user-panel">
-			<van-button @click.native="clickLoginOut" color="linear-gradient(to right, #ff6034, #ee0a24)" block>退出登录</van-button>
+			<van-button @click.native="clickLoginOut" color="linear-gradient(to right, #ff6034, #ee0a24)" block>{{ $t('login.getOut') }}</van-button>
 		</div>
 		
 		<Tabbar />

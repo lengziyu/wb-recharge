@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<van-nav-bar
-		  title="登录"
+		  :title="$t('login.title')"
 		  left-text=""
-		  :right-text="isPWLogin?'验证码登录':'密码登录'"
+		  :right-text="isPWLogin?$t('login.yzLogin'):$t('login.passwordLogin')"
 		  left-arrow
 		   
 		  @click-left="$utils.routeBack"
@@ -17,16 +17,16 @@
 		<van-form>
 		  <van-field
 		    v-model="username"
-		    name="用户名/邮箱/手机号码"
-		    placeholder="用户名/邮箱/手机号码"
+		    :name="$t('login.username')"
+		    :placeholder="$t('login.username')"
 			left-icon="user-o"
 			v-if="isPWLogin"
 		  />
 		  <van-field
 		  v-else
 		    v-model="phone"
-		    name="手机号码"
-		    placeholder="手机号码"
+		    :name="$t('login.phone')"
+		    :placeholder="$t('login.phone')"
 		  	left-icon="user-o"
 			maxlength="11"
 			type="number"
@@ -34,9 +34,9 @@
 		  <van-field v-if="isPWLogin"
 		    v-model="password"
 		    type="password"
-		    name="密码"
+		    :name="$t('login.password')"
 			left-icon="browsing-history-o"
-		    placeholder="密码"
+		    :placeholder="$t('login.password')"
 		  />
 
 			 <van-field
@@ -44,9 +44,9 @@
 			   v-model="sms"
 			   center
 			   clearable
-			   name="验证码"
+			   :name="$t('login.sms')"
 				left-icon="comment-o"
-			   placeholder="短信验证码"
+			   :placeholder="$t('login.sms')"
 			   type="number"
 			   maxlength="6"
 			 >
@@ -54,10 +54,10 @@
 		  		
 				<van-button @click="clickSendCode" size="small" type="primary" :disabled="sendStatus?true:false">
 					<span class="sendCode" v-if="sendStatus">
-						<van-count-down @finish="finish" :time="time" format="ss" />s重新发送
+						<van-count-down @finish="finish" :time="time" format="ss" />s{{ $t('login.resend') }}
 					</span>
 					<span class="sendText" v-else>
-							发送验证码
+							{{ $t('login.sendCode') }}
 					</span>
 				</van-button>
 			</template>
@@ -66,18 +66,18 @@
 
 		  <div style="margin: 16px; margin-top: 40px;">
 		    <van-button round block type="info" @click="onSubmit" native-type="submit">
-		      登录
+		      {{ $t('login.title') }}
 		    </van-button>
 		  </div>
 		</van-form>
 		
 		<ul class="tcenter login-tar">
 			<li>
-				<router-link :to="{ path: '/login/forgetPW', params: { userId: 123 }}">忘记密码</router-link>
+				<router-link :to="{ path: '/login/forgetPW', params: { userId: 123 }}"> {{ $t('login.forgetPW') }}</router-link>
 				|
 			</li>
 			<li>
-				<router-link :to="{ path: '/login/register', params: { userId: 123 }}">立即注册</router-link>
+				<router-link :to="{ path: '/login/register', params: { userId: 123 }}"> {{ $t('login.register') }}</router-link>
 			</li>
 		</ul>
 	</div>
