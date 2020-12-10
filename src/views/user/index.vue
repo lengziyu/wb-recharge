@@ -40,7 +40,7 @@
 		</div>
 		
 		<div class="user-panel">
-			<van-button @click.native="clickLoginOut" color="linear-gradient(to right, #ff6034, #ee0a24)" block>{{ $t('login.getOut') }}</van-button>
+			<van-button v-if="userInfo" @click.native="clickLoginOut" color="linear-gradient(to right, #ff6034, #ee0a24)" block>{{ $t('login.getOut') }}</van-button>
 		</div>
 		
 		<Tabbar />
