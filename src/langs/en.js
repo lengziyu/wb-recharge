@@ -21,6 +21,16 @@ export const en = {
 	register: 'Register',
 	signTitle: 'Safety · Favorable · Convenience'
   },
+  register: {
+  	title: 'register',
+  	email: 'email',
+  	password: 'password',
+  	registerBtn: 'Register Now',
+  	isRegister: 'Have an account? Login now',
+  	phoneRegister: 'Phone Register',
+  	emailRegister: 'Email Register',
+  	phone: 'phone',
+  },
   user: {
   	  header: {
 		  loginStatus: 'Not Login',

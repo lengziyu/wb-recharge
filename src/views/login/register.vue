@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<van-nav-bar
-		  title="注册"
+		  :title="$t('register.title')"
 		  left-text=""
 		   
-		  :right-text="isPhoneRegister?'邮箱注册':'手机号注册'"
+		  :right-text="isPhoneRegister?$t('register.emailRegister'):$t('register.phoneRegister')"
 		  left-arrow
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
@@ -18,20 +18,20 @@
 		<van-form v-if="!isPhoneRegister">
 		  <van-field
 		    v-model="email"
-		    name="邮箱"
-		    placeholder="邮箱"
+		    :name="$t('register.email')"
+		    :placeholder="$t('register.email')"
 			left-icon="user-o"
 		  />
 		  <van-field
 		    v-model="password"
 		    type="password"
-		    name="密码"
+		    :name="$t('register.password')"
 			left-icon="browsing-history-o"
-		    placeholder="密码"
+		    :placeholder="$t('register.password')"
 		  />
 		  <div style="margin: 16px; margin-top: 40px;">
 		    <van-button round block type="info" @click="clickSubmit" native-type="submit">
-		      立即注册
+		      {{ $t('register.registerBtn') }}
 		    </van-button>
 		  </div>
 		</van-form>
@@ -40,8 +40,8 @@
 		<van-form v-else>
 		  <van-field
 		    v-model="phone"
-		    name="手机号码"
-		    placeholder="手机号码"
+		    :name="$t('register.phone')"
+		    :placeholder="$t('register.phone')"
 			left-icon="user-o"
 			type="number"
 			maxlength="11"
@@ -49,16 +49,16 @@
 		  <van-field
 		    v-model="password"
 		    type="password"
-		    name="密码"
+		    :name="$t('register.password')"
 			left-icon="browsing-history-o"
-		    placeholder="密码"
+		    :placeholder="$t('register.password')"
 		  />
 		  <van-field
 		    v-model="sms"
 		    center
 		    clearable
 		  	left-icon="comment-o"
-		    placeholder="短信验证码"
+		    :placeholder="$t('login.sms')"
 			type="number"
 			maxlength="6"
 		  >
@@ -66,24 +66,24 @@
 		  		
 				<van-button @click="clickSendCode" size="small" type="primary" :disabled="sendStatus?true:false">
 					<span class="sendCode" v-if="sendStatus">
-						<van-count-down @finish="finish" :time="time" format="ss" />s重新发送
+						<van-count-down @finish="finish" :time="time" format="ss" />s{{ $t('login.resend') }}
 					</span>
 					<span class="sendText" v-else>
-						发送验证码
+						{{ $t('login.sendCode') }}
 					</span>
 					</van-button>
 		    </template>
 		  </van-field> 
 		  <div style="margin: 16px; margin-top: 40px;">
 		    <van-button round block type="info" @click="clickSubmit" native-type="submit">
-		      立即注册
+		      {{ $t('register.registerBtn') }}
 		    </van-button>
 		  </div>
 		</van-form>
 		
 		<ul class="tcenter login-tar">
 			<li>
-				<router-link :to="{ path: '/login', params: { userId: 123 }}">已有账号？立即登录</router-link>
+				<router-link :to="{ path: '/login', params: { userId: 123 }}">{{ $t('register.isRegister') }}</router-link>
 			</li>
 		</ul>
 	</div>

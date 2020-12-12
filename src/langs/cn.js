@@ -21,6 +21,16 @@ export const cn = {
 	register: '立即注册',
 	signTitle: '安全 · 优价 · 便捷'
   },
+  register: {
+	title: '注册',
+	email: '邮箱',
+	password: '密码',
+	registerBtn: '立即注册',
+	isRegister: '已有账号？立即登录',
+	phoneRegister: '手机号注册',
+	emailRegister: '邮箱注册',
+	phone: '手机号码',
+  },
   user: {
 	  header: {
 		  loginStatus: '未登录',
