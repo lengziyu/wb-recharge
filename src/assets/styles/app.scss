@@ -109,3 +109,26 @@ img.max{
 .van-coupon__content{
 	padding: 0 !important;
 }
+
+.btn-tag{
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	color: #fff;
+	display: inline-block;
+	width: 36px;
+	height: 18px;
+	font-size: 8px;
+	border-radius: 6px;
+	line-height: 18px;
+	text-align: center;
+}
+.btn-tag-hotsale{
+	background: #ee1010;
+}
+.btn-tag-new{
+	background: #a4c639;
+}
+.btn-tag-miao{
+	background: #ff8300;
+}

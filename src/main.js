@@ -15,12 +15,12 @@ import '@/utils/request'
 import 'normalize.css/normalize.css'
 
 // VANT UI 全局
-import Vant from 'vant';
-import 'vant/lib/index.css';
+// import Vant from 'vant';
+// import 'vant/lib/index.css';
 
 import '@vant/touch-emulator';
 
-Vue.use(Vant);
+// Vue.use(Vant);
 
 // 国际化配置
 import VueI18n from 'vue-i18n'
