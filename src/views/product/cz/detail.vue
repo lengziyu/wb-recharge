@@ -28,6 +28,15 @@
 					  <ul>
 					  	<li v-for="(i, idx1) in huafei" :class="current1 == idx1?'current':''" @click="clickCurrent1(i, idx1)">
 							{{ i.title }}
+							<span class="btn-tag btn-tag-hotsale" v-if="i.tag == 1">
+								热销
+							</span>
+							<span class="btn-tag btn-tag-miao" v-else-if="i.tag == 2">
+								秒杀
+							</span>
+							<span class="btn-tag btn-tag-new" v-else-if="i.tag == 3">
+								新品
+							</span>
 						</li>
 					  </ul>
 				  </van-tab>
@@ -35,6 +44,15 @@
 					  <ul>
 					  	<li v-for="(i, idx2) in taocan" :class="current2 == idx2?'current':''" @click="clickCurrent2(i, idx2)">
 							{{ i.title }}
+							<span class="btn-tag btn-tag-hotsale" v-if="i.tag == 1">
+								热销
+							</span>
+							<span class="btn-tag btn-tag-miao" v-else-if="i.tag == 2">
+								秒杀
+							</span>
+							<span class="btn-tag btn-tag-new" v-else-if="i.tag == 3">
+								新品
+							</span>
 						</li>
 					  </ul>
 				  </van-tab>
@@ -42,6 +60,15 @@
 					  <ul>
 					  	<li v-for="(i, idx3) in liuliang" :class="current3 == idx3?'current':''" @click="clickCurrent3(i, idx3)">
 							{{ i.title }}
+							<span class="btn-tag btn-tag-hotsale" v-if="i.tag == 1">
+								热销
+							</span>
+							<span class="btn-tag btn-tag-miao" v-else-if="i.tag == 2">
+								秒杀
+							</span>
+							<span class="btn-tag btn-tag-new" v-else-if="i.tag == 3">
+								新品
+							</span>
 						</li>
 					  </ul>
 				  </van-tab>
@@ -201,6 +228,7 @@ export default {
 	ul{
 		overflow: hidden;
 		margin-top: 10px;
+		padding-top: 14px;
 	}
 	li{
 		border: 1px solid #ddd;
@@ -212,7 +240,8 @@ export default {
 		font-size: 13px;
 		padding: 8px 1%;
 		color: #555;
-		overflow: hidden;
+		// overflow: hidden;
+		position: relative;
 	}
 	.current{
 		background-color: #1989fa;

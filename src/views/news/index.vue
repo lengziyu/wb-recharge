@@ -4,11 +4,18 @@
 		<div class="re-title">
 			网站公告
 		</div>
-		<van-notice-bar
-		  wrapable
-		  :scrollable="false"
-		  text="双十一来临,大量精彩活动邀您参与!充值1000元送50元,优惠不断,敬请关注!"
-		/>
+			<van-notice-bar left-icon="volume-o" :scrollable="false">
+			  <van-swipe
+				vertical
+				class="notice-swipe"
+				:autoplay="4000"
+				:show-indicators="false"
+			  >
+				<van-swipe-item v-if="notifyList && notifyList.length > 0" v-for="(i, idx) in notifyList">
+				{{ i.title }}
+				</van-swipe-item>
+			  </van-swipe>
+			</van-notice-bar>
 		<div class="re-title">
 			优惠券
 		</div>
@@ -31,9 +38,9 @@
 			常见问题汇总
 		</div>
 		<van-collapse v-model="activeNames">
-		  <van-collapse-item title="怎么获得积分？" name="1">通过签到和分享给好友可以获得。</van-collapse-item>
-		  <van-collapse-item title="常见问题2" name="2">内容</van-collapse-item>
-		  <van-collapse-item title="常见问题3" name="3">内容</van-collapse-item>
+		  <van-collapse-item :title="a.title" :name="aidx" v-for="(a, aidx) in problemList">
+			  <span v-html="a.content"></span>
+		  </van-collapse-item>
 		</van-collapse>
 		<Tabbar />
 	</div>
@@ -43,6 +50,7 @@
 import Tabbar from '@/components/Tabbar.vue'
 import { Toast } from 'vant';
 import { couponList, couponGet } from '@/api/my/coupon.js'
+import { notifyList, problemList } from '@/api/news.js'
 export default {
 	components: {
 		Tabbar
@@ -53,12 +61,33 @@ export default {
 			chosenCoupon: -1,
 			coupons: [],
 			disabledCoupons: [],
+			notifyList: [],
+			problemList: []
 		}
 	},
 	mounted() {
+		this.getNotifyList();
 		this.couponList();
+		this.getProblemList();
 	},
 	methods: {
+		getNotifyList(){
+			notifyList().then(nRes=>{
+				if(nRes.errno == 1){
+					this.notifyList = nRes.data.data;
+					console.log(this.notifyList)
+				}
+			})
+		},
+		getProblemList(){
+			problemList().then(nRes=>{
+				if(nRes.errno == 1){
+					this.problemList = nRes.data.data;
+					console.log(this.problemList)
+				}
+			})
+		},
+		
 		couponList() {
 			couponList().then(re=>{
 				this.coupons = [];
@@ -75,7 +104,7 @@ export default {
 					}else if(res[i].used == 3) {
 						name += '话费'
 					}
-
+					console.log(this.coupons)
 					this.coupons.push({
 						startAt: res[i].valid_start_time,
 						endAt: res[i].valid_end_time,
@@ -108,6 +137,10 @@ export default {
 	padding-top: 20px;
 	padding-left: 12px;
 }
+  .notice-swipe {
+    height: 40px;
+    line-height: 40px;
+  }
 </style>
 
 <style lang="scss">

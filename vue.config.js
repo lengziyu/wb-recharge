@@ -37,7 +37,8 @@ module.exports = {
 	config.externals({
 		'vue': 'Vue',
 		'vuex': 'Vuex',
-		'vue-router': 'VueRouter'
+		'vue-router': 'VueRouter',
+		'Vant': 'Vant'
 	})
 	// 解决ie11兼容ES6
 	config.entry("main").add("babel-polyfill");
@@ -51,9 +52,9 @@ module.exports = {
 			args[0].terserOptions.compress.pure_funcs = ['console.log']
 			return args
        })
-	// config
-	// 	.plugin('webpack-bundle-analyzer')
-	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	config
+		.plugin('webpack-bundle-analyzer')
+		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 	// 移除prefetch插件
 	config.plugins.delete('preload') 
 	config.plugins.delete('prefetch') 
