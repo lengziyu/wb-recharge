@@ -45,9 +45,10 @@
 
 			</div>
 			
-			<div class="fab-btn" @click="clickPay">
-				确认订单
+			<div class="tcenter mt-20">
+				<van-button class="btn-s" round @click.native="clickPay" type="primary">确认订单</van-button>
 			</div>
+
 		</div>
 	</div>
 </template>

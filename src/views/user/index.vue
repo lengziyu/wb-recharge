@@ -9,7 +9,10 @@
 					<img v-else class="max notLogin" src="@/assets/images/user.png">
 				</div>
 				<div class="user-infos">
-					<span class="user-name">{{ userInfo?userInfo.username:$t('user.header.loginStatus') }}</span>
+					<span class="user-name" v-if="userInfo">{{ userInfo.username }}</span>
+					<span class="user-name" @click="clickLoginOut" v-else>
+						{{ $t('login.title') }}
+					</span>
 					<span class="signIn-num">{{ $t('user.header.jifen') }}：{{ userInfo?userInfo.integral:'0' }}</span>
 				</div>
 				<div class="signIn-btn" v-if="signShow != 'load'">
@@ -39,10 +42,10 @@
 			</van-cell-group>
 		</div>
 		
-		<div class="user-panel">
+		<div class="user-panel" v-if="userInfo">
 			<van-button @click.native="clickLoginOut" color="linear-gradient(to right, #ff6034, #ee0a24)" block>
 				
-				{{ userInfo?$t('login.getOut'):$t('login.title') }}
+				{{ $t('login.getOut') }}
 			</van-button>
 		</div>
 		

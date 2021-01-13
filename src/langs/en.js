@@ -39,25 +39,25 @@ export const en = {
 		  jfIsSign: 'Is Sign'
   	  },
 	  orders: {
-	  		  title: 'My Order',
-	  		  all: 'All',
-	  		  waitPay: 'Wait Pay',
-	  		  refund: 'Refund'
+		title: 'My Order',
+		all: 'All',
+		waitPay: 'Wait Pay',
+		refund: 'Refund'
 	  },
 	  menus: {
-	  		  addr: 'Address',
-	  		  agent: 'Agent',
-	  		  coupon: 'Coupon',
-	  		  getVip: 'Luckdraw VIP',
-	  		  wallet: 'My Wallet',
-	  		  passed: 'Authentication'
+		addr: 'Address',
+		agent: 'Agent',
+		coupon: 'Coupon',
+		getVip: 'Luckdraw VIP',
+		wallet: 'My Wallet',
+		passed: 'Authentication'
 	  },
 	  cells: {
-	  		  recommend: 'My Recommend Link',
-	  		  jfKou: 'Integral Deduction Rules',
-	  		  jfGet: 'How To Get Integral',
-	  		  message: 'Feedbook',
-	  		  jfList: 'My Integral Record'
+		recommend: 'My Recommend Link',
+		jfKou: 'Integral Deduction Rules',
+		jfGet: 'How To Get Integral',
+		message: 'Feedbook',
+		jfList: 'My Integral Record'
 	  }
   }
 }

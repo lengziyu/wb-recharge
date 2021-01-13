@@ -25,11 +25,20 @@ body{
 img.max{
 	max-width: 100%;
 }
+.btn-s{
+	width: 110px;
+}
+.fr{
+	float: right;
+}
 .tcenter{
 	text-align: center;
 }
 .tright{
 	text-align: right;
+}
+.mt-20{
+	margin-top: 20px;
 }
 .user-panel{
 	border-radius: 8px;
@@ -131,4 +140,7 @@ img.max{
 }
 .btn-tag-miao{
 	background: #ff8300;
+}
+.van-nav-bar__content{
+	width: 100% !important;
 }

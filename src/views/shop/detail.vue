@@ -38,16 +38,19 @@
 				
 			</div>
 		</div>
-		<van-goods-action>
-		  <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
-		  <van-goods-action-button
-		    type="danger"
-		    text="立即兑换"
-		    @click="onClickButton"
-		  />
-		  
-		  
-		</van-goods-action>
+		<div class="detail-panel">
+			
+			<div class="btn-chat">
+				<van-icon name="chat-o" text="客服" size="22" @click="onClickIcon" />客服
+			</div>
+			<div class="btn-duihuan">
+				<van-button class="btn-s" round @click.native="onClickButton" type="danger">积分兑换</van-button>
+				<van-button style="margin-left: 10px;" class="btn-s" round @click.native="onClickButton" type="primary">购买</van-button>
+			</div>
+		</div>
+	<!-- 	<van-goods-action>
+
+		</van-goods-action> -->
 	</div>
 </template>
 
@@ -141,5 +144,18 @@ export default {
 		background-color: #fff;
 		margin-top: 10px;
 		padding: 10px;
+		overflow: hidden;
+	}
+	.btn-chat{
+		float: left;
+		line-height: 35px;
+		.van-icon{
+			vertical-align: middle;
+			margin-top: -2px;
+			margin-right: 5px;
+		}
+	}
+	.btn-duihuan{
+		float: right;
 	}
 </style>

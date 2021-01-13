@@ -5,7 +5,6 @@
 		  left-text=""
 		  :right-text="isPWLogin?$t('login.yzLogin'):$t('login.passwordLogin')"
 		  left-arrow
-		   
 		  @click-left="$utils.routeBack"
 		  @click-right="onClickRight"
 		/>

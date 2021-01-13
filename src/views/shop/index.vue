@@ -11,7 +11,9 @@
 		  <template #action>
 		    <div @click="onSearch">搜索</div>
 		  </template>
+		  
 		</van-search>
+		
 		<div class="user-panel">
 			<div v-if="list2000.length > 0">
 				<div class="re-title">
@@ -72,7 +74,7 @@ export default {
 			list2000: [],
 			list1000: [],
 			list500: [],
-			title: ''
+			title: '',
 		}
 	},
 	mounted() {
@@ -95,15 +97,15 @@ export default {
 			})
 			
 			jifenList({...this.listQuery, 
-			'search[title]': this.title,
-			'search[integral]': 1000
+				'search[title]': this.title,
+				'search[integral]': 1000
 			}).then(res=>{
 				this.list1000 = res.data.data;
 			})
 			
 			jifenList({...this.listQuery, 
-			'search[title]': this.title,
-			'search[integral]': 2000
+				'search[title]': this.title,
+				'search[integral]': 2000
 			}).then(res=>{
 				this.list2000 = res.data.data;
 			})

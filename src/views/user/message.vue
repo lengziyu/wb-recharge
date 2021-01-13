@@ -26,7 +26,7 @@
 
 <script>
 import { Toast } from 'vant';
-
+import { messageAdd } from '@/api/my/message.js';
 export default {
 	name: "",
 	components: {
@@ -42,8 +42,18 @@ export default {
 	},
 	methods:{
 		clickSave() {
-			
-		}
+			if(!this.message){
+				Toast('请输入留言内容');
+				return
+			}
+			messageAdd({
+				content: this.message,
+			}).then(res=>{
+				if(res.errno == 1){
+					Toast('留言成功，审核通过即可显示在留言板');
+				}
+			})
+		},
 	}
 };
 </script>
