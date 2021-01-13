@@ -11,7 +11,11 @@
 				:autoplay="4000"
 				:show-indicators="false"
 			  >
-				<van-swipe-item v-if="notifyList && notifyList.length > 0" v-for="(i, idx) in notifyList">
+				<van-swipe-item 
+				v-if="notifyList && notifyList.length > 0" 
+				v-for="(i, idx) in notifyList"
+				@click.native="clickNotify(i)"
+				>
 				{{ i.title }}
 				</van-swipe-item>
 			  </van-swipe>
@@ -71,6 +75,9 @@ export default {
 		this.getProblemList();
 	},
 	methods: {
+		clickNotify(i) {
+			this.$router.push('/news/detail?id='+i.id)
+		},
 		getNotifyList(){
 			notifyList().then(nRes=>{
 				if(nRes.errno == 1){

@@ -26,4 +26,13 @@ export default {
 .van-tabbar--fixed{
 	z-index: 99999;
 }
+.van-tabbar{
+	height: 1.5rem;
+}
+.van-tabbar-item__icon{
+	font-size: 28px;
+}
+.van-tabbar-item{
+	font-size: .36rem;
+}
 </style>

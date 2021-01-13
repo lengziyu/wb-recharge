@@ -9,6 +9,15 @@ export function notifyList(query) {
 	})
 }
 
+// 公告详情
+export function notifyDetail(query) {
+	return request({
+	    url: '/notify/show',
+	    method: 'GET',
+		params: query,
+	})
+}
+
 // 常见问题
 export function problemList(query) {
 	return request({

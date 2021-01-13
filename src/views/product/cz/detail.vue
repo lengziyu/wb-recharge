@@ -147,9 +147,9 @@ export default {
 		},
 		cardRectype() {
 			cardRectype({
-				country_id: this.country_id,
-				operator_id: this.operator_id,
-				type: this.type.split(',')[this.active],
+				'search[country_id]': this.country_id,
+				'search[operator_id]': this.operator_id,
+				'search[type]': this.type.split(',')[this.active],
 			}).then(res=>{
 				this.info = res.data;
 				this.cardProductList(res.data.id, this.type.split(',')[this.active]);
@@ -162,24 +162,27 @@ export default {
 				console.log(res)
 				if(type == '1'){
 					this.huafei = res.data.data;
-					this.activeContent = this.huafei[this.current1].content;
+					this.activeContent = this.huafei[this.current1]?this.huafei[this.current1].content:'';
 				}else if(type == '2') {
 					this.taocan = res.data.data;
-					this.activeContent = this.taocan[this.current2].content;
+					this.activeContent = this.taocan[this.current2]?this.taocan[this.current2].content:'';
 				}else if(type == '3') {
 					this.liuliang = res.data.data;
-					this.activeContent = this.liuliang[this.current3].content;
+					this.activeContent = this.liuliang[this.current3]?this.liuliang[this.current3].content:'';
 				}
 			})
 		},
 		clickCurrent1(i, idx) {
 			this.current1 = idx;
+			this.activeContent = i.content?i.content:'';
 		},
 		clickCurrent2(i, idx) {
 			this.current2 = idx;
+			this.activeContent = i.content?i.content:'';
 		},
 		clickCurrent3(i, idx) {
 			this.current3 = idx;
+			this.activeContent = i.content?i.content:'';
 		},
 		clickPayWx() {
 			
