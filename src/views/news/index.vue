@@ -20,24 +20,7 @@
 				</van-swipe-item>
 			  </van-swipe>
 			</van-notice-bar>
-		<div class="re-title">
-			优惠券
-		</div>
-		<div>
-			<!-- <img class="max" src="@/assets/images/q1.png" alt=""> -->
-			
-			<van-coupon-list
-				:coupons="coupons"
-				:chosen-coupon="chosenCoupon"
-				:disabled-coupons="disabledCoupons"
-				:show-close-button="false"
-				:exchange-button-disabled="true"
-				:show-exchange-bar="false"
-				:editable="false"
-				@change="change"
-			/>
-			
-		</div>
+
 		<div class="re-title">
 			常见问题汇总
 		</div>
@@ -71,7 +54,6 @@ export default {
 	},
 	mounted() {
 		this.getNotifyList();
-		this.couponList();
 		this.getProblemList();
 	},
 	methods: {
@@ -95,46 +77,7 @@ export default {
 			})
 		},
 		
-		couponList() {
-			couponList().then(re=>{
-				this.coupons = [];
-				this.disabledCoupons = [];
-				let res = re.data;
-				for (var i = 0; i < res.length; i++) {
-					var name = '使用场景：';
-					if(res[i].used == 0){
-						name += '所有场景'
-					}else if(res[i].used == 1) {
-						name += '积分商城'
-					}else if(res[i].used == 2) {
-						name += '门票'
-					}else if(res[i].used == 3) {
-						name += '话费'
-					}
-					console.log(this.coupons)
-					this.coupons.push({
-						startAt: res[i].valid_start_time,
-						endAt: res[i].valid_end_time,
-						description: res[i].content,
-						name: name,
-						condition: '满'+res[i].with_amount+'元可减',
-						valueDesc: res[i].used_amount,
-						value: res[i].used_amount,
-						id: res[i].id,
-					})
-				}
-			})
-		},
-		// 领取优惠券
-		change(idx) {
-			couponGet({
-				coupon_id: this.coupons[idx].id
-			}).then(res=>{
-				if(res.errno == 1){
-					Toast('领取成功！')
-				}
-			})
-		}
+
 	}
 }
 </script>

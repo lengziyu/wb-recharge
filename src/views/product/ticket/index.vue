@@ -8,30 +8,35 @@
 		  @click-left="$utils.routeBack"
 		/>
 		<div class="banner padding-head">
-			<img class="max" src="@/assets/images/b1.png" alt="">
+			<img class="w100" src="@/assets/images/b1.png" alt="">
 		</div>
 		
+		<van-search
+		  v-model="search"
+		  show-action
+		  placeholder="请输入标题"
+		  @search="onSearch"
+		  @clear="onClear"
+		>
+		  <template #action>
+		    <div @click="onSearch">搜索</div>
+		  </template>
+		  
+		</van-search>
+		
+		
 		<div class="user-panel">
-			<div class="da-list">
-				<div class="da-title">
+			<div v-if="list.length > 0">
+				<div class="re-title">
 					点击以下列表查看详情
 				</div>
-				<div class="da-list-wrap">
-					<div class="da-item" v-for="i in list" @click="clickItem(i)">
-						<div class="da-item-pic">
-							<img class="max" :src="i.cover_url" alt="">
-						</div>
-						<div class="da-item-info">
-							<div class="da-item-info-title">
-								{{ i.title }}
-							</div>
-							<div class="da-item-info-btn">
-								点击购买>>
-							</div>
-						</div>
-					</div>
+				<div class="tk-list">
+					<ul>
+						<li v-for="i in list" @click="clickItem(i)">
+							<Item :item="i" />
+						</li>
+					</ul>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -40,10 +45,11 @@
 <script>
 import { Toast } from 'vant';
 import { tickettype } from '@/api/product/ticket.js'
+import Item from './components/Item.vue'
 export default {
 	name: "",
 	components: {
-	
+		Item
 	},
 	data() {
 		return {
@@ -52,7 +58,10 @@ export default {
 				limit: 20,
 				page: 1,
 			},
-			search: ''
+			search: '',
+			list2000: [],
+			list1000: [],
+			list500: [],
 			
 		}
 	},
@@ -62,6 +71,12 @@ export default {
 	methods:{
 		clickItem(i) {
 			this.$router.push('/product/ticket/detail?id='+i.id)
+		},
+		onSearch() {
+			this.tickettype();
+		},
+		onClear() {
+			this.tickettype();
 		},
 		tickettype() {
 			tickettype({
@@ -87,27 +102,42 @@ export default {
 		border-radius: 6px;
 		overflow: hidden;
 	}
-	.da-item{
-		background-color: #fff;
-		padding: 12px;
-		border-bottom: 1px solid #f2f2f2;
-		overflow: hidden;
-		.da-item-pic{
-			float: left;
-			width: 80px;
-			height: 50px;
+	// .da-item{
+	// 	background-color: #fff;
+	// 	padding: 12px;
+	// 	border-bottom: 1px solid #f2f2f2;
+	// 	overflow: hidden;
+	// 	.da-item-pic{
+	// 		float: left;
+	// 		width: 80px;
+	// 		height: 50px;
+	// 		overflow: hidden;
+	// 		margin-right: 10px;
+	// 	}
+	// 	.da-item-info{
+	// 		font-size: 14px;
+	// 		color: #555;
+	// 		.da-item-info-btn{
+	// 			color: red;
+	// 			margin-top: 6px;
+	// 			font-size: 13px;
+	// 		}
+	// 	}
+	// }
+}
+	.tk-list{
+		ul{
 			overflow: hidden;
-			margin-right: 10px;
+			margin-bottom: 10px;
 		}
-		.da-item-info{
-			font-size: 14px;
-			color: #555;
-			.da-item-info-btn{
-				color: red;
-				margin-top: 6px;
-				font-size: 13px;
-			}
+		ul > li{
+			float: left;
+			width: 29.33%;
+			background-color: #fff;
+			border-radius: 8px;
+			overflow: hidden;
+			padding: 1%;
+			margin: 1%;
 		}
 	}
-}
 </style>

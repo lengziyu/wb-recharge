@@ -42,7 +42,8 @@ export const en = {
 		title: 'My Order',
 		all: 'All',
 		waitPay: 'Wait Pay',
-		refund: 'Refund'
+		refund: 'Refund',
+		subComm: 'Commission Award'
 	  },
 	  menus: {
 		addr: 'Address',

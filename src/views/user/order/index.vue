@@ -14,11 +14,11 @@
 		  <van-tab title="全部">
 			  <Item v-for="i in 3" />
 		  </van-tab>
-		  <van-tab title="待付款">
-			  <Item v-for="i in 6" />
-		  </van-tab>
 		  <van-tab title="申请退款">
-			<van-empty description="暂无订单" />
+		  			<van-empty description="暂无订单" />
+		  </van-tab>
+		  <van-tab title="分佣奖励">
+			  <Item v-for="i in 6" />
 		  </van-tab>
 		</van-tabs>
 	</div>

@@ -34,4 +34,9 @@ export default [
 		name: 'ProductWx',
 		component: () => import('@/views/product/wx/index.vue')
 	},
+	{
+		path: '/coupon/list',
+		name: 'CouponList',
+		component: () => import('@/views/coupon/list.vue')
+	},
 ]

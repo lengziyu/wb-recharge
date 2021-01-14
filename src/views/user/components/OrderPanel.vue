@@ -23,14 +23,16 @@ export default {
 				code: '',
 				icon: 'credit-pay',
 			},{
-				name: this.$t('user.orders.waitPay'),
-				code: '',
-				icon: 'pending-payment'
-			},{
 				name: this.$t('user.orders.refund'),
 				code: '',
 				icon: 'peer-pay'
-			}]
+			},
+			{
+				name: this.$t('user.orders.subComm'),
+				code: '',
+				icon: 'ecard-pay'
+			}
+			]
 		}
 	},
 	mounted() {

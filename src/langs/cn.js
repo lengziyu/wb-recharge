@@ -42,7 +42,8 @@ export const cn = {
 		  title: '我的订单',
 		  all: '全部',
 		  waitPay: '待付款',
-		  refund: '申请退款'
+		  refund: '申请退款',
+		  subComm: '分佣奖励'
 	  },
 	  menus: {
 		  addr: '收货地址',
