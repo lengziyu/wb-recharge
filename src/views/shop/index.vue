@@ -4,12 +4,12 @@
 		<van-search
 		  v-model="title"
 		  show-action
-		  placeholder="类别/名称/积分区间/价格区间"
+		  :placeholder="$t('shop.index.searchInput')"
 		  @search="onSearch"
 		  @clear="onClear"
 		>
 		  <template #action>
-		    <div @click="onSearch">搜索</div>
+		    <div @click="onSearch">{{ $t('common.searchText') }}</div>
 		  </template>
 		  
 		</van-search>
@@ -17,7 +17,7 @@
 		<div class="user-panel">
 			<div v-if="list2000.length > 0">
 				<div class="re-title">
-					2000神券适用
+					2000 {{ $t('shop.index.title') }}
 				</div>
 				<div class="jf-list">
 					<ul>
@@ -29,7 +29,7 @@
 			</div>
 			
 			<div class="re-title">
-				1000神券适用
+				1000{{ $t('shop.index.title') }}
 			</div>
 			<div class="jf-list">
 				<ul>
@@ -41,7 +41,7 @@
 			
 			<div  v-if="list500.length > 0">
 				<div class="re-title">
-					500神券适用
+					500{{ $t('shop.index.title') }}
 				</div>
 				<div class="jf-list">
 					<ul>

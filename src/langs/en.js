@@ -1,5 +1,11 @@
 export const en = {
   aa: 'hahaha',
+  common: {
+  	more: 'See More',  
+	searchText: 'Search',
+	btnDuihuan: 'Redeem',
+	btnGet: 'Get'
+  },
   tabbar: {
   	cp: 'Product',
   	jf: 'Integral',
@@ -60,5 +66,18 @@ export const en = {
 		message: 'Feedbook',
 		jfList: 'My Integral Record'
 	  }
+  },
+  news: {
+  	  notifyTitle: 'Website Notice',
+  	  problemTitle: 'FAQ Summary'
+  },
+  shop: {
+  	  index: {
+  		  searchInput: 'Category/Name/Point/Price',
+		  title: 'Application Of Voucher'
+  	  }
+  },
+  product: {
+	  couponTitle: 'Coupon'
   }
 }

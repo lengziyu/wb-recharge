@@ -10,7 +10,7 @@
 			{{ item.integral }} <span>积分</span>
 		</div>
 		<div class="jf-btn">
-			立即兑换
+			{{ $t('common.btnDuihuan') }}
 		</div>
 	</div>
 </template>

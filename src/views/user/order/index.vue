@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<van-nav-bar
-		  title="我的订单"
+		  :title="$t('user.orders.title')"
 		  left-text=""
 		  left-arrow
 		   
@@ -11,13 +11,13 @@
 			
 		</div>
 		<van-tabs v-model="active">
-		  <van-tab title="全部">
+		  <van-tab :title="$t('user.orders.all')">
 			  <Item v-for="i in 3" />
 		  </van-tab>
-		  <van-tab title="申请退款">
-		  			<van-empty description="暂无订单" />
+		  <van-tab :title="$t('user.orders.refund')">
+		  		<van-empty description="暂无订单" />
 		  </van-tab>
-		  <van-tab title="分佣奖励">
+		  <van-tab :title="$t('user.orders.subComm')">
 			  <Item v-for="i in 6" />
 		  </van-tab>
 		</van-tabs>

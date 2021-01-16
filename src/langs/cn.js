@@ -1,5 +1,11 @@
 export const cn = {
   aa: '哈哈哈',
+  common: {
+	more: '查看更多',
+	searchText: '搜索',
+	btnDuihuan: '立即兑换',
+	btnGet: '立即领取'
+  },
   tabbar: {
 	cp: '产品中心',
 	jf: '积分商城',
@@ -60,5 +66,18 @@ export const cn = {
 		  message: '留言板',
 		  jfList: '我的积分记录'
 	  }
+  },
+  news: {
+	  notifyTitle: '网站公告',
+	  problemTitle: '常见问题汇总'
+  },
+  shop: {
+	  index: {
+		  searchInput: '类别/名称/积分区间/价格区间',
+		  title: '神劵适用'
+	  },
+  },
+  product: {
+  	  couponTitle: '优惠券'
   }
 }

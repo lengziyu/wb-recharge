@@ -2,7 +2,7 @@
 	<div class="my-news">
 		<div class="tabbar-height"></div>
 		<div class="re-title">
-			网站公告
+			{{ $t('news.notifyTitle') }}
 		</div>
 			<van-notice-bar left-icon="volume-o" :scrollable="false">
 			  <van-swipe
@@ -22,7 +22,7 @@
 			</van-notice-bar>
 
 		<div class="re-title">
-			常见问题汇总
+			{{ $t('news.problemTitle') }}
 		</div>
 		<van-collapse v-model="activeNames">
 		  <van-collapse-item :title="a.title" :name="aidx" v-for="(a, aidx) in problemList">

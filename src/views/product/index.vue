@@ -15,8 +15,8 @@
 		</van-swipe>
 		
 		<div class="re-title">
-			优惠券
-			<span class="coupon-more" @click="couponMore">查看更多</span>
+			{{ $t('product.couponTitle') }}
+			<span class="coupon-more" @click="couponMore">{{ $t('common.more') }}</span>
 		</div>
 		<div>
 			<!-- <img class="max" src="@/assets/images/q1.png" alt=""> -->
