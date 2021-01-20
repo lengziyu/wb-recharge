@@ -44,3 +44,12 @@ export function interList(query) {
 		params: query
 	})
 }
+
+// 规则
+export function integralConfig(query) {
+	return request({
+	    url: '/integralconfig',
+	    method: 'GET',
+		params: query
+	})
+}

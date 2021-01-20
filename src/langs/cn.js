@@ -73,8 +73,11 @@ export const cn = {
   },
   shop: {
 	  index: {
-		  searchInput: '类别/名称/积分区间/价格区间',
-		  title: '神劵适用'
+		  searchInputTitle: '类别/名称',
+		  title: '神劵适用',
+		  searchInputJifen: '积分区间',
+		  searchTypeTitle: '标题',
+		  searchTypeJifen: '积分',
 	  },
   },
   product: {

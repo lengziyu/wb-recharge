@@ -20,6 +20,7 @@
 
 <script>
 import { Toast } from 'vant';
+import { integralConfig } from '@/api/my/index.js'
 
 export default {
 	name: "",
@@ -35,6 +36,7 @@ export default {
 		}
 	},
 	mounted() {
+		this.integralConfig()
 		if(this.type == 'dikou'){
 			this.title = "积分抵扣规则"
 		}else{
@@ -42,7 +44,17 @@ export default {
 		}
 	},
 	methods:{
-
+		integralConfig() {
+			integralConfig().then(res=>{
+				if(res.errno == 1){
+					if(this.type == 'dikou'){
+						this.content = res.use_content;
+					}else{
+						this.content2 = res.get_content;
+					}
+				}
+			})
+		}
 	}
 };
 </script>

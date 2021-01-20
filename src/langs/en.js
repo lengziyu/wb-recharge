@@ -73,8 +73,11 @@ export const en = {
   },
   shop: {
   	  index: {
-  		  searchInput: 'Category/Name/Point/Price',
-		  title: 'Application Of Voucher'
+  		  searchInputTitle: 'Category/Name',
+		  title: 'Application Of Voucher',
+		  searchInputJifen: 'Point',
+		  searchTypeTitle: 'Title',
+		  searchTypeJifen: 'Integral',
   	  }
   },
   product: {

@@ -5,13 +5,11 @@
 		  <van-dropdown-item v-model="value1" @change="onChange" :options="option1" />
 		</van-dropdown-menu>
 		<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" height="200">
-		  <van-swipe-item>
-			  <img src="@/assets/images/b2.png" alt="">
+		  <van-swipe-item v-for="a in banners">
+			  <a :href="a.url">
+				  <img :src="a.cover_url" alt="">
+			  </a>
 		  </van-swipe-item>
-		  <van-swipe-item>
-			  <img src="@/assets/images/b1.png" alt="">
-		  </van-swipe-item>
-		  <van-swipe-item>3</van-swipe-item>
 		</van-swipe>
 		
 		<div class="re-title">
@@ -31,22 +29,13 @@
 				:editable="false"
 				@change="change"
 			/>
-			
 		</div>
 		
-		<div class="product-item" @click="$router.push('/product/cz')">
+		<div class="product-item" v-for="i in products">
 			<div class="product-pic">
-				<img class="max" src="@/assets/images/m2.png" alt="">
-			</div>
-		</div>
-		<div class="product-item" @click="$router.push('/product/ticket')">
-			<div class="product-pic">
-				<img class="max" src="@/assets/images/m1.png" alt="">
-			</div>
-		</div>
-		<div class="product-item">
-			<div class="product-pic">
-				<img class="max" src="@/assets/images/user-head-bg.jpg" alt="">
+				<a :href="i.url">
+					<img class="max" :src="i.cover_url" alt="">
+				</a>
 			</div>
 		</div>
 		<Tabbar />
@@ -58,6 +47,7 @@ import Tabbar from '@/components/Tabbar.vue'
 import store from '@/store'
 import { mapMutations } from 'vuex'
 import { couponList, couponGet } from '@/api/my/coupon.js'
+import { carousel, prodconfig } from '@/api/product/index.js'
 export default {
 	components: {
 		Tabbar
@@ -74,16 +64,32 @@ export default {
 		  chosenCoupon: -1,
 		  coupons: [],
 		  disabledCoupons: [],
+		  banners: [],
+		  products: []
 		}
 	},
 	mounted() {
 		this.couponList();
+		this.carousel();
+		this.prodconfig();
 	},
 	methods: {
 		...mapMutations(['setLang']),
 		onChange(e) {
 			this.setLang(e)
 			this.$i18n.locale = e
+		},
+		// 轮播
+		carousel() {
+			carousel().then(res=>{
+				this.banners = res.data.data;
+			})
+		},
+		// 广告图
+		prodconfig() {
+			prodconfig().then(res=>{
+				this.products = res.data;
+			})
 		},
 		couponList() {
 			couponList({
@@ -148,7 +154,7 @@ export default {
   }
 .product{
 	.product-item{
-		padding: 5px 20px;
+		padding: 5px 10px;
 		.product-title{
 			line-height: 30px;
 			margin-bottom: 5px;
