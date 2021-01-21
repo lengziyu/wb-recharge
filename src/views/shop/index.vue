@@ -218,15 +218,15 @@ export default {
 			width: 80%;
 		}
 	}
-	.van-popup{
-		border-radius: 6px;
-		overflow: hidden;
-		left: 5px !important;
-		top: 110px !important;
-	}
-	.van-popover__action{
-		line-height: 35px;
-		padding: 0 25px;
-		font-size: 13px;
-	}
+		.van-popover--light{
+			border-radius: 6px;
+			overflow: hidden;
+			left: 5px !important;
+			top: 110px !important;
+		}
+		.van-popover--light .van-popover__action{
+			line-height: 35px;
+			padding: 0 25px;
+			font-size: 13px;
+		}
 </style>

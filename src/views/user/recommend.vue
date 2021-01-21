@@ -54,7 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 .recommend-ewm{
-	width: 150px;
+	width: 142px;
 	margin: 20px auto;
 }
 .recommend p{
