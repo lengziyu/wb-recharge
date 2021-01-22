@@ -53,3 +53,12 @@ export function integralConfig(query) {
 		params: query
 	})
 }
+
+// 个人推荐
+export function personreCommend(query) {
+	return request({
+	    url: '/personrecommend',
+	    method: 'GET',
+		params: query
+	})
+}

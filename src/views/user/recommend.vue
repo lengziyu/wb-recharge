@@ -12,12 +12,9 @@
 			<div class="recommend-ewm">
 				<div class="qrcode" ref="qrCodeUrl"></div>
 			</div>
-			<p>
-				24小时在线充值，做您的充值管家！
-			</p>
-			<p>
-				分享给好友注册、充值，可获取丰富的积分奖励哦！
-			</p>
+			<div v-html="recommended_content">
+				
+			</div>
 		</div>
 	</div>
 </template>
@@ -25,6 +22,7 @@
 <script>
 import { Toast } from 'vant';
 import QRCode from 'qrcodejs2'
+import { personreCommend } from '@/api/my/index.js'
 export default {
 	name: "",
 	components: {
@@ -32,22 +30,41 @@ export default {
 	},
 	data() {
 		return {
-			recommended_url: ''
+			recommended_url: '',
+			recommended_content: ''
 		}
 	},
 	mounted() {
-		this.recommended_url = this.$utils.getStorage('userInfo').recommended_url;
-		var qrcode = new QRCode(this.$refs.qrCodeUrl, {
-			text: this.recommended_url, // 需要转换为二维码的内容
-			width: 140,
-			height: 140,
-			colorDark: '#000000',
-			colorLight: '#ffffff',
-			correctLevel: QRCode.CorrectLevel.H
-		})
+		// this.recommended_url = this.$utils.getStorage('userInfo').recommended_url;
+		// var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+		// 	text: this.recommended_url, // 需要转换为二维码的内容
+		// 	width: 140,
+		// 	height: 140,
+		// 	colorDark: '#000000',
+		// 	colorLight: '#ffffff',
+		// 	correctLevel: QRCode.CorrectLevel.H
+		// })
+		
+		this.personreCommend();
 	},
 	methods:{
-
+		personreCommend() {
+			personreCommend().then(res=>{
+				if(res.errno == 1){
+					this.recommended_content = res.data.content;
+					this.recommended_url = res.data.url;
+					
+					var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+						text: this.recommended_url, // 需要转换为二维码的内容
+						width: 140,
+						height: 140,
+						colorDark: '#000000',
+						colorLight: '#ffffff',
+						correctLevel: QRCode.CorrectLevel.H
+					})
+				}
+			})
+		}
 	}
 };
 </script>
