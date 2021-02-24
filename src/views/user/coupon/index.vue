@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { couponGethasList } from '@/api/my/coupon.js'
 
 export default {

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import QRCode from 'qrcodejs2'
 import { personreCommend } from '@/api/my/index.js'
 export default {

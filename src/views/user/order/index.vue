@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import Item from './components/Item.vue'
 export default {
 	name: "",

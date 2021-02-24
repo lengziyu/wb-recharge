@@ -38,10 +38,10 @@ module.exports = {
 		'vue': 'Vue',
 		'vuex': 'Vuex',
 		'vue-router': 'VueRouter',
-		'Vant': 'Vant'
+		'Vant': 'Vant',
+		'axios': 'axios',
+		// 'date-fns/format': 'format'
 	})
-	// 解决ie11兼容ES6
-	config.entry("main").add("babel-polyfill");
 	// 打包文件分析
 		config.optimization.minimizer('terser').tap((args) => {
 			// 注释console.*
@@ -52,15 +52,15 @@ module.exports = {
 			args[0].terserOptions.compress.pure_funcs = ['console.log']
 			return args
        })
-	// config
-		// .plugin('webpack-bundle-analyzer')
-		// .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	config
+		.plugin('webpack-bundle-analyzer')
+		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 	// 移除prefetch插件
 	config.plugins.delete('preload') 
 	config.plugins.delete('prefetch') 
-	config.optimization.splitChunks({
-	  chunks: 'all'
-	})
+	// config.optimization.splitChunks({
+	//   chunks: 'all'
+	// })
   },
     configureWebpack: {  //webpack的相关配置在这里
 			output: {

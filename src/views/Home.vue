@@ -9,7 +9,7 @@
 
 <script>
 // @ is an alias to /src
-import { Toast } from 'vant';
+ 
 
 export default {
   name: "Home",
@@ -18,7 +18,7 @@ export default {
   },
   methods:{
 	  clickTa() {
-		  Toast('提示内容')
+
 	  },
 	  changeLang () {
 		const temp = this.$i18n.locale

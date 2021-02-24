@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 
 export default {
 	props: ['item'],

@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { Toast,Badge } from 'vant';
 import { couponList, couponGet } from '@/api/my/coupon.js'
 export default {
 	
@@ -79,7 +78,7 @@ export default {
 				coupon_id: this.coupons[idx].id
 			}).then(res=>{
 				if(res.errno == 1){
-					Toast('领取成功！')
+					vant.Toast('领取成功！')
 				}
 			})
 		},

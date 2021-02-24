@@ -49,6 +49,8 @@
 			</van-button>
 		</div>
 		
+		<van-badge content="5">33333</van-badge>
+		
 		<Tabbar />
 	</div>
 </template>
@@ -59,14 +61,17 @@ import OrderPanel from './components/OrderPanel.vue'
 import MenuPanel from './components/MenuPanel.vue'
 import { loginOut } from '@/api/login.js'
 import Cookies from 'js-cookie'
-import { Toast } from 'vant';
 import { isCheckSignin, interSignin } from '@/api/my/index.js'
 import { getUserInfo } from '@/api/my/index.js'
+
+console.log(vant.Badge)
+
+Vue.use(vant.Badge);
 export default {
 	components: {
 		Tabbar,
 		OrderPanel,
-		MenuPanel
+		MenuPanel,
 	},
 	data() {
 		return {
@@ -120,7 +125,7 @@ export default {
 			interSignin().then(res=>{
 				if(res.errno == 1){
 					this.signShow = true;
-					Toast('签到成功');
+					vant.Toast('签到成功');
 					setTimeout(()=>{
 						this.getUserInfo();
 					}, 50)

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { messageAdd, messageList } from '@/api/my/message.js';
 export default {
 	name: "",
@@ -85,14 +85,14 @@ export default {
 	methods:{
 		clickSave() {
 			if(!this.message){
-				Toast('请输入留言内容');
+				vant.Toast('请输入留言内容');
 				return
 			}
 			messageAdd({
 				content: this.message,
 			}).then(res=>{
 				if(res.errno == 1){
-					Toast('留言成功，审核通过即可显示在留言板');
+					vant.Toast('留言成功，审核通过即可显示在留言板');
 					setTimeout(()=>{
 						this.$utils.routeBack();
 					}, 1500)

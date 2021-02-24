@@ -54,12 +54,12 @@
 </template>
 
 <script>
-import { Toast,Badge } from 'vant';
 import { ticket } from '@/api/product/ticket.js'
+Vue.use(vant.Badge);
 export default {
 	name: "",
 	components: {
-		Badge,
+		// Badge,
 	},
 	data() {
 		return {

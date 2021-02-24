@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { upload } from '@/api/other.js'
 import { realnameAuth } from '@/api/my/passed.js'
 export default {
@@ -74,13 +74,13 @@ export default {
 	methods:{
 		onSubmit() {
 			if(!this.username){
-				Toast('请输入姓名')
+				vant.Toast('请输入姓名')
 			}else if(!this.usernumber) {
-				Toast('请输入身份证号码')
+				vant.Toast('请输入身份证号码')
 			}else if(this.fileList.length == 0) {
-				Toast('请上传身份证正面照片')
+				vant.Toast('请上传身份证正面照片')
 			}else if(this.fileList2.length == 0){
-				Toast('请上传身份证反面照片')
+				vant.Toast('请上传身份证反面照片')
 			}else{
 				realnameAuth({
 					real_name: this.username,
@@ -89,7 +89,7 @@ export default {
 					img_url_f: this.fileList2[0].url
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('已提交实名认证审核');
+						vant.Toast('已提交实名认证审核');
 						setTimeout(()=>{
 							this.$router.push('/user')
 						}, 1500)

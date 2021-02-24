@@ -89,7 +89,7 @@
 		loginPhone,
 		loginPhoneGetCode
 	} from '@/api/login.js'
-	import { Toast } from 'vant';
+	 
 	import Cookies from 'js-cookie';
 	import { getUserInfo } from '@/api/my/index.js'
 	export default {
@@ -112,14 +112,14 @@
 		// 发送验证码
 		clickSendCode() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else{
 				loginPhoneGetCode({
 					type: 3,
 					phone: this.phone,
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('验证码已发送，请注意查收')
+						vant.Toast('验证码已发送，请注意查收')
 						this.time = this.$variables.sendCodeTime;
 						this.sendStatus = true;
 					}
@@ -140,9 +140,9 @@
 		// 密码登录
 		login() {
 			if(!this.username){
-				Toast('请输入用户名/邮箱/手机号码')
+				vant.Toast('请输入用户名/邮箱/手机号码')
 			}else if(!this.password){
-				Toast('请输入密码')
+				vant.Toast('请输入密码')
 			}else{
 				loginPwd({
 					username: this.username,
@@ -150,7 +150,7 @@
 				}).then(res=>{
 					if(res.errno == 1){
 						this.$utils.setStorage('token', res.data.token);
-						Toast('登录成功');
+						vant.Toast('登录成功');
 						this.getUserInfo();
 					}
 				})
@@ -159,9 +159,9 @@
 		// 密码登录
 		loginPhone() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else if(!this.sms){
-				Toast('请输入验证码')
+				vant.Toast('请输入验证码')
 			}else{
 				loginPhone({
 					phone: this.phone,
@@ -169,7 +169,7 @@
 				}).then(res=>{
 					if(res.errno == 1){
 						this.$utils.setStorage('token', res.data.token)
-						Toast('登录成功');
+						vant.Toast('登录成功');
 						this.getUserInfo();
 					}
 				})

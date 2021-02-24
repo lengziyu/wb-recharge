@@ -58,7 +58,7 @@ export default {
 	methods: {
 		clickItem(item) {
 			if(item.url == '/user/luckdraw' && this.userInfo.is_vip == 1){
-				Toast('您已是VIP会员');
+				vant.Toast('您已是VIP会员');
 			}else{
 				this.$router.push(item.url)
 			}

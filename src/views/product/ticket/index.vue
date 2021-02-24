@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { tickettype } from '@/api/product/ticket.js'
 import Item from './components/Item.vue'
 export default {

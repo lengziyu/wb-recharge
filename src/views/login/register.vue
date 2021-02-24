@@ -96,7 +96,7 @@
 		registerEmail, 
 		loginPhoneGetCode 
 	} from '@/api/login.js'
-	import { Toast } from 'vant';
+	 
 	export default {
 		name: "Login",
 		components: {
@@ -117,7 +117,7 @@
 		// 发送验证码
 		clickSendCode() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else{
 				loginPhoneGetCode({
 					type: 1,
@@ -148,11 +148,11 @@
 		// 手机号码注册
 		registerPhone() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else if(!this.password){
-				Toast('请输入密码')
+				vant.Toast('请输入密码')
 			}else if(!this.sms){
-				Toast('请输入验证码')
+				vant.Toast('请输入验证码')
 			}else{
 				registerPhone({
 					phone: this.phone,
@@ -160,7 +160,7 @@
 					code: this.sms,
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('注册成功');
+						vant.Toast('注册成功');
 						setTimeout(()=>{
 							this.$router.push('/login')
 						}, 1500)
@@ -171,16 +171,16 @@
 		// 邮箱注册
 		registerEmail() {
 			if(!this.email){
-				Toast('请输入邮箱')
+				vant.Toast('请输入邮箱')
 			}else if(!this.password) {
-				Toast('请输入密码')
+				vant.Toast('请输入密码')
 			}else {
 				registerEmail({
 					email: this.email,
 					password: this.password,
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('注册成功');
+						vant.Toast('注册成功');
 						setTimeout(()=>{
 							this.$router.push('/login')
 						}, 1500)

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { integralConfig } from '@/api/my/index.js'
 
 export default {

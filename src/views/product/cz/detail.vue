@@ -105,13 +105,12 @@
 </template>
 
 <script>
-import { Toast, Dialog  } from 'vant';
 import { cardRectype, cardProductList } from '@/api/product/cz.js'
 import Paytype from '@/components/PayType.vue'
+
 export default {
 	name: "",
 	components: {
-		Dialog,
 		Paytype
 	},
 	data() {
@@ -189,11 +188,11 @@ export default {
 		},
 		clickPay() {
 			if(!this.info.regx_string.test(this.phone)){
-				Toast('请输入正确的手机号')
+				vant.Toast('请输入正确的手机号')
 			}
 		},
 		clickTips() {
-			Dialog.alert({
+			vant.Dialog.alert({
 			  title: '使用说明',
 			  message: '弹窗内容',
 			  theme: 'round-button',

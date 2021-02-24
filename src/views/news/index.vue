@@ -35,7 +35,7 @@
 
 <script>
 import Tabbar from '@/components/Tabbar.vue'
-import { Toast } from 'vant';
+ 
 import { couponList, couponGet } from '@/api/my/coupon.js'
 import { notifyList, problemList } from '@/api/news.js'
 export default {

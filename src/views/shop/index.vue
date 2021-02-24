@@ -15,7 +15,6 @@
 				</span>
 			  </template>
 			</van-popover>
-			
 			<div class="search-main">
 				<van-search
 				  v-model="title"
@@ -94,7 +93,7 @@ export default {
 			list1000: [],
 			list500: [],
 			title: '',
-			actions: [{ text: this.$t('shop.index.searchTypeTitle'), idx: 0 }, { text: this.$t('shop.index.searchTypeJifen'),idx:1 }],
+			actions: [{ text: this.$t('shop.index.searchTypeTitle'), idx: 0 }, { text: this.$t('shop.index.searchTypeJifen'), idx:1 }],
 			showPopover: false,
 			currentSearch: this.$t('shop.index.searchTypeTitle'),
 			currentSearchIdx: 0

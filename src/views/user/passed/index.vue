@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { getUserInfo } from '@/api/my/index.js'
 export default {
 	name: "",

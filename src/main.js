@@ -35,12 +35,12 @@ const i18n = new VueI18n({
       'en': { ...en }    // 英文语言包
     }
 })
-import { Locale } from 'vant';
+// import { Locale } from 'vant';
 // 引入英文语言包
-if(store.state.lang == 'en'){
-	var enUS = require('vant/es/locale/lang/en-US')
-	Locale.use('en-US', enUS);
-}
+// if(store.state.lang == 'en'){
+// 	var enUS = require('vant/es/locale/lang/en-US')
+// 	Locale.use('en-US', enUS);
+// }
 
 // rem 适配
 import 'amfe-flexible';

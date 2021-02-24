@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { addressList } from '@/api/my/address.js'
 export default {
   data() {

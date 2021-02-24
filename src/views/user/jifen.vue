@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { interList } from '@/api/my/index.js'
 export default {
 	name: "",

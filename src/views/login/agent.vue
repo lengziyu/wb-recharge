@@ -60,7 +60,7 @@
 <script>
 	import SignInTitle from './components/SignInTitle.vue'
 	import { agentAdd } from '@/api/my/index.js'
-	import { Toast } from 'vant';
+	 
 	export default {
 		name: "LoginAgent",
 		components: {
@@ -81,19 +81,19 @@
 	  methods:{
 		onSubmit() {
 			if(!this.info.real_name){
-				Toast('请填写姓名');
+				vant.Toast('请填写姓名');
 			}else if(!this.info.phone) {
-				Toast('请填写手机号码');
+				vant.Toast('请填写手机号码');
 			}else if(!this.info.addr) {
-				Toast('请填写联系地址');
+				vant.Toast('请填写联系地址');
 			}else if(!this.info.work) {
-				Toast('请填写目前工作');
+				vant.Toast('请填写目前工作');
 			}else if(!this.info.reason) {
-				Toast('请填写申请缘由');
+				vant.Toast('请填写申请缘由');
 			}else{
 				agentAdd(this.info).then(res=>{
 					if(res.errno == 1){
-						Toast('申请成功，请保持通话畅通！');
+						vant.Toast('申请成功，请保持通话畅通！');
 						setTimeout(()=>{
 							this.$router.push('/product')
 						}, 1500)

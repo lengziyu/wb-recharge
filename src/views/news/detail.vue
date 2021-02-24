@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { notifyDetail } from '@/api/news.js'
 export default {
   data() {

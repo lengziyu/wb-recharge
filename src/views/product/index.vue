@@ -129,7 +129,7 @@ export default {
 				coupon_id: this.coupons[idx].id
 			}).then(res=>{
 				if(res.errno == 1){
-					Toast('领取成功！')
+					vant.Toast('领取成功！')
 				}
 			})
 		},

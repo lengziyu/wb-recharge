@@ -1,9 +1,7 @@
-import axios from 'axios'
 import $variables from './variables'
 import qs from 'qs'
 import Vue from 'vue'
 import router from '@/router';
-import { Toast } from 'vant';
 
 let vm = new Vue();
 import store from '@/store'
@@ -41,16 +39,16 @@ service.interceptors.response.use(
 	console.log(response.data)
 	
 	if(response.data.errno == 9999){
-		Toast(response.data.msg);
+		vant.Toast(response.data.msg);
 	}else if(response.data.errno == 10000){
-		Toast(response.data.msg);
+		vant.Toast(response.data.msg);
 		vm.$utils.removeStorage('token');
 		vm.$utils.removeStorage('userInfo');
 		setTimeout(()=>{
 			vm.$utils.routeTo('/login?redirect='+router.history.current.fullPath);
 		}, 1500)
 	}else if(response.data.errno != 1){
-		Toast(response.data.msg);
+		vant.Toast(response.data.msg);
 	}
 	// else if(response.data.code === '1004') {
 	// 	// vm.$utils.removeStorage('CAI-Admin-Token');

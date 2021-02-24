@@ -46,7 +46,7 @@
     <div class="toast" v-show="prize">
       <div class="toast-container">
         <img :src="toastIcon" class="toast-picture" />
-        <div class="close" @click="closeToast()"></div>
+        <div class="close" @click="closevant.Toast()"></div>
         <div class="toast-title">{{toastTitle}}</div>
       </div>
     </div>
@@ -55,7 +55,7 @@
 </template>
 <script>
 import { prizeList } from './config'
-import { Toast } from 'vant';
+ 
 import { getUserInfo } from '@/api/my/index.js'
 import { LDGetConfig, LDGetTackout } from '@/api/my/luckdraw.js'
 const CIRCLE_ANGLE = 360
@@ -162,8 +162,8 @@ export default {
       return list
     },
 	rateNum(arr) {
-		var array = arr.split(",");           //转化为zhi数组dao
-		var value = array[Math.round(Math.random()*(array.length-1))];  //随机抽zhuan取一个值shu
+		var array = arr.split(",");           //转化为zhi数组dao
+		var value = array[Math.round(Math.random()*(array.length-1))];  //随机抽zhuan取一个值shu
 		return value
 	},
     beginRotate() {

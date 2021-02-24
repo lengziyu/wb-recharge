@@ -113,7 +113,7 @@
 		loginPhoneGetCode,
 		emailRegister,
 	} from '@/api/login.js'
-	import { Toast } from 'vant';
+	 
 	export default {
 		name: "Login",
 		components: {
@@ -137,14 +137,14 @@
 		  // 邮箱发送验证码
 		  clickSendCode2() {
 		  	if(!this.email){
-		  		Toast('请输入邮箱')
+		  		vant.Toast('请输入邮箱')
 		  	}else{
 		  		emailRegister({
 		  			type: 4,
 		  			email: this.email,
 		  		}).then(res=>{
 					if(res.errno == 1){
-						Toast('验证码已发送，请注意查收')
+						vant.Toast('验证码已发送，请注意查收')
 						this.time2 = this.$variables.sendCodeTime;
 						this.sendStatus2 = true;
 					}
@@ -158,14 +158,14 @@
 		// 手机号发送验证码
 		clickSendCode() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else{
 				loginPhoneGetCode({
 					type: 4,
 					phone: this.phone,
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('验证码已发送，请注意查收')
+						vant.Toast('验证码已发送，请注意查收')
 						this.time = this.$variables.sendCodeTime;
 						this.sendStatus = true;
 					}
@@ -190,11 +190,11 @@
 		},
 		forGetEmail() {
 			if(!this.email){
-				Toast('请输入邮箱')
+				vant.Toast('请输入邮箱')
 			}else if(!this.emailSms) {
-				Toast('请输入邮箱验证码')
+				vant.Toast('请输入邮箱验证码')
 			}else if(!this.password) {
-				Toast('请输入新密码')
+				vant.Toast('请输入新密码')
 			}else {
 				findByEmail({
 					email: this.email,
@@ -202,7 +202,7 @@
 					password: this.password
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('修改成功')
+						vant.Toast('修改成功')
 						setTimeout(()=>{
 							this.$router.push('/login')
 						}, 1500)
@@ -212,11 +212,11 @@
 		},
 		findByPhone() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else if(!this.sms) {
-				Toast('请输入短信验证码')
+				vant.Toast('请输入短信验证码')
 			}else if(!this.password) {
-				Toast('请输入新密码')
+				vant.Toast('请输入新密码')
 			}else {
 				findByPhone({
 					phone: this.phone,
@@ -224,7 +224,7 @@
 					password: this.password
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('修改成功')
+						vant.Toast('修改成功')
 						setTimeout(()=>{
 							this.$router.push('/login')
 						}, 1500)

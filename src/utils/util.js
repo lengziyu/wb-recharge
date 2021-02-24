@@ -6,7 +6,7 @@
 
 import router from '@/router';
 import Vue from 'vue'
-import format from 'date-fns/format'
+// import format from 'date-fns/format'
 
 let vm = new Vue();
 
@@ -43,13 +43,13 @@ Vue.prototype.$utils = {
 		return window[type].removeItem(key)
 	},
 	// 时间格式化,年月日
-	formatYMD: (date, type)=> {
-		if(type && type == 'ymd'){
-			return format(new Date(date), 'yyyy年MM月dd日');
-		}else{
-			return format(new Date(date), 'MM月dd日 HH:mm');
-		}
-	},
+	// formatYMD: (date, type)=> {
+	// 	if(type && type == 'ymd'){
+	// 		return format(new Date(date), 'yyyy年MM月dd日');
+	// 	}else{
+	// 		return format(new Date(date), 'MM月dd日 HH:mm');
+	// 	}
+	// },
 	// 是否是移动端
 	isMoblie: ()=> {
 		if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {

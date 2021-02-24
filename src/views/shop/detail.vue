@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import { jifenDetail } from '@/api/jifen.js'
 export default {
 	name: "",
@@ -81,7 +81,7 @@ export default {
 			})
 		},
 	    onClickIcon() {
-	      Toast('点击图标');
+	      vant.Toast('点击图标');
 	    },
 	    onClickButton() {
 	

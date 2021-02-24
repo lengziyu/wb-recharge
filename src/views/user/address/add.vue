@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 import areaList from '@/assets/json/area.js'
 import { addressDel, addressAdd, addressInfo, addressEdit } from '@/api/my/address.js'
 export default {
@@ -86,7 +86,7 @@ export default {
 				areaCode: e.areaCode,
 				postcode: e.postalCode,
 			}).then(res=>{
-				Toast('修改成功');
+				vant.Toast('修改成功');
 				setTimeout(()=>{
 					this.$router.push('/user/address')
 				}, 1500)	   
@@ -104,7 +104,7 @@ export default {
 				postcode: e.postalCode,
 			}).then(res=>{
 				if(res.errno == 1){
-					Toast('新增成功');
+					vant.Toast('新增成功');
 					setTimeout(()=>{
 						this.$router.push('/user/address')
 					}, 1500)
@@ -118,7 +118,7 @@ export default {
 		   	id: this.id,
 		   }).then(res=>{
 			if(res.errno == 1){
-				Toast('删除成功');
+				vant.Toast('删除成功');
 				setTimeout(()=>{
 					this.$router.push('/user/address')
 				}, 1500)

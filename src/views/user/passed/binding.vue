@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+ 
 	import { 
 		loginPhoneGetCode,
 		emailRegister,
@@ -98,14 +98,14 @@ export default {
 		clickSendCode() {
 			if(this.$route.query.type == 'phone'){
 				if(!this.phone){
-					Toast('请输入手机号码')
+					vant.Toast('请输入手机号码')
 				}else{
 					loginPhoneGetCode({
 						type: 2,
 						phone: this.phone,
 					}).then(res=>{
 						if(res.errno == 1){
-							Toast('验证码已发送，请注意查收');
+							vant.Toast('验证码已发送，请注意查收');
 							this.time = this.$variables.sendCodeTime;
 							this.sendStatus = true;
 						}
@@ -113,14 +113,14 @@ export default {
 				}
 			}else{
 				if(!this.email){
-					Toast('请输入邮箱')
+					vant.Toast('请输入邮箱')
 				}else{
 					emailRegister({
 						type: 2,
 						email: this.email,
 					}).then(res=>{
 						if(res.errno == 1){
-							Toast('验证码已发送，请注意查收');
+							vant.Toast('验证码已发送，请注意查收');
 							this.time = this.$variables.sendCodeTime;
 							this.sendStatus = true;
 						}
@@ -143,16 +143,16 @@ export default {
 		},
 		bindPhone() {
 			if(!this.phone){
-				Toast('请输入手机号码')
+				vant.Toast('请输入手机号码')
 			}else if(!this.sms){
-				Toast('请输入验证码')
+				vant.Toast('请输入验证码')
 			}else{
 				bindPhone({
 					phone: this.phone,
 					code: this.sms,
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('绑定成功');
+						vant.Toast('绑定成功');
 						this.$router.push('/user/passed')
 					}
 				})
@@ -160,16 +160,16 @@ export default {
 		},
 		bindEmail() {
 			if(!this.email){
-				Toast('请输入邮箱')
+				vant.Toast('请输入邮箱')
 			}else if(!this.sms){
-				Toast('请输入验证码')
+				vant.Toast('请输入验证码')
 			}else{
 				bindEmail({
 					email: this.email,
 					code: this.sms,
 				}).then(res=>{
 					if(res.errno == 1){
-						Toast('绑定成功');
+						vant.Toast('绑定成功');
 						this.$router.push('/user/passed')
 					}
 				})
