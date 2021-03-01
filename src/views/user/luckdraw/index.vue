@@ -43,6 +43,33 @@
         </div>
       </div>
     </div>
+	
+	<div class="record-list">
+		<div class="rl-name">
+			中奖情况
+		</div>
+		<ul>
+			<li v-for="i in 5">
+				<div class="rl-left">
+					<div class="rl-title">
+						奖品名称：电风扇
+					</div>
+					<div class="rl-date">
+						2021-10-21 23:56
+					</div>
+				</div>
+				<div class="rl-right">
+					<div class="rl-type">
+						类型是
+					</div>
+					<div class="rl-btn" @click="clickGetBtn(i)">
+						领取
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
     <div class="toast" v-show="prize">
       <div class="toast-container">
         <img :src="toastIcon" class="toast-picture" />
@@ -54,10 +81,16 @@
   </div>
 </template>
 <script>
-import { prizeList } from './config'
+// import { prizeList } from './config'
  
 import { getUserInfo } from '@/api/my/index.js'
-import { LDGetConfig, LDGetTackout } from '@/api/my/luckdraw.js'
+import { 
+	LDGetConfig, 
+	LDGetTackout,
+	LDluckdrawAll,
+	LDluckdrawRecord,
+	LDluckdrawGetgift,
+	} from '@/api/my/luckdraw.js'
 const CIRCLE_ANGLE = 360
 
 const config = {
@@ -91,6 +124,8 @@ export default {
 	this.getUserInfo();
     // 获取奖品列表
     this.initPrizeList();
+	
+	this.LDluckdrawAll();
   },
   computed: {
     rotateStyle () {
@@ -112,7 +147,45 @@ export default {
         : require("@/assets/images/luckdraw/sorry.png");
     }
   },
-  methods: {
+	methods: {
+		// 立即领取
+		clickGetBtn() {
+			
+		},
+		// 中奖记录列表
+		LDluckdrawRecord() {
+			LDluckdrawRecord().then(res=>{
+				
+			})
+		},
+		// 所有奖品
+		LDluckdrawAll() {
+			LDluckdrawAll().then(res=>{
+				if(res.errno == 1){
+					var myPrizeList = [];
+					for (let var1 in res.data) {
+						myPrizeList.push({
+							id: res.data[var1].id,
+							name: res.data[var1].title,
+							isPrize: 1,
+							icon: require("@/assets/images/luckdraw/VIP.png")
+						})
+					}
+					
+					// 谢谢参与的
+					for (var i = 0; i < (8 - res.data.length); i++) {
+						myPrizeList.push({
+							id: 0,
+							name: '谢谢参与',
+							isPrize: 0,
+							icon: require("@/assets/images/luckdraw/xx.png")
+						})
+					}
+					
+					this.prizeList = this.formatPrizeList(myPrizeList)
+				}
+			})
+		},
 	getUserInfo() {
 		getUserInfo().then(userRes=>{
 			if(userRes.errno == 1){
@@ -121,6 +194,7 @@ export default {
 			}
 		})
 	},
+	// 需要多少积分
 	LDGetConfig() {
 		LDGetConfig().then(res=>{
 			this.needIntegral = res.data.integral;
@@ -131,7 +205,7 @@ export default {
       // 这里可以发起请求，从服务端获取奖品列表
       // 这里使用模拟数据
 
-      this.prizeList = this.formatPrizeList(prizeList)
+      // this.prizeList = this.formatPrizeList(prizeList)
     },
     // 格式化奖品列表，计算每个奖品的位置
     formatPrizeList (list) {
@@ -323,7 +397,7 @@ export default {
   width: 100%;
   min-height: 260px;
   background: rgb(243, 109, 86);
-  padding-bottom: 1.6875rem;
+  padding-bottom: .6rem;
 }
 .main-bg {
   width: 100%;
@@ -467,5 +541,56 @@ export default {
   height: 34px;
   background: url("../../../assets/images/luckdraw/close_store.png") no-repeat center top;
   background-size: 100%;
+}
+.record-list{
+	background-color: #f36d56;
+	color: #fff8c5;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 40px;
+	.rl-name{
+		text-align: center;
+		font-size: 15px;
+		font-weight: bold;
+		margin-bottom: 0.4rem;
+		color: #fccc6e;
+	}
+	.rl-left{
+		float: left;
+		.rl-title{
+			font-weight: bold;
+			font-size: 13px;
+			margin-bottom: 3px;
+			color: #fff;
+		}
+		.rl-date{
+			font-size: 10px;
+			color: #f2f2f2;
+		}
+	}
+	.rl-right{
+		float: right;
+		
+		font-size: 12px;
+		.rl-type{
+			float: left;
+			margin-right: 20px;
+			margin-top: 10px;
+		}
+		.rl-btn{
+			float: left;
+			background-color: #fff;
+			color: red;
+			padding: 4px 6px;
+			border-radius: 4px;
+			margin-top: 5px;
+		}
+	}
+	ul>li{
+		border-bottom: 1px solid rgba(255,248,197,.4);
+		overflow: hidden;
+		margin-bottom: .2rem;
+		padding-bottom: .2rem;
+	}
 }
 </style>
