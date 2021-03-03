@@ -55,7 +55,7 @@ export const en = {
 		addr: 'Address',
 		agent: 'Agent',
 		coupon: 'Coupon',
-		getVip: 'Luckdraw VIP',
+		getVip: 'Luckdraw',
 		wallet: 'My Wallet',
 		passed: 'Authentication'
 	  },

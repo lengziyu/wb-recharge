@@ -48,9 +48,6 @@
 				{{ $t('login.getOut') }}
 			</van-button>
 		</div>
-		
-		<van-badge content="5">33333</van-badge>
-		
 		<Tabbar />
 	</div>
 </template>

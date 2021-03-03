@@ -55,7 +55,7 @@ export const cn = {
 		  addr: '收货地址',
 		  agent: '加盟代理商',
 		  coupon: '优惠券',
-		  getVip: '抽奖获VIP会员',
+		  getVip: '抽奖获大礼',
 		  wallet: '我的钱包',
 		  passed: '个人信息认证'
 	  },

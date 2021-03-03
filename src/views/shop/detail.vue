@@ -13,7 +13,7 @@
 		</van-swipe>
 		<div class="details">
 			<div class="price">
-				{{ detail.integral }} <span>积分</span> /  <span>￥</span>{{ detail.money }}<span>元</span>
+				{{ detail.integral }} <span>积分</span> +  <span>￥</span>{{ detail.money }}<span>元</span>
 			</div>
 			<div class="title">
 				{{ detail.title }}
@@ -44,7 +44,10 @@
 				<van-icon name="chat-o" text="客服" size="22" @click="onClickIcon" />客服
 			</div>
 			<div class="btn-duihuan">
-				<van-button class="btn-s" round @click.native="onClickButton" type="danger">积分兑换</van-button>
+				<div class="stepNum">
+					<van-stepper v-model="goodsNum" />
+				</div>
+				<!-- <van-button class="btn-s" round @click.native="onClickButton" type="danger">积分兑换</van-button> -->
 				<van-button style="margin-left: 10px;" class="btn-s" round @click.native="onClickButton" type="primary">购买</van-button>
 			</div>
 		</div>
@@ -64,7 +67,8 @@ export default {
 	},
 	data() {
 		return {
-			detail: ''
+			detail: '',
+			goodsNum: 1,
 		}
 	},
 	mounted() {
@@ -72,7 +76,6 @@ export default {
 	},
 	methods:{
 		jifenDetail() {
-			console.log(this.$route.query.id)
 			jifenDetail({
 				id: this.$route.query.id,
 			}).then(res=>{
@@ -84,7 +87,7 @@ export default {
 	      vant.Toast('点击图标');
 	    },
 	    onClickButton() {
-	
+			this.$router.push('/pay/cashier?page=shop&goodsId='+this.$route.query.id+'&goodsNum='+this.goodsNum)
 	    },
 		onBuyClicked() {
 			
@@ -157,5 +160,10 @@ export default {
 	}
 	.btn-duihuan{
 		float: right;
+	}
+	.stepNum{
+		float: left;
+		margin-top: 6px;
+		margin-right: 10px;
 	}
 </style>

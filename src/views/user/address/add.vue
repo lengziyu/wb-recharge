@@ -35,6 +35,7 @@ export default {
     return {
       areaList: areaList,
 	  id: this.$route.query.id,
+	  comefrom: this.$route.query.comefrom,
 	  info: {
 		  id: this.$route.query.id,
 		  tel: '',
@@ -47,7 +48,8 @@ export default {
 		  name: '',
 		  isDefault: false, 
 	  },
-	  currentAddr: ''
+	  currentAddr: '',
+	  goodsId: this.$route.query.goodsId,
     };
   },
   mounted() {
@@ -88,7 +90,7 @@ export default {
 			}).then(res=>{
 				vant.Toast('修改成功');
 				setTimeout(()=>{
-					this.$router.push('/user/address')
+					this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId)
 				}, 1500)	   
 			})
 		}else{
@@ -106,7 +108,7 @@ export default {
 				if(res.errno == 1){
 					vant.Toast('新增成功');
 					setTimeout(()=>{
-						this.$router.push('/user/address')
+						this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId)
 					}, 1500)
 				}
 			})

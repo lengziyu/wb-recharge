@@ -22,6 +22,7 @@
 		      default-tag-text="默认"
 		      @add="onAdd"
 		      @edit="onEdit"
+			  @select="clickItem"
 		      add-button-text="新增地址"
 		    />
 		  </van-list>
@@ -37,23 +38,34 @@ import { addressList } from '@/api/my/address.js'
 export default {
   data() {
 	return {
-		chosenAddressId: '',
+		chosenAddressId: Number(this.$route.query.selectAdId),
 		list: [],
 		switchable: false,
 		showNoting: false,
 		listQuery: {
-			limit: 10,
+			limit: 30,
 			page: 1
 		},
 		loading: false,
 		finished: false,
 		total: '',
+		comefrom: this.$route.query.f,
+		goodsId: this.$route.query.goodsId,
 		};
 	},
 	  mounted() {
 		// this.addressList();  
+		if(this.comefrom == 'cashier'){
+			this.switchable = true;
+		}
 	  },
 	  methods: {
+		clickItem(e) {
+			if(this.comefrom == 'cashier'){
+				this.$router.push('/pay/cashier?adId='+e.id+'&goodsId='+this.goodsId);
+			}
+			
+		},
 		onLoad() {
 			if (this.refreshing) {
 				this.list = [];
@@ -62,10 +74,10 @@ export default {
 			this.addressList();
 		},
 	    onAdd() {
-			this.$router.push('/user/address/add');
+			this.$router.push('/user/address/add?comefrom='+this.comefrom+'&goodsId='+this.goodsId);
 	    },
 	    onEdit(item, index) {
-			this.$router.push('/user/address/add?id='+item.id);
+			this.$router.push('/user/address/add?id='+item.id+'&comefrom='+this.comefrom+'&goodsId='+this.goodsId);
 	    },
 		async getList() {
 		    let { data: res } = await addressList({ 
@@ -87,6 +99,10 @@ export default {
 		  		address: resList[i].province+resList[i].city+resList[i].county+resList[i].addr,
 		  		isDefault: resList[i].isDefault == 1?true:false,
 		  	})
+			
+			if(!this.chosenAddressId && this.comefrom == 'cashier' && resList[i].isDefault == 1){
+				this.chosenAddressId = resList[i].id;
+			}
 		  }
 		  
 		  this.loading = false;			// 加载状态结束 

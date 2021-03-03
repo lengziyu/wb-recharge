@@ -36,7 +36,7 @@ export default {
 			},{
 				name: this.$t('user.menus.getVip'),
 				code: '',
-				icon: 'gem-o',
+				icon: 'point-gift-o',
 				url: '/user/luckdraw'
 			},{
 				name: this.$t('user.menus.wallet'),

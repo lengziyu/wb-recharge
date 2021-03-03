@@ -9,6 +9,7 @@ import userRouter from './modules/user.js'
 import newsRouter from './modules/news.js'
 import shopRouter from './modules/shop.js'
 import productRouter from './modules/product.js'
+import payRouter from './modules/pay.js'
 
 export const constantRoutes = [
   {
@@ -26,6 +27,7 @@ export const constantRoutes = [
   ...newsRouter,
   ...shopRouter,
   ...productRouter,
+  ...payRouter,
 ];
 
 const createRouter = () => new VueRouter({

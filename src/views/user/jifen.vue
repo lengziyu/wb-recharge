@@ -70,6 +70,10 @@ export default {
 				return '购物使用积分代扣'
 			}else if(type == 5){
 				return '邀请好友购物积分'
+			}else if(type == 6){
+				return '抽奖消耗'
+			}else if(type == 7){
+				return '抽奖获得'
 			}
 		},
 		async getList() {

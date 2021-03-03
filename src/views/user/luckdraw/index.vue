@@ -1,11 +1,11 @@
 <template>
   <div class="container">
 	<van-nav-bar
-	  title="抽奖获VIP会员"
+	  title="抽奖获大礼"
 	  left-text=""
 	  left-arrow
 	   
-	  @click-left="$utils.routeBack"
+	  @click-left="$router.push('/user')"
 	/>
     <div class="lucky-wheel">
       <div class="lucky-title"></div>
@@ -37,33 +37,48 @@
       <div class="tip">
         <div class="tip-title">活动规则</div>
         <div class="tip-content">
-          <p>1.每{{ needIntegral }}积分可以抽取一次，幸运大转盘的机会。 </p>
-          <p>2.中奖后，自动变身尊贵的”VIP会员“，购物等有重大优惠哦。</p>
-          <p>3.最终解析权归我司所有。</p>
+          <p>1.每{{ needIntegral }}积分可以抽取一次幸运大转盘的机会。 </p>
+          <p>2.奖品不定时有包括：VIP会员、积分、优惠券、实物等丰富奖品，敬请关注。</p>
+		  <p>3.除实物外，其他奖品均自动发放到抽奖账号；实物需要点击领取，选择收货地址后提交即可，快递7个工作日内发放，物流情况请联系客服。</p>
+          <p>4.最终解析权归我司所有。</p>
         </div>
       </div>
     </div>
 	
-	<div class="record-list">
+	<div class="record-list" v-if="recordList.length != 0">
 		<div class="rl-name">
 			中奖情况
 		</div>
 		<ul>
-			<li v-for="i in 5">
+			<li v-for="i in recordList">
 				<div class="rl-left">
 					<div class="rl-title">
-						奖品名称：电风扇
+						{{ i.title }}
 					</div>
 					<div class="rl-date">
-						2021-10-21 23:56
+						{{ i.created_at }}
 					</div>
 				</div>
 				<div class="rl-right">
 					<div class="rl-type">
-						类型是
+						<span v-if="i.type == 1">
+							vip
+						</span>
+						<span v-if="i.type == 2">
+							积分
+						</span>
+						<span v-if="i.type == 3">
+							优惠券
+						</span>
+						<span v-if="i.type == 4">
+							实物
+						</span>
 					</div>
-					<div class="rl-btn" @click="clickGetBtn(i)">
+					<div class="rl-btn" @click="clickGetBtn(i)" v-if="i.addr_id == 0 && i.type == 4">
 						领取
+					</div>
+					<div class="isGet" v-else-if="i.addr_id != 0 && i.type == 4">
+						已领取
 					</div>
 				</div>
 			</li>
@@ -73,7 +88,7 @@
     <div class="toast" v-show="prize">
       <div class="toast-container">
         <img :src="toastIcon" class="toast-picture" />
-        <div class="close" @click="closevant.Toast()"></div>
+        <div class="close" @click="closeToast()"></div>
         <div class="toast-title">{{toastTitle}}</div>
       </div>
     </div>
@@ -89,7 +104,6 @@ import {
 	LDGetTackout,
 	LDluckdrawAll,
 	LDluckdrawRecord,
-	LDluckdrawGetgift,
 	} from '@/api/my/luckdraw.js'
 const CIRCLE_ANGLE = 360
 
@@ -111,7 +125,9 @@ export default {
       index: 0,
       prize: null,
 	  needIntegral: '',
-	  userInfo: ''
+	  userInfo: '',
+	  ldId: '2',
+	  recordList: []
     };
   },
   created() {
@@ -126,6 +142,7 @@ export default {
     this.initPrizeList();
 	
 	this.LDluckdrawAll();
+	this.LDluckdrawRecord();
   },
   computed: {
     rotateStyle () {
@@ -149,13 +166,14 @@ export default {
   },
 	methods: {
 		// 立即领取
-		clickGetBtn() {
-			
+		clickGetBtn(i) {
+			this.$router.push('/pay/cashier?page=luckdraw&goodsId='+i.id+'&ldGoodsName='+i.title);
 		},
 		// 中奖记录列表
 		LDluckdrawRecord() {
-			LDluckdrawRecord().then(res=>{
-				
+			LDluckdrawRecord({limit: 80, page: 1}).then(res=>{
+				console.log(res)
+				this.recordList = res.data.data;
 			})
 		},
 		// 所有奖品
@@ -300,7 +318,7 @@ export default {
     rotateOver () {
       this.isRotating = false
 
-      this.prize = prizeList[this.index]
+      this.prize = this.prizeList[this.index]
 
       console.log(this.prize, this.index)
     },
@@ -446,7 +464,7 @@ export default {
   padding: 0.3125rem 0.625rem;
 }
 .tip-content {
-  padding: 20px 0.625rem;
+  padding: 10px 0.325rem;
   font-size: 14px;
   color: #fff8c5;
   line-height: 1.5;
@@ -584,6 +602,12 @@ export default {
 			padding: 4px 6px;
 			border-radius: 4px;
 			margin-top: 5px;
+		}
+		.isGet{
+			float: left;
+			margin-top: 10px;
+			color: #f2f2f2;
+			font-size: 12px;
 		}
 	}
 	ul>li{
