@@ -281,11 +281,23 @@ export default {
 			};
 			if(payType == 'wx'){
 				createInteWx({...query}).then(res=>{
-					
+					if(res.errno == 1){
+						if(res.data.is_pay == 0){
+							this.$router.push('/user/order')
+						}else{
+							
+						}
+					}
 				})
 			}else{
 				createInteZfb({...query}).then(res=>{
-					
+					if(res.errno == 1){
+						if(res.data.is_pay == 0){
+							this.$router.push('/user/order')
+						}else{
+							
+						}
+					}
 				})
 			}
 		},
@@ -305,7 +317,11 @@ export default {
 		},
 		// 跳转收货地址
 		clickAddr() {
-			this.$router.push('/user/address?f=cashier&selectAdId='+this.adId+'&goodsId='+this.goodsId)
+			this.$router.push('/user/address?f=cashier&selectAdId='+this.adId
+			+'&goodsId='+this.goodsId
+			+'&goodsNum='+this.goodsNum
+			+'&page='+this.page
+			)
 		},
 		// 收货地址信息
 		adDetail() {

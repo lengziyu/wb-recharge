@@ -1,10 +1,10 @@
 <template>
 	<div class="user-panel order-item">
 		<van-card
-		  num="2"
-		  price="2.00"
-		  desc="描述信息"
-		  title="商品标题"
+		  :num="item.product_num"
+		  :price="item.product_integral+'积分+'+item.product_money+'元'"
+		  :desc="item.created_at"
+		  :title="item.title"
 		  @click.native="clickItem"
 		  thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
 		>
@@ -17,9 +17,9 @@
 </template>
 
 <script>
- 
 
 export default {
+	props: ['item'],
 	name: "",
 	components: {
 	

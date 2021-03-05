@@ -10,15 +10,24 @@
 		<div class="padding-head">
 			
 		</div>
-		<van-tabs v-model="active">
+		<van-tabs @click="onClick" v-model="active">
 		  <van-tab :title="$t('user.orders.all')">
-			  <Item v-for="i in 3" />
+			  <div v-if="list.length > 0">
+				  <Item v-for="i in list" :item="i" />
+			  </div>
+		  	  <van-empty v-else description="暂无订单" />
 		  </van-tab>
 		  <van-tab :title="$t('user.orders.refund')">
-		  		<van-empty description="暂无订单" />
+			  <div v-if="list.length > 0">
+				  <Item v-for="i in list" :item="i" />
+			  </div>
+		  	  <van-empty v-else description="暂无订单" />
 		  </van-tab>
 		  <van-tab :title="$t('user.orders.subComm')">
-			  <Item v-for="i in 6" />
+			  <div v-if="list.length > 0">
+				  <Item v-for="i in list" :item="i" />
+			  </div>
+		  	  <van-empty v-else description="暂无订单" />
 		  </van-tab>
 		</van-tabs>
 	</div>
@@ -27,6 +36,7 @@
 <script>
  
 import Item from './components/Item.vue'
+import { orderList } from '@/api/my/order.js'
 export default {
 	name: "",
 	components: {
@@ -34,14 +44,34 @@ export default {
 	},
 	data() {
 		return {
-			
+			query: {
+				limit: 20,
+				page: 1,
+				// 'search[status]': 0
+			},
+			list: []
 		}
 	},
 	mounted() {
-
+		this.orderList();
 	},
 	methods:{
-
+		orderList(e){
+			var idx = '';
+			
+			if(e == 1){
+				idx = 1;
+			}
+			orderList(this.query).then(res=>{
+				if(res.errno == 1){
+					this.list = res.data.data;
+				}
+			})
+		},
+		onClick(e) {
+			this.orderList(e);
+			console.log(e)
+		}
 	}
 };
 </script>

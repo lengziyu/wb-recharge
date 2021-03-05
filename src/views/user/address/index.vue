@@ -51,6 +51,8 @@ export default {
 		total: '',
 		comefrom: this.$route.query.f,
 		goodsId: this.$route.query.goodsId,
+		goodsNum: this.$route.query.goodsNum,
+		page: this.$route.query.page
 		};
 	},
 	  mounted() {
@@ -61,8 +63,12 @@ export default {
 	  },
 	  methods: {
 		clickItem(e) {
+			console.log(this.$route.query.page)
 			if(this.comefrom == 'cashier'){
-				this.$router.push('/pay/cashier?adId='+e.id+'&goodsId='+this.goodsId);
+				this.$router.push('/pay/cashier?adId='+e.id+'&goodsId='+this.goodsId
+				+'&goodsNum='+this.goodsNum
+				+'&page='+this.$route.query.page
+				);
 			}
 			
 		},
@@ -74,10 +80,16 @@ export default {
 			this.addressList();
 		},
 	    onAdd() {
-			this.$router.push('/user/address/add?comefrom='+this.comefrom+'&goodsId='+this.goodsId);
+			this.$router.push('/user/address/add?comefrom='+this.comefrom+'&goodsId='+this.goodsId
+			+'&goodsNum='+this.goodsNum
+			+'&page='+this.$route.query.page
+			);
 	    },
 	    onEdit(item, index) {
-			this.$router.push('/user/address/add?id='+item.id+'&comefrom='+this.comefrom+'&goodsId='+this.goodsId);
+			this.$router.push('/user/address/add?id='+item.id+'&comefrom='+this.comefrom+'&goodsId='+this.goodsId
+			+'&goodsNum='+this.goodsNum
+			+'&page='+this.$route.query.page
+			);
 	    },
 		async getList() {
 		    let { data: res } = await addressList({ 

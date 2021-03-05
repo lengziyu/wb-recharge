@@ -50,6 +50,8 @@ export default {
 	  },
 	  currentAddr: '',
 	  goodsId: this.$route.query.goodsId,
+	  goodsNum: this.$route.query.goodsNum,
+	  page: this.$route.query.page
     };
   },
   mounted() {
@@ -90,7 +92,10 @@ export default {
 			}).then(res=>{
 				vant.Toast('修改成功');
 				setTimeout(()=>{
-					this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId)
+					this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId
+					+'&goodsNum='+this.goodsNum
+					+'&page='+this.$route.query.page
+					)
 				}, 1500)	   
 			})
 		}else{
@@ -108,7 +113,10 @@ export default {
 				if(res.errno == 1){
 					vant.Toast('新增成功');
 					setTimeout(()=>{
-						this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId)
+						this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId
+						+'&goodsNum='+this.goodsNum
+						+'&page='+this.$route.query.page
+						)
 					}, 1500)
 				}
 			})
@@ -122,7 +130,10 @@ export default {
 			if(res.errno == 1){
 				vant.Toast('删除成功');
 				setTimeout(()=>{
-					this.$router.push('/user/address')
+					this.$router.push('/user/address?f='+this.comefrom+'&goodsId='+this.goodsId
+					+'&goodsNum='+this.goodsNum
+					+'&page='+this.$route.query.page
+					)
 				}, 1500)
 			}
 		  })
